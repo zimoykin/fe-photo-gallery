@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './components/home-component';
+import Login from './components/login/login-component';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
+import NavBar from './components/nav-bar/nav-bar-component';
 
-function App() {
+const App: React.FC = () => {
+  const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isAuthenticated ? <NavBar /> : null}
+      <Router>
+        <div className='app-container'>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={isAuthenticated ? <Home /> : <Login />} />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
-}
+};
 
 export default App;

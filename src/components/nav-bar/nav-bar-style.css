@@ -1,0 +1,14 @@
+.nav-bar {
+    position: fixed;
+    top: 0;
+    right: 1%;
+}
+
+.nav-bar i {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
