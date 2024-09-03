@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './components/home-component';
-import Login from './components/login/login-component';
 import { useSelector } from 'react-redux';
 import { RootState } from './store';
 import NavBar from './components/nav-bar/nav-bar-component';
+import { Login, Home } from './pages';
 
 const App: React.FC = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);

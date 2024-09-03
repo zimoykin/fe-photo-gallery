@@ -15,7 +15,7 @@ const logoData = [
     { backgroundColor: '#FF6666', color: '#FFF', height: '204px', width: '100%', letter: 'Y' }
 ];
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -52,12 +52,10 @@ const Login: React.FC = () => {
                 <h3 style={{ color: 'white', fontWeight: 'bold', fontSize: '20px' }}>click here to continue using app</h3>
             </div> :
                 <form className="container" onSubmit={(e) => e.preventDefault()}>
-                    <input className='input' type="text" placeholder='Username' onChange={(e) => setEmail(e.target.value)} />
-                    <input className='input' type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+                    <input className='input' required type="email" placeholder='email' onChange={(e) => setEmail(e.target.value)} />
+                    <input className='input' required type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
                     <button onClick={() => submitUserData({ username: email, password: password })}>LOGIN</button>
                 </form>}
         </div>
     );
 };
-
-export default Login;
