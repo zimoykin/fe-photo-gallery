@@ -42,8 +42,6 @@ const Box: React.FC = () => {
         },
     ];
 
-    // const heightPerFolder = `${100 / (folders.length)}vh`;
-
     const [lineSize, setLineSize] = useState(`${100 / (folders.length)}vh`);
     const [openLineSize, setOpenLineSize] = useState('75vh');
     const [choosen, setChoosen] = useState(-1);

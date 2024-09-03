@@ -3,20 +3,24 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface AuthState {
   isAuthenticated: boolean;
   accessToken: string | null;
+  refreshToken: string | null;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   accessToken: null,
+  refreshToken: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<string>) => {
+    login: (state, action: PayloadAction<[string, string]>) => {
       state.isAuthenticated = true;
-      state.accessToken = action.payload;
+      const [accessToken, refreshToken] = action.payload;
+      state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
     },
     logout: (state) => {
       state.isAuthenticated = false;
