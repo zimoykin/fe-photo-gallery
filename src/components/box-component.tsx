@@ -43,7 +43,7 @@ const Box: React.FC = () => {
     ];
 
     const [lineSize, setLineSize] = useState(`${100 / (folders.length)}vh`);
-    const [openLineSize, setOpenLineSize] = useState('75vh');
+    const [openLineSize] = useState('75vh'); //TODO
     const [choosen, setChoosen] = useState(-1);
 
     const onClickLine = (ind: number) => {

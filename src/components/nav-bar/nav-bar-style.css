@@ -1,14 +1,34 @@
 .nav-bar {
     position: fixed;
-    top: 0;
-    right: 1%;
+    top: 0; 
+    right: 10px; 
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    max-width: 1280px;
+    width: auto;
+    box-sizing: border-box;
 }
 
 .nav-bar i {
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid white;
+    padding: 5px;
+    margin: 5px 5px;
     border-radius: 5px;
-    color: white;
     cursor: pointer;
+    font-size: 24px;
+    border: 2px solid;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+
+@media (min-width: 1280px) {
+    .nav-bar {
+        left: auto; 
+        right: calc(50% - 640px);
+    }
 }

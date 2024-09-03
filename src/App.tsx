@@ -8,7 +8,6 @@ import { Login, Home } from './pages';
 
 const App: React.FC = () => {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-
   return (
     <>
       {isAuthenticated ? <NavBar /> : null}

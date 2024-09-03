@@ -23,6 +23,7 @@ const BoxLine: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, 
                 margin: '0px 0px 0px 0px',
                 cursor: 'pointer',
                 verticalAlign: 'middle',
+                width: "100%"
             }} onClick={onClick}>
 
                 {text.toUpperCase()}
