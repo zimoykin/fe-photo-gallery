@@ -54,7 +54,8 @@ export const Login: React.FC = () => {
 
     return (
         <>
-            {error ? <div className='error-message'>{error.message}</div> : <div className='pageContainer'>
+            {error ? <div className='error-message' onClick={() => setError(null)}> <div>{error.message}</div></div> : null}
+            <div className='pageContainer'>
                 <div className='logoContainer'>
                     <div className='logo'>
                         {logoData.map((item, index) => (
@@ -74,12 +75,12 @@ export const Login: React.FC = () => {
                         <div className='loading-spinner'></div>
                         :
                         <form className="container" onSubmit={(e) => e.preventDefault()}>
-                            <input className='input' required type="email" placeholder='email' onChange={(e) => setEmail(e.target.value)} />
-                            <input className='input' required type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
+                            <input className='input' value={email} type="email" placeholder='email' onChange={(e) => setEmail(e.target.value)} />
+                            <input className='input' value={password} type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
                             <button onClick={() => handleLogin()}>LOGIN</button>
                         </form>}
                 </>}
-            </div>}
+            </div>
 
         </>
     );
