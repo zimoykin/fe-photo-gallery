@@ -1,4 +1,4 @@
-import Galery from "../galery/galery-component";
+import Galery from "../gallery/gallery-component";
 
 interface Props {
     bgColor: string; //TODO
@@ -10,6 +10,7 @@ interface Props {
 }
 
 const Folder: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, onClick }: Props) => {
+
     return (
         <>
             {/* TODO: move to css file */}
@@ -29,11 +30,7 @@ const Folder: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, o
 
                 {text.toUpperCase()}
                 {isOpen
-                    ? <Galery
-                        onImgClick={(src: string, event: React.MouseEvent) => {
-                            event.stopPropagation();
-                            console.log('clicked:', src);
-                        }} />
+                    ? <Galery />
                     : null
                 }
             </div>
