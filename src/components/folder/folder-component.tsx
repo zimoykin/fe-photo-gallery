@@ -1,3 +1,4 @@
+import React from 'react';
 import Galery from "../gallery/gallery-component";
 
 interface Props {

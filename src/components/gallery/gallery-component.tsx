@@ -17,7 +17,6 @@ const photos = [
     'Frame-25-08-2024-03-15-03.jpeg',
     'Frame-25-08-2024-03-17-46.jpeg',
     'Frame-25-08-2024-03-20-22.jpeg'
-
 ] as const;
 const imgMockFolder = 'hardcoded-images';
 interface ImageWithOrientation {

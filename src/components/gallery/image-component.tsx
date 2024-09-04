@@ -1,10 +1,11 @@
+import React from 'react';
 import './gallery-style.css';
 
 interface Props {
     src: string;
-    onClose: (ev: any) => void;
-    next: (ev: any) => void;
-    prev: (ev: any) => void;
+    onClose: (ev: React.MouseEvent) => void;
+    next: (ev: React.MouseEvent) => void;
+    prev: (ev: React.MouseEvent) => void;
 }
 
 const ImageModal: React.FC<Props> = ({ src, onClose, next, prev }: Props) => {
