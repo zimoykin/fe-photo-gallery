@@ -22,7 +22,7 @@ export const Login: React.FC = () => {
         if (email?.length > 0 && password?.length > 0) {
             setLoading(true);
             apilogin(email, password)
-                .then((tokens: any) => {
+                .then((tokens) => {
                     if (tokens.accessToken && tokens.refreshToken) {
                         dispatch(
                             login([tokens.accessToken, tokens.refreshToken])

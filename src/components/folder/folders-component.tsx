@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from 'react';
 import Folder from "./folder-component";
 
 const Folders: React.FC = () => {

@@ -1,3 +1,4 @@
+import React from 'react';
 import Folders from "../../components/folder/folders-component";
 import './home-style.css';
 
