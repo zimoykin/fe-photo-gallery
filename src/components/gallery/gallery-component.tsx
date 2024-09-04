@@ -110,7 +110,7 @@ const Gallery: React.FC = () => {
                                 <img
                                     key={i}
                                     src={`/${imgMockFolder}/${src}`}
-                                    alt={src}
+                                    alt=""
                                     onClick={(ev) => {
                                         handleImgClick(String(src));
                                         ev.stopPropagation();
@@ -120,7 +120,7 @@ const Gallery: React.FC = () => {
                         ) : (
                             <img
                                 src={`/${imgMockFolder}/${image.src}`}
-                                alt={image.src}
+                                alt=""
                                 onClick={(ev) => {
                                     handleImgClick(String(image.src));
                                     ev.stopPropagation();
