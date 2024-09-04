@@ -12,7 +12,7 @@ const ImageModal: React.FC<Props> = ({ src, onClose, next, prev }: Props) => {
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content">
-                <img src={src} />
+                <img src={src} alt=''/>
                 <div className='commands'>
 
                     <i className="fas fa-times" onClick={onClose} />
