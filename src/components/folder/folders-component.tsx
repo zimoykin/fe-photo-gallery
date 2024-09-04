@@ -1,7 +1,7 @@
 import { useState } from "react";
-import BoxLine from "./box-line-component";
+import Folder from "./folder-component";
 
-const Box: React.FC = () => {
+const Folders: React.FC = () => {
 
     //TODO: this line should come from the backend
     const folders = [
@@ -42,10 +42,8 @@ const Box: React.FC = () => {
         },
     ];
 
-    // const heightPerFolder = `${100 / (folders.length)}vh`;
-
     const [lineSize, setLineSize] = useState(`${100 / (folders.length)}vh`);
-    const [openLineSize, setOpenLineSize] = useState('75vh');
+    const [openLineSize] = useState('75vh'); //TODO
     const [choosen, setChoosen] = useState(-1);
 
     const onClickLine = (ind: number) => {
@@ -62,7 +60,7 @@ const Box: React.FC = () => {
         <>
             {folders.map((folder, index) => {
                 return (
-                    <BoxLine
+                    <Folder
                         bgColor={folder.bgColor}
                         textColor={folder.textColor}
                         text={folder.text}
@@ -77,4 +75,4 @@ const Box: React.FC = () => {
     );
 };
 
-export default Box;
+export default Folders;

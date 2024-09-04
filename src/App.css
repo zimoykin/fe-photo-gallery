@@ -28,11 +28,63 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+  background-color: lightgray;
+  color: #000000;
+}
+
+body.dark-theme {
+  background-color: darkslategray;
+  color: #ffffff;
+}
+
+.box-container {
+  transition: box-shadow 0.3s ease;
+}
+
+/* Light mode styles */
+/* .light-mode * {
+  box-shadow: 2px 1px 33px 3px rgba(0, 0, 0, 0.33);
+  color: #000000;
+} */
+
+/* Dark mode text defaultstyles */
+.dark-mode р,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+input,
+textarea,
+select,
+option {
+  color: wheat !important;
+}
+
+
+/* Dark mode text defaultstyles */
+.light-mode р,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button,
+input,
+textarea,
+select,
+option {
+  color: black !important;
 }

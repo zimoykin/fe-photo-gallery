@@ -1,4 +1,4 @@
-import Galery from "./galery/galery-component";
+import Galery from "../gallery/gallery-component";
 
 interface Props {
     bgColor: string; //TODO
@@ -9,9 +9,11 @@ interface Props {
     onClick: () => void;
 }
 
-const BoxLine: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, onClick }: Props) => {
+const Folder: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, onClick }: Props) => {
+
     return (
         <>
+            {/* TODO: move to css file */}
             <div style={{
                 backgroundColor: bgColor,
                 height: lineSize,
@@ -23,15 +25,12 @@ const BoxLine: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, 
                 margin: '0px 0px 0px 0px',
                 cursor: 'pointer',
                 verticalAlign: 'middle',
+                width: "100%"
             }} onClick={onClick}>
 
                 {text.toUpperCase()}
                 {isOpen
-                    ? <Galery
-                        onImgClick={(src: string, event: React.MouseEvent) => {
-                            event.stopPropagation();
-                            console.log('clicked:', src);
-                        }} />
+                    ? <Galery />
                     : null
                 }
             </div>
@@ -39,4 +38,4 @@ const BoxLine: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, 
     );
 };
 
-export default BoxLine;
+export default Folder;

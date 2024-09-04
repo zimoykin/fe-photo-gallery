@@ -3,6 +3,7 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from 'redux-persist/lib/storage';
 import authReducer from './features/auth/auth-slice';
 import profileReducer from './features/profile/profile-slice';
+import themaReducer from './features/thema/thema-slice';
 
 
 // Persist configuration
@@ -16,11 +17,13 @@ const persistConfig = {
 // Create persisted reducers
 const persistedReducerAuth = persistReducer(persistConfig, authReducer);
 const persistedReducerUser = persistReducer(persistConfig, profileReducer);
+const persistedReducerThema = persistReducer(persistConfig, themaReducer);
 
 const store = configureStore({
   reducer: {
     auth: persistedReducerAuth,
     profile: persistedReducerUser,
+    thema: persistedReducerThema,
   },
   middleware: (getDefaultMiddleware: any) =>
     getDefaultMiddleware({
