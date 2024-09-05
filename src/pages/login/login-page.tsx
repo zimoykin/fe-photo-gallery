@@ -5,7 +5,6 @@ import { login } from '../../features/auth/auth-slice';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { apilogin } from '../../api/login-api';
-import CameraSpinner from '../../components/camera-spinner/camera-spinner.component';
 import CameraSpinnerModal from '../../components/camera-spinner/camera-spinner-modal.component';
 
 //TODO: Add a loading state for the login button, move color to a theme file
