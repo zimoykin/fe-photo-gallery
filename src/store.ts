@@ -26,7 +26,8 @@ const store = configureStore({
     profile: persistedReducerUser,
     thema: persistedReducerThema,
   },
-  middleware: (getDefaultMiddleware: any) =>
+
+  middleware: (getDefaultMiddleware: any) => // eslint-disable-line
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
