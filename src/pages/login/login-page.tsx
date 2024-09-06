@@ -60,7 +60,8 @@ export const Login: React.FC = () => {
                 <div className='logoContainer'>
                     <div className='logo'>
                         {logoData.map((item, index) => (
-                            <div key={index} style={{ backgroundColor: item.backgroundColor, color: item.color, height: item.height }}>
+                            <div key={index}
+                                style={{ backgroundColor: item.backgroundColor, color: item.color, height: item.height }}>
                                 {item.letter}
                             </div>
                         ))}

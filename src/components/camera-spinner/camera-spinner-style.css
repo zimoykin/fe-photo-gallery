@@ -19,9 +19,6 @@
     border-radius: 50%;
     background-color: transparent;
     animation: shot 1.5s ease-out infinite, rotate 1.5s ease-in-out reverse infinite;
-    /* border: 20px solid lightgrey; */
-    /* border-left-color: gray; */
-    /* animation: shot 1s ease-in-out infinite; */
 }
 
 .petal {

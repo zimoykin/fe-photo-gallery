@@ -7,10 +7,11 @@ interface Props {
     text: string;
     isOpen?: true;
     lineSize: string;
+    folderId: string;
     onClick: () => void;
 }
 
-const Folder: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, onClick }: Props) => {
+const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, lineSize, onClick }: Props) => {
 
     return (
         <>
@@ -31,7 +32,7 @@ const Folder: React.FC<Props> = ({ bgColor, textColor, text, isOpen, lineSize, o
 
                 {text.toUpperCase()}
                 {isOpen
-                    ? <Galery />
+                    ? <Galery folderId={folderId} />
                     : null
                 }
             </div>
