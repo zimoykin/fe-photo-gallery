@@ -1,51 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from 'react';
 import Folder from "./folder-component";
+import { apiFetchUserFolders, IUserFolder } from "../../api/api-gallery";
+import CameraSpinnerModal from "../camera-spinner/camera-spinner-modal.component";
 
 const Folders: React.FC = () => {
 
-    //TODO: this line should come from the backend
-    const folders = [
-        {
-            bgColor: "#FF6666",
-            textColor: "#FFFFFF",
-            text: "Spain"
-        },
-        {
-            bgColor: "#FFBD55",
-            textColor: "#FFFFFF",
-            text: "Italy"
-        },
-        {
-            bgColor: "#FFFF66",
-            textColor: "#000000",
-            text: "Germany"
-        },
-        {
-            bgColor: "#557C51",
-            textColor: "#FFFFFF",
-            text: "Denmark",
-        },
-        {
-            bgColor: "#559F61",
-            textColor: "#FFFFFF",
-            text: "Turkey"
-        },
-        {
-            bgColor: "#23AEAE",
-            textColor: "#FFFFFF",
-            text: "Portugal"
-        },
-        {
-            bgColor: "#87CEFA",
-            textColor: "#FFFFFF",
-            text: "France"
-        },
-    ];
+    const [folders, setFolders] = useState<IUserFolder[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => {
+        setIsLoading(true);
+        apiFetchUserFolders().then((folders) => {
+            setFolders(folders);
+        }).finally(() => {
+            setIsLoading(false);
+        });
+    }, []);
 
     const [lineSize, setLineSize] = useState(`${100 / (folders.length)}vh`);
     const [openLineSize] = useState('75vh'); //TODO
     const [choosen, setChoosen] = useState(-1);
+
+    useEffect(() => {
+        setLineSize(`${100 / (folders.length)}vh`);
+    }, [folders]);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
@@ -59,19 +37,23 @@ const Folders: React.FC = () => {
 
     return (
         <>
-            {folders.map((folder, index) => {
-                return (
-                    <Folder
-                        bgColor={folder.bgColor}
-                        textColor={folder.textColor}
-                        text={folder.text}
-                        isOpen={index === choosen ? true : undefined}
-                        lineSize={index === choosen ? openLineSize : lineSize}
-                        key={index}
-                        onClick={() => { onClickLine(index); }}
-                    />
-                );
-            })}
+            {isLoading ? <CameraSpinnerModal /> : <>
+                {
+                    folders.map((folder, index) => {
+                        return (
+                            <Folder
+                                bgColor={folder.bgColor}
+                                textColor={folder.color}
+                                text={folder.title}
+                                isOpen={index === choosen ? true : undefined}
+                                lineSize={index === choosen ? openLineSize : lineSize}
+                                key={index}
+                                folderId={folder.id}
+                                onClick={() => { onClickLine(index); }}
+                            />
+                        );
+                    })
+                } </>}
         </>
     );
 };

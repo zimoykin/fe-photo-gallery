@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './nav-bar-style.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../features/auth/auth-slice';
 import { useTheme } from '../../contexts/theme/theme-context';
 import { toDark, toLight } from '../../features/thema/thema-slice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const NavBar: React.FC = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const [iconSet, setIconSet] = useState<'home' | 'settings'>('home');
     const { theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        console.log(location.pathname);
+        if (location.pathname === '/') {
+            setIconSet('settings');
+        } else {
+            setIconSet('home');
+        }
+    }, [location]);
 
     const handleOnClick = () => {
         dispatch(logout());
+    };
+
+    const handleSettings = () => {
+        console.log(location.pathname);
+        if (location.pathname === '/settings') {
+            navigate('/');
+        } else
+            navigate('/settings');
     };
 
     const handleThemeChange = () => {
@@ -24,7 +46,7 @@ const NavBar: React.FC = () => {
         <div >
             <div
                 className='nav-bar'>
-                <i className="fas fa-cog" />
+                {iconSet === 'home' ? <i className="fas fa-home" onClick={handleSettings} /> : < i className="fas fa-cog" onClick={handleSettings} />}
                 {theme === 'dark' ? <i className="fas fa-sun" onClick={handleThemeChange} /> : <i className="fas fa-moon" onClick={handleThemeChange} />}
                 <i className="fa fa-sign-out"
                     onClick={handleOnClick}
