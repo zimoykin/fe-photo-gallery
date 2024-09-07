@@ -9,12 +9,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const NavBar: React.FC = () => {
+    const { theme, setTheme } = useTheme();
+    const [iconSet, setIconSet] = useState<'home' | 'settings'>('home');
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-
-    const [iconSet, setIconSet] = useState<'home' | 'settings'>('home');
-    const { theme, setTheme } = useTheme();
 
     useEffect(() => {
         console.log(location.pathname);
@@ -23,7 +23,7 @@ const NavBar: React.FC = () => {
         } else {
             setIconSet('home');
         }
-    }, [location]);
+    }, [location, theme, setTheme]);
 
     const handleOnClick = () => {
         dispatch(logout());
