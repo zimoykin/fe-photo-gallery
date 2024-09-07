@@ -25,7 +25,7 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
         }).finally(() => {
             setIsLoading(false);
         });
-    }, []);
+    }, [folderId]);
 
     const handleImgClick = (src: string) => {
         console.log(`Clicked on image: ${src}`);
