@@ -19,12 +19,17 @@ const logoData = [
 ];
 
 export const Login: React.FC = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handleLogin = async () => {
         if (email?.length > 0 && password?.length > 0) {
             setLoading(true);
             apilogin(email, password)
                 .then((tokens) => {
                     if (tokens.accessToken && tokens.refreshToken) {
+                        console.log('Login successful');
                         dispatch(
                             login([tokens.accessToken, tokens.refreshToken])
                         );
@@ -50,9 +55,6 @@ export const Login: React.FC = () => {
 
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
     return (
         <>
             {error ? <div className='error-message' onClick={() => setError(null)}> <div>{error.message}</div></div> : null}
@@ -76,7 +78,7 @@ export const Login: React.FC = () => {
                         ?
                         <CameraSpinnerModal />
                         :
-                        <form className="container" onSubmit={(e) => e.preventDefault()}>
+                        <form className="container" >
                             <input className='input' value={email} type="email" placeholder='email' onChange={(e) => setEmail(e.target.value)} />
                             <input className='input' value={password} type="password" placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
                             <button onClick={() => handleLogin()}>LOGIN</button>

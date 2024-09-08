@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import authReducer from './features/auth/auth-slice';
 import profileReducer from './features/profile/profile-slice';
 import themaReducer from './features/thema/thema-slice';
+import folderReducer from './features/folders/folders-slice';
 
 
 // Persist configuration
@@ -19,12 +20,14 @@ const persistConfig = {
 const persistedReducerAuth = persistReducer(persistConfig, authReducer);
 const persistedReducerUser = persistReducer(persistConfig, profileReducer);
 const persistedReducerThema = persistReducer(persistConfig, themaReducer);
+const persistedReducerFolders = persistReducer(persistConfig, folderReducer);
 
 const store = configureStore({
   reducer: {
     auth: persistedReducerAuth,
     profile: persistedReducerUser,
     thema: persistedReducerThema,
+    folders: persistedReducerFolders
   },
 
   middleware: (getDefaultMiddleware: any) => // eslint-disable-line

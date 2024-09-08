@@ -17,17 +17,21 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action: PayloadAction<[string, string]>) => {
+      console.log(action.payload);
       state.isAuthenticated = true;
       const [accessToken, refreshToken] = action.payload;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
     },
     logout: (state) => {
+      console.log(state);
       state.isAuthenticated = false;
       state.accessToken = null;
+      state.refreshToken = null;
     },
   },
 });
+
 
 export const { login, logout } = authSlice.actions;
 

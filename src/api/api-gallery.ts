@@ -24,14 +24,16 @@ export interface IPhoto {
 }
 
 export const apiFetchUserFolders = async () => {
-    return apiClient.get<IUserFolder[]>('/folder').then((response) => {
-        if (response.status !== 200) {
-            throw new Error('Failed to get folders');
-        }
-        return response.data;
-    }).catch(error => {
-        throw error;
-    });
+    return apiClient.get<IUserFolder[]>('/folder')
+        .then((response) => {
+            if (response?.status !== 200) {
+                throw new Error('Failed to get folders');
+            }
+            return response.data;
+        }).catch(error => {
+            console.log(error);
+            throw error;
+        });
 };
 
 export const apiFetchGalleryByFolderId = async (id: string) => {
@@ -43,4 +45,28 @@ export const apiFetchGalleryByFolderId = async (id: string) => {
     }).catch(error => {
         throw error;
     });
+};
+
+export const apiUpdateFolderById = async (id: string, folder: Omit<IUserFolder, 'id'>) => {
+    return apiClient.put<IUserFolder>(`/folder/${id}`, folder).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get folders');
+        }
+        return response.data;
+    }).catch(error => {
+        throw error;
+    });
+};
+
+export const apiCreateFolder = async (folder: Omit<IUserFolder, 'id'>) => {
+    return apiClient.post<IUserFolder>('/folder', folder)
+        .then((response) => {
+            if (response?.status !== 200) {
+                throw new Error('Failed to get folders');
+            }
+            return response.data;
+        }).catch(error => {
+            console.error(error);
+            return null;
+        });
 };
