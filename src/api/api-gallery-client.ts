@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import store, { RootState } from '../store';
 import apiClientAuth from './api-auth-client';
-import { login } from '../features/auth/auth-slice';
+import { login, logout } from '../features/auth/auth-slice';
 const { REACT_APP_API_URL } = process.env;
 
 const apiClient = axios.create({
@@ -30,9 +30,9 @@ apiClient.interceptors.response.use(
     async (error: AxiosError<any, any>) => {
         // eslint-disable-next-line
         const { config, response } = error as any; //TODO: fix type
-        if (response?.status === 401 && !config._retry) {
+        if ((response?.status === 401 || response?.status === 403) && !config._retry) {
             config._retry = true;
-
+            console.log('refreshing token');
             const state: RootState = store.getState();
             const refreshToken = state.auth.refreshToken;
             try {
@@ -45,7 +45,7 @@ apiClient.interceptors.response.use(
                 return apiClient(config);
             } catch (error) {
                 console.error('Failed to refresh token', error);
-                // store.dispatch(logout());
+                store.dispatch(logout());
             }
         }
 
