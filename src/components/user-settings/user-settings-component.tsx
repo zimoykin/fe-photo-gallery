@@ -62,7 +62,7 @@ const UserSettings: React.FC = () => {
     };
 
     const handleDragOver = (e: React.DragEvent) => {
-        console.log(ind, e.target);
+        console.log(e.target);
     };
     return (
         <>
