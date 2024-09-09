@@ -16,21 +16,17 @@ const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, l
     return (
         <>
             {/* TODO: move to css file */}
-            <div style={{
-                backgroundColor: bgColor,
-                height: lineSize,
-                color: textColor,
-                fontFamily: 'inter',
-                fontSize: '40px',
-                fontWeight: 'bolder',
-                paddingLeft: '10px',
-                margin: '0px 0px 0px 0px',
-                cursor: 'pointer',
-                verticalAlign: 'middle',
-                width: "100%"
-            }} onClick={onClick}>
+            <div
+                className='folder-line'
+                style={{
+                    backgroundColor: bgColor,
+                    height: lineSize,
+                    color: textColor,
+                }} onClick={onClick}>
 
-                {text.toUpperCase()}
+                <div style={{ padding: '20px', fontSize: `${isOpen ? '35px' : '18px'}` }}>
+                    <b>{text.toUpperCase()}</b>
+                </div>
                 {isOpen
                     ? <Galery folderId={folderId} />
                     : null

@@ -24,7 +24,7 @@ export interface IPhoto {
 }
 
 export const apiFetchUserFolders = async () => {
-    return apiClient.get<IUserFolder[]>('/folder')
+    return apiClient.get<IUserFolder[]>('/folders')
         .then((response) => {
             if (response?.status !== 200) {
                 throw new Error('Failed to get folders');
@@ -37,7 +37,7 @@ export const apiFetchUserFolders = async () => {
 };
 
 export const apiFetchGalleryByFolderId = async (id: string) => {
-    return apiClient.get<IPhoto[]>(`/photo/${id}`).then((response) => {
+    return apiClient.get<IPhoto[]>(`/photos/${id}`).then((response) => {
         if (response.status !== 200) {
             throw new Error('Failed to get folders');
         }
@@ -48,7 +48,7 @@ export const apiFetchGalleryByFolderId = async (id: string) => {
 };
 
 export const apiUpdateFolderById = async (id: string, folder: Omit<IUserFolder, 'id'>) => {
-    return apiClient.put<IUserFolder>(`/folder/${id}`, folder).then((response) => {
+    return apiClient.put<IUserFolder>(`/folders/${id}`, folder).then((response) => {
         if (response?.status !== 200) {
             throw new Error('Failed to get folders');
         }
@@ -59,7 +59,7 @@ export const apiUpdateFolderById = async (id: string, folder: Omit<IUserFolder, 
 };
 
 export const apiCreateFolder = async (folder: Omit<IUserFolder, 'id'>) => {
-    return apiClient.post<IUserFolder>('/folder', folder)
+    return apiClient.post<IUserFolder>('/folders', folder)
         .then((response) => {
             if (response?.status !== 200) {
                 throw new Error('Failed to get folders');
@@ -69,4 +69,15 @@ export const apiCreateFolder = async (folder: Omit<IUserFolder, 'id'>) => {
             console.error(error);
             return null;
         });
+};
+
+export const apiDeleteFolderById = async (id: string) => {
+    return apiClient.delete(`/folders/${id}`).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get folders');
+        }
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+    });
 };

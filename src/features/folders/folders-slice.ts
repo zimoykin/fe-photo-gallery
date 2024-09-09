@@ -12,7 +12,7 @@ const initialState: FoldersState = {
 };
 
 const foldersSlice = createSlice({
-    name: '_folders',
+    name: 'user_folders',
     initialState,
     reducers: {
         storeFolders: (state, action: PayloadAction<IUserFolder[]>) => {
