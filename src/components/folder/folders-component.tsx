@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import React from 'react';
 import Folder from "./folder-component";
 import { apiFetchUserFolders, IUserFolder } from "../../api/api-gallery";
-import CameraSpinnerModal from "../camera-spinner/camera-spinner-modal.component";
 import { useDispatch } from "react-redux";
 import { storeFolders } from "../../features/folders/folders-slice";
 import { useNavigate } from "react-router-dom";
+import FolderSpinnerComponent from "./folder-spinner-component";
 
 const Folders: React.FC = () => {
     const dispatch = useDispatch();
@@ -23,34 +23,41 @@ const Folders: React.FC = () => {
             );
             setFolders(folders);
         }).finally(() => {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 4000);
         }).catch(() => {
             setIsLoading(false);
             navigate('/login');
         });
     }, [dispatch, navigate]);
 
-    const [lineSize, setLineSize] = useState(`${100 / (folders.length)}vh`);
+    const getFolderSize = (ini: number = 100) => {
+        const foldersMax = Math.max(4, folders.length);
+        return `${ini / Math.min(foldersMax, 10)}vh`;
+    };
+
+    const [lineSize, setLineSize] = useState(getFolderSize());
     const [openLineSize] = useState('75vh'); //TODO
     const [choosen, setChoosen] = useState(-1);
 
     useEffect(() => {
-        setLineSize(`${100 / (folders.length)}vh`);
+        setLineSize(getFolderSize());
     }, [folders]);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
             setChoosen(-1);
-            setLineSize(`${100 / (folders.length)}vh`);
+            setLineSize(getFolderSize());
         } else {
             setChoosen(ind);
-            setLineSize(`${50 / (folders.length)}vh`);
+            setLineSize(getFolderSize(50));
         }
     };
 
     return (
         <>
-            {isLoading ? <CameraSpinnerModal /> : <>
+            {isLoading ? <FolderSpinnerComponent /> : <>
                 {
                     folders.map((folder, index) => {
                         return (

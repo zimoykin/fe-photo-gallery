@@ -5,7 +5,7 @@ import './home-style.css';
 export const Home: React.FC = () => {
     return (
         <div className="home-container">
-            <div className="box-container">
+            <div className="home-box-container">
                 <Folders />
             </div>
         </div>

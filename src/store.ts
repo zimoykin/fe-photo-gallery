@@ -15,12 +15,22 @@ const persistConfig = {
   storage,
 };
 
+const persistConfigThema = {
+  key: 'thema',
+  version: 1,
+  storage,
+};
 
+const persistConfigFolders = {
+  key: 'folders',
+  version: 1,
+  storage,
+};
 // Create persisted reducers
 const persistedReducerAuth = persistReducer(persistConfig, authReducer);
 const persistedReducerUser = persistReducer(persistConfig, profileReducer);
-const persistedReducerThema = persistReducer(persistConfig, themaReducer);
-const persistedReducerFolders = persistReducer(persistConfig, folderReducer);
+const persistedReducerThema = persistReducer(persistConfigThema, themaReducer);
+const persistedReducerFolders = persistReducer(persistConfigFolders, folderReducer);
 
 const store = configureStore({
   reducer: {
