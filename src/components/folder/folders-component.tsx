@@ -44,7 +44,7 @@ const Folders: React.FC = () => {
 
     useEffect(() => {
         setLineSize(getFolderSize());
-    }, [folders]);
+    }, [folders, getFolderSize]);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
@@ -57,7 +57,7 @@ const Folders: React.FC = () => {
     };
 
     return (
-        <div style={{ }}>
+        <div style={{}}>
             {isLoading ? <FolderSpinnerComponent /> : <>
                 {
                     folders.map((folder, index) => {
