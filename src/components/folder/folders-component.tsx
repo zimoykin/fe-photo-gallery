@@ -15,6 +15,11 @@ const Folders: React.FC = () => {
     const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
+    const getFolderSize = useCallback((ini: number = 100) => {
+        const foldersMax = Math.max(4, folders.length);
+        return `${ini / Math.min(foldersMax, 10)}vh`;
+    }, [folders.length]);
+
     useEffect(() => {
         setIsLoading(true);
         apiFetchUserFolders().then((folders) => {
@@ -23,6 +28,7 @@ const Folders: React.FC = () => {
                 storeFolders(folders)
             );
             setFolders(folders);
+            setLineSize(getFolderSize());
         }).finally(() => {
             setTimeout(() => {
                 setIsLoading(false);
@@ -31,20 +37,12 @@ const Folders: React.FC = () => {
             setIsLoading(false);
             navigate('/login');
         });
-    }, [dispatch, navigate]);
+    }, [dispatch, navigate, getFolderSize]);
 
-    const getFolderSize = (ini: number = 100) => {
-        const foldersMax = Math.max(4, folders.length);
-        return `${ini / Math.min(foldersMax, 10)}vh`;
-    };
 
     const [lineSize, setLineSize] = useState(getFolderSize());
     const [openLineSize] = useState('75vh'); //TODO
     const [choosen, setChoosen] = useState(-1);
-
-    useCallback(() => {
-        setLineSize(getFolderSize());
-    }, [folders]);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
