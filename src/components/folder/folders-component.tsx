@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import React from 'react';
 import Folder from "./folder-component";
 import { apiFetchUserFolders, IUserFolder } from "../../api/api-gallery";
@@ -42,9 +42,9 @@ const Folders: React.FC = () => {
     const [openLineSize] = useState('75vh'); //TODO
     const [choosen, setChoosen] = useState(-1);
 
-    useEffect(() => {
+    useCallback(() => {
         setLineSize(getFolderSize());
-    }, [folders, getFolderSize]);
+    }, [folders]);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
