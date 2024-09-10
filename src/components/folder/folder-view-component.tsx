@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './folders-style.css';
+import './styles/folder-view-style.css';
 import { apiCreateFolder, apiUpdateFolderById, IUserFolder } from "../../api/api-gallery";
 import CameraSpinnerModal from "../camera-spinner/camera-spinner-modal.component";
 import { ColorResult, SketchPicker } from 'react-color';

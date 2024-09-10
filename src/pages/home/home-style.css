@@ -2,8 +2,7 @@
     /* padding-top: 10vh; */
     max-width: 1280px;
     width: 100%;
-    height: 100%;
-    background-color: lightgray;
+    /* height: 100%; */
 }
 
 .home-box-container.dark-mode {

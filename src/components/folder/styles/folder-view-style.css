@@ -49,35 +49,3 @@
     padding: 10px;
     font-size: 39px;
 }
-
-/* FOLDER */
-.folder-line {
-    font-family: 'robota';
-    font-weight: 'bolder';
-    padding-left: '40px';
-    padding-right: '20px';
-    margin: '0px 0px 0px 0px';
-    cursor: 'pointer';
-    vertical-align: 'middle';
-    width: "100%";
-    /* box-shadow: 2px 1px 1px 3px rgba(0, 0, 0, 0.43); */
-}
-
-.folder-spinner {
-    background-color: 'lightgray';
-    animation: fadeInOutInOut 1.5s infinite;
-}
-
-@keyframes fadeInOutInOut {
-    0% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}

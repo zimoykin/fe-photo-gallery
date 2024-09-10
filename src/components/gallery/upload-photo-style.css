@@ -1,0 +1,104 @@
+.upload-photo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.upload-photo-container {
+    max-width: 1280px;
+    padding: 10px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 80%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    overflow: hidden;
+    /* background-color: tomato; */
+}
+
+.upload-photo-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    width: 50%;
+    height: 100%;
+    /* background-color: grey; */
+}
+
+.upload-photo-info input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 2px 1px 10px 3px rgba(0, 0, 0, 0.33);
+}
+
+.upload-photo-info button {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: lightgreen;
+    box-shadow: 2px 1px 10px 3px rgba(0, 0, 0, 0.33);
+}
+
+.upload-photo-info button:active {
+    transform: scale(0.95);
+    background-color: #4c854c;
+    color: white;
+    font-weight: 100;
+    box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.33);
+}
+
+.upload-photo-drag-area {
+    background-color: white;
+    /* padding: 10px; */
+    border-radius: 10px;
+    margin: 10px;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* .upload-photo-drag-area::backdrop {
+    background-color: lightgray;
+} */
+
+.uploaded-image {
+    width: 200px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 5px;
+    position: relative;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    box-shadow: 2px 1px 10px 3px rgba(0, 0, 0, 0.33);
+}
+
+.uploaded-photos-container {
+    /* background-color: gray; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

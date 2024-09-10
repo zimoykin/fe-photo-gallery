@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { storeFolders } from "../../features/folders/folders-slice";
 import { useNavigate } from "react-router-dom";
 import FolderSpinnerComponent from "./folder-spinner-component";
+import './styles/folders-style.css';
 
 const Folders: React.FC = () => {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Folders: React.FC = () => {
         }).finally(() => {
             setTimeout(() => {
                 setIsLoading(false);
-            }, 4000);
+            }, 1000);
         }).catch(() => {
             setIsLoading(false);
             navigate('/login');
@@ -43,7 +44,7 @@ const Folders: React.FC = () => {
 
     useEffect(() => {
         setLineSize(getFolderSize());
-    }, [folders, getFolderSize]);
+    }, [folders]);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
@@ -56,7 +57,7 @@ const Folders: React.FC = () => {
     };
 
     return (
-        <>
+        <div style={{ }}>
             {isLoading ? <FolderSpinnerComponent /> : <>
                 {
                     folders.map((folder, index) => {
@@ -74,7 +75,7 @@ const Folders: React.FC = () => {
                         );
                     })
                 } </>}
-        </>
+        </div>
     );
 };
 
