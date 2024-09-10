@@ -81,3 +81,18 @@ export const apiDeleteFolderById = async (id: string) => {
         console.error(error);
     });
 };
+
+export const apiUploadPhoto = async (formData: FormData, folderId: string) => {
+    return apiClient.post<IPhoto>(`/photos/${folderId}`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get folders');
+        }
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+    });
+};

@@ -5,7 +5,7 @@ import { RootState } from '../../store';
 import { apiDeleteFolderById, apiFetchUserFolders, IUserFolder } from '../../api/api-gallery';
 import FolderView from '../folder/folder-view-component';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
-
+import UploadPhotoModal from '../gallery/upload-photo-model';
 
 const UserSettings: React.FC = () => {
 
@@ -13,7 +13,8 @@ const UserSettings: React.FC = () => {
     const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [showModalFolderView, setShowModalFolderView] = useState(false);
-
+    const [showUploadImg, setShowUploadImg] = useState(false);
+    const [dragFolder, setDragFolder] = useState<[number, number] | null>(null);
     const [selectedFolder, setSelectedFolder] = useState(-1);
 
     useEffect(() => {
@@ -55,15 +56,21 @@ const UserSettings: React.FC = () => {
     };
 
     const handleDragEnd = (e: React.DragEvent, ind: number) => {
-        console.log(ind, e.target);
+        console.log(dragFolder, ind);
     };
     const handleDragStart = (e: React.DragEvent, ind: number) => {
-        console.log(ind, e.target);
+        console.log(ind, e.detail);
+        setDragFolder([ind, 0]);
     };
 
-    const handleDragOver = (e: React.DragEvent) => {
-        console.log(e.target);
+    const handleDragOver = (e: React.DragEvent, ind: number) => {
+        setDragFolder([ind, (dragFolder?.[1] ?? 0) + 1]);
     };
+
+    const handleUploadPhotoClick = () => {
+        setShowUploadImg(true);
+    };
+
     return (
         <>
             <div id='user-settings-container'>
@@ -78,6 +85,7 @@ const UserSettings: React.FC = () => {
                     {selectedFolder >= 0 ? <div className='icon'>
                         <i className="fas fa-edit" onClick={() => setShowModalFolderView(true)} />
                     </div> : null}
+                    {selectedFolder >= 0 ? <div className='icon'> <i className="fas fa-camera" onClick={handleUploadPhotoClick} /> </div> : null}
 
                 </div>
                 <div className='user-settings-page'>
@@ -93,7 +101,7 @@ const UserSettings: React.FC = () => {
 
                                     draggable
                                     onDragStart={(e) => handleDragStart(e, ind)}
-                                    onDragOver={(e) => handleDragOver(e)}
+                                    onDragOver={(e) => handleDragOver(e, ind)}
                                     onDragEnd={(e) => handleDragEnd(e, ind)}
 
                                     onClick={() => handleSelectedFolder(ind)}
@@ -104,7 +112,7 @@ const UserSettings: React.FC = () => {
                                     <td style={{}}> {folder.sortOrder} </td>
                                     <td style={{}} className={'table-line'}>{folder.title}</td>
                                     <td style={{}}> {folder.description} </td>
-                                    <td style={{}}> <i className="fa fa-plus" style={{ fontSize: '20px' }} /></td>
+                                    <td> {Math.floor(Math.random() * 10)} </td>
                                 </tr>)
                             }
                         </tbody>
@@ -113,6 +121,7 @@ const UserSettings: React.FC = () => {
             </div>
             {showModalFolderView ? <FolderView onClose={folderViewOnClose} folder={folders[selectedFolder]} /> : null}
             {isLoading ? <CameraSpinnerModal /> : null}
+            {showUploadImg ? <UploadPhotoModal folderId={folders[selectedFolder].id} onClose={() => setShowUploadImg(false)} /> : null}
         </>
     );
 };

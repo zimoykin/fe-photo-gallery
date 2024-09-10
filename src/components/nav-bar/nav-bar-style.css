@@ -1,13 +1,22 @@
 .nav-bar {
-    position: fixed;
-    top: 0; 
-    right: 10px; 
+    position: sticky;
+    /* background-color: tomato; */
+    top: 0;
+    right: 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     padding: 10px;
-    max-width: 1280px;
-    width: auto;
+    /* max-width: 1280px; */
+    width: 100%;
     box-sizing: border-box;
+}
+
+.nav-bar-command-panel {
+    width: 100%;
+    max-width: 1280px;
+    display: flex;
+    /* background-color: cadetblue; */
+    justify-content: flex-end;
 }
 
 .nav-bar i {
@@ -28,7 +37,7 @@
 
 @media (min-width: 1280px) {
     .nav-bar {
-        left: auto; 
+        left: auto;
         right: calc(50% - 640px);
     }
 }

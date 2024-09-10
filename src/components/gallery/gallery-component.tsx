@@ -20,6 +20,9 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
 
     useEffect(() => {
         setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 10_000);
         apiFetchGalleryByFolderId(folderId).then((images) => {
             setImages(images);
         }).finally(() => {
