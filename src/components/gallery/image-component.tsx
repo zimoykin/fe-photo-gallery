@@ -39,7 +39,7 @@ const ImageModal: React.FC<Props> = ({ src, onClose, next, prev, photo }: Props)
     }, []);
 
     const [showOverlays, setShowOverlays] = useState(false);
-    const handleOnMouseEnter = (ev: React.MouseEvent) => {
+    const handleOnMouseEnter = () => {
         setShowOverlays(true);
     };
 
