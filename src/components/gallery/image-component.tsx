@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './image-modal-style.css';
 import ImageOverlays from './image-overlays';
 import { IPhoto } from '../../api/api-gallery';
@@ -14,7 +14,7 @@ interface Props {
 const ImageModal: React.FC<Props> = ({ src, onClose, next, prev, photo }: Props) => {
 
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = useCallback((event: KeyboardEvent) => {
         switch (event.key) {
             case 'ArrowLeft':
                 prev(event);
@@ -28,7 +28,7 @@ const ImageModal: React.FC<Props> = ({ src, onClose, next, prev, photo }: Props)
             default:
                 break;
         }
-    };
+    }, [prev, next, onClose]);
 
 
     useEffect(() => {
