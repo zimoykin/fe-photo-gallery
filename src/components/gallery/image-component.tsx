@@ -36,7 +36,7 @@ const ImageModal: React.FC<Props> = ({ src, onClose, next, prev, photo }: Props)
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [handleKeyDown]);
 
     const [showOverlays, setShowOverlays] = useState(false);
     const handleOnMouseEnter = () => {
