@@ -46,6 +46,7 @@ const NavBar: React.FC = () => {
         <div
             className='nav-bar'>
             <div className='nav-bar-command-panel'>
+                <i className="fa-solid fa-bell" />
                 {iconSet === 'home' ? <i className="fas fa-home" onClick={handleSettings} /> : < i className="fas fa-cog" onClick={handleSettings} />}
                 {theme === 'dark' ? <i className="fas fa-sun" onClick={handleThemeChange} /> : <i className="fas fa-moon" onClick={handleThemeChange} />}
                 <i className="fa fa-sign-out"

@@ -1,4 +1,3 @@
-
 .image-modal-overlay {
     position: fixed;
     top: 50%;
@@ -29,12 +28,30 @@
 
 .commands {
     position: absolute;
+    background-color: lightgray;
     cursor: pointer;
     border-radius: 5%;
     display: flex;
     top: 5px;
+    color: #000;
 }
 
 .commands i {
     padding: 10px;
+}
+
+
+.overlay-container {
+    position: relative;
+    color: #000;
+}
+
+.image-overlays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
 }

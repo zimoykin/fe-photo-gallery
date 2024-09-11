@@ -3,7 +3,6 @@ import './gallery-style.css';
 import './gallery-table-style.css';
 import ImageModal from './image-component';
 import { apiFetchGalleryByFolderId, apiFetchPhotoById, IPhoto } from '../../api/api-gallery';
-import CameraSpinner from '../camera-spinner/camera-spinner.component';
 
 interface Props {
     folderId: string;
@@ -13,6 +12,7 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [images, setImages] = useState<IPhoto[]>([]);
     const [showImage, setShowImage] = useState<string | null>(null);
+    const [selectedImage, setSelectedImage] = useState(-1);
 
     useEffect(() => {
         setIsLoading(true);
@@ -26,7 +26,8 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
         });
     }, [folderId]);
 
-    const handleImgClick = async (folderId: string, photoId: string) => {
+    const handleImgClick = async (folderId: string, photoId: string, ind: number) => {
+        setSelectedImage(ind);
         setShowImage(
             images[images.findIndex(image => image.id === photoId)
             ].url);
@@ -36,17 +37,28 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
         }
     };
 
-    const handlePrevClick = () => {
-        const index = images.findIndex(image => image.url === showImage);
-        if (index > 0) {
-            setShowImage(images[index - 1].url);
+    const handlePrevClick = async () => {
+        const prev = selectedImage - 1;
+        if (prev >= 0) {
+            setSelectedImage(prev);
+            setShowImage(images[prev].url);
+            const photo = await apiFetchPhotoById(images[prev].folderId, images[prev].id);
+            if (photo) {
+                setShowImage(photo.url);
+            }
         }
     };
 
-    const handleNextClick = () => {
-        const index = images.findIndex(image => image.url === showImage);
-        if (index < images.length - 1) {
-            setShowImage(images[index + 1].url);
+    const handleNextClick = async () => {
+        console.log(selectedImage);
+        const next = selectedImage + 1;
+        if (next >= 0 && images.length > next) {
+            setSelectedImage(next);
+            setShowImage(images[next].url);
+            const photo = await apiFetchPhotoById(images[next].folderId, images[next].id);
+            if (photo) {
+                setShowImage(photo.url);
+            }
         }
     };
 
@@ -55,11 +67,13 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
             <div className="gallery-container"
                 onClick={(ev) => { ev.stopPropagation(); }}
             >
-                {isLoading && <div className="gallery-spinner"><CameraSpinner /></div>}
+                {isLoading && <div className="gallery-image-card"><div className='gallery-image-loading'>  </div></div>}
 
                 <div className="gallery-row">
                     {images.map((image, index) => (
-                        <div key={index} className='gallery-image-card' onClick={() => image?.id && handleImgClick(image.folderId!, image.id)}>
+                        <div
+                            key={index} className='gallery-image-card'
+                            onClick={() => image?.id && handleImgClick(image.folderId!, image.id, index)}>
                             <img src={image.url} alt='' />
                             <div className='gallery-image-info'>
                                 <p>📍 {image.location} </p>
@@ -71,6 +85,7 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
                 </div>
 
                 {showImage ? <ImageModal
+                    photo={images[selectedImage]}
                     src={`${showImage}`}
                     onClose={(ev) => { setShowImage(null); ev.stopPropagation(); }}
                     next={(ev) => { handleNextClick(); ev.stopPropagation(); }}
