@@ -36,8 +36,8 @@ export const apiFetchUserFolders = async () => {
         });
 };
 
-export const apiFetchGalleryByFolderId = async (id: string) => {
-    return apiClient.get<IPhoto[]>(`/photos/${id}`).then((response) => {
+export const apiFetchGalleryByFolderId = async (id: string, type: 'preview' | 'original' | 'compressed') => {
+    return apiClient.get<IPhoto[]>(`/photos/${id}/${type}`).then((response) => {
         if (response.status !== 200) {
             throw new Error('Failed to get folders');
         }
@@ -88,6 +88,20 @@ export const apiUploadPhoto = async (formData: FormData, folderId: string) => {
             'Content-Type': 'multipart/form-data'
         }
     }).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get folders');
+        }
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+    });
+};
+
+export const apiFetchPhotoById = async (
+    folderId: string,
+    photoId: string
+) => {
+    return apiClient.get<IPhoto>(`/photos/${folderId}/${photoId}/compressed`).then((response) => {
         if (response?.status !== 200) {
             throw new Error('Failed to get folders');
         }

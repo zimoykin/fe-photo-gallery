@@ -7,12 +7,11 @@ interface Props {
     textColor: string;
     text: string;
     isOpen?: true;
-    lineSize: string;
     folderId: string;
     onClick: () => void;
 }
 
-const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, lineSize, onClick }: Props) => {
+const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, onClick }: Props) => {
     const folderRef = useRef<HTMLDivElement>(null);
 
     const handleClick = () => {
@@ -35,19 +34,19 @@ const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, l
     return (
         <>
             <div
-                className='folder-line'
+                className={'folder-line' + (isOpen ? '-selected' : '')}
                 ref={folderRef}
                 style={{
                     backgroundColor: bgColor,
-                    height: lineSize,
                     color: textColor,
                 }} onClick={handleClick}>
 
-                <div style={{ padding: '20px', fontSize: `${isOpen ? '35px' : '18px'}` }}>
+                <div style={{ paddingLeft: '20px', paddingTop: '10px', fontSize: `${isOpen ? '35px' : '18px'}` }}>
                     <b>{text.toUpperCase()}</b>
                 </div>
                 {isOpen
-                    ? <Galery folderId={folderId} />
+                    ? <Galery folderId={folderId}
+                    />
                     : null
                 }
             </div>
