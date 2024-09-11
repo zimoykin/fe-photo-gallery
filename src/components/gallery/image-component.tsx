@@ -1,5 +1,5 @@
 import React from 'react';
-import './gallery-style.css';
+import './image-modal-style.css';
 
 interface Props {
     src: string;
@@ -10,9 +10,11 @@ interface Props {
 
 const ImageModal: React.FC<Props> = ({ src, onClose, next, prev }: Props) => {
     return (
-        <div className="modal-overlay" onClick={onClose}>
+        <div className="image-modal-overlay" onClick={onClose}>
             <div className="modal-content">
-                <img src={src} alt=''/>
+                <img
+                    style={{ maxHeight: window.innerHeight - 100, maxWidth: window.innerWidth - 100 }}
+                    src={src} alt='' />
                 <div className='commands'>
 
                     <i className="fas fa-times" onClick={onClose} />

@@ -37,7 +37,7 @@ apiClient.interceptors.response.use(
             const refreshToken = state.auth.refreshToken;
             try {
                 const refreshResponse = await apiClientAuth.post('auth/refresh', { refreshToken });
-                const { accessToken, newRefreshToken } = refreshResponse.data;
+                const { accessToken, refreshToken: newRefreshToken } = refreshResponse.data;
                 store.dispatch(
                     login([accessToken, newRefreshToken])
                 );

@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Folder from "./folder-component";
 import { apiFetchUserFolders, IUserFolder } from "../../api/api-gallery";
 import { useDispatch } from "react-redux";
@@ -15,11 +14,6 @@ const Folders: React.FC = () => {
     const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const getFolderSize = useCallback((ini: number = 100) => {
-        const foldersMax = Math.max(4, folders.length);
-        return `${ini / Math.min(foldersMax, 10)}vh`;
-    }, [folders.length]);
-
     useEffect(() => {
         setIsLoading(true);
         apiFetchUserFolders().then((folders) => {
@@ -28,7 +22,6 @@ const Folders: React.FC = () => {
                 storeFolders(folders)
             );
             setFolders(folders);
-            setLineSize(getFolderSize());
         }).finally(() => {
             setTimeout(() => {
                 setIsLoading(false);
@@ -37,25 +30,20 @@ const Folders: React.FC = () => {
             setIsLoading(false);
             navigate('/login');
         });
-    }, [dispatch, navigate, getFolderSize]);
+    }, [dispatch, navigate]);
 
-
-    const [lineSize, setLineSize] = useState(getFolderSize());
-    const [openLineSize] = useState('75vh'); //TODO
     const [choosen, setChoosen] = useState(-1);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
             setChoosen(-1);
-            setLineSize(getFolderSize());
         } else {
             setChoosen(ind);
-            setLineSize(getFolderSize(50));
         }
     };
 
     return (
-        <div style={{}}>
+        <div className="folder-container">
             {isLoading ? <FolderSpinnerComponent /> : <>
                 {
                     folders.map((folder, index) => {
@@ -65,14 +53,14 @@ const Folders: React.FC = () => {
                                 textColor={folder.color}
                                 text={folder.title}
                                 isOpen={index === choosen ? true : undefined}
-                                lineSize={index === choosen ? openLineSize : lineSize}
                                 key={index}
                                 folderId={folder.id}
                                 onClick={() => { onClickLine(index); }}
                             />
                         );
                     })
-                } </>}
+                }
+            </>}
         </div>
     );
 };
