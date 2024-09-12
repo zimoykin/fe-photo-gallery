@@ -1,0 +1,130 @@
+.image-modal-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.modal-content img {
+    width: 100%;
+    object-fit: contain;    
+}
+
+/* spinner */
+.film-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-image: url('/public/film.png');
+    background-repeat: round;
+    background-position: 0 0;
+    background-size: 110%;
+    border: black solid 10px;
+    animation: film-loading 1.5s ease-in-out alternate infinite;
+}
+
+.image-vignette {
+    position: relative;
+    display: flex; 
+}
+
+.image-vignette img {
+    display: block;
+}
+
+.image-vignette::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.9) 100%);
+    /* filter: invert(1); */
+}
+
+.image-negative {
+    position: relative;
+    display: flex; 
+}
+
+.image-negative img {
+    display: block;
+    filter: blur(2px) invert(1) brightness(0.8) contrast(1.2);
+    
+}
+
+.image-negative::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    filter: invert(-1);
+}
+
+@keyframes film-loading {
+    100% {
+        opacity: .7;
+        height: 102%;
+        width: 102%;
+    }
+
+    0% {
+        opacity: .9;
+    }
+}
+
+/* commands-panel */
+.commands {
+    position: absolute;
+    background-color: lightgray;
+    cursor: pointer;
+    border-radius: 5%;
+    display: flex;
+    top: 5px;
+    color: #000;
+}
+
+.commands i {
+    padding: 10px;
+}
+
+
+.overlay-container {
+    position: relative;
+    color: #000;
+}
+
+/* image info */
+
+.image-overlays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+}

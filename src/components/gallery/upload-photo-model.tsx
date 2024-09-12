@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./upload-photo-style.css";
+import "./styles/upload-photo-style.css";
 import { apiUploadPhoto } from "../../api/api-gallery";
 import CameraSpinnerModal from "../camera-spinner/camera-spinner-modal.component";
 
@@ -26,7 +26,6 @@ const UploadPhotoModal: React.FC<Props> = ({ folderId, onClose }: Props) => {
     const handleUpload = () => {
         setIsLoading(true);
         images.map(async image => {
-            // new File(imag.url);
             const formData = new FormData();
             formData.append('file', image.file);
             formData.append('camera', camera);
