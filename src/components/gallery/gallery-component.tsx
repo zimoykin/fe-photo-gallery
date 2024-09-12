@@ -44,7 +44,7 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
         if (photo) {
             handlePickingPhoto(photo.id, index);
         }
-    }, [images, searchParams]);
+    }, [images, searchParams, handlePickingPhoto]);
 
     useEffect(() => {
         setIsLoading(true);

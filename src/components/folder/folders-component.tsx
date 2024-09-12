@@ -41,7 +41,7 @@ const Folders: React.FC = () => {
                 setIsLoading(false);
             });
         }
-    }, [dispatch]);
+    }, [dispatch, searchParams]);
 
     const [choosen, setChoosen] = useState(-1);
 
