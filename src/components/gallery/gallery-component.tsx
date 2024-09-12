@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './styles/gallery-style.css';
 import './styles/gallery-table-style.css';
 import ImageModal from './image-modal-component';
@@ -19,12 +19,12 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
     const [selectedImage, setSelectedImage] = useState(-1);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const updateQuery = (params: Record<string, string>) => {
+    const updateQuery = useCallback(async (params: Record<string, string>) => {
         const currentParams = Object.fromEntries(searchParams.entries());
         setSearchParams({ ...currentParams, ...params });
-    };
+    }, [searchParams, setSearchParams]);
 
-    const handlePickingPhoto = async (id: string, ind: number) => {
+    const handlePickingPhoto = useCallback(async (id: string, ind: number) => {
         updateQuery({ photoId: id });
         setSelectedImage(ind);
         const photo = images.find(image => image.id === id);
@@ -36,7 +36,7 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
                 setImgCompressed(photoCompressed.url);
             }
         }
-    };
+    }, [folderId, images, updateQuery]);
 
     useEffect(() => {
         const photo = images.find(image => image.id === searchParams.get('photoId'));
