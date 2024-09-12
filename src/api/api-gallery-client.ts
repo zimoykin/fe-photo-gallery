@@ -32,7 +32,6 @@ apiClient.interceptors.response.use(
         const { config, response } = error as any; //TODO: fix type
         if ((response?.status === 401 || response?.status === 403) && !config._retry) {
             config._retry = true;
-            console.log('refreshing token');
             const state: RootState = store.getState();
             const refreshToken = state.auth.refreshToken;
             try {

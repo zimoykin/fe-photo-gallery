@@ -5,11 +5,10 @@ interface Props {
     photo: IPhoto;
 }
 
-const ImageOverlays: React.FC<Props> = ({ photo }: Props) => {
+const ImageInfo: React.FC<Props> = ({ photo }: Props) => {
     return (
         <div className="image-overlays">
             <div className="image-overlay">{photo.location}</div>
-
             <div className="image-overlay">{photo.camera}</div>
             <div className="image-overlay">{photo.lens}</div>
             <div className="image-overlay">{photo.film}</div>
@@ -18,4 +17,4 @@ const ImageOverlays: React.FC<Props> = ({ photo }: Props) => {
 };
 
 
-export default ImageOverlays;
+export default ImageInfo;

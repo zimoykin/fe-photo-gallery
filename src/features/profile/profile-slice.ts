@@ -1,29 +1,29 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ProfileState {
-    userData: {
-        name: string;
+    user: {
+        id: string;
         email: string;
-        folders: string[];
+        name: string;
     } | null;
 }
 
 const initialState: ProfileState = {
-    userData: null,
+    user: null,
 };
 
 const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        setUserData: (state, action: PayloadAction<{ name: string; email: string; progress: number; folders: string[]; }>) => {
-            state.userData = action.payload;
+        setUserProfile: (state, action: PayloadAction<ProfileState['user']>) => {
+            state.user = action.payload;
         },
-        clearUserData: (state) => {
-            state.userData = null;
+        clearUserProfile: (state) => {
+            state.user = null;
         },
     },
 });
 
-export const { setUserData, clearUserData } = profileSlice.actions;
+export const { setUserProfile, clearUserProfile } = profileSlice.actions;
 export default profileSlice.reducer;

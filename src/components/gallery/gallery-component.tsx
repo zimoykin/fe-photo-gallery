@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import './gallery-style.css';
-import './gallery-table-style.css';
-import ImageModal from './image-component';
+import './styles/gallery-style.css';
+import './styles/gallery-table-style.css';
+import ImageModal from './image-modal-component';
 import { apiFetchGalleryByFolderId, apiFetchPhotoById, IPhoto } from '../../api/api-gallery';
+import { useSearchParams } from 'react-router-dom';
 
 interface Props {
     folderId: string;
@@ -11,14 +12,42 @@ interface Props {
 const Gallery: React.FC<Props> = ({ folderId }: Props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [images, setImages] = useState<IPhoto[]>([]);
-    const [showImage, setShowImage] = useState<string | null>(null);
+    const [impPreview, setImgPreview] = useState<string | null>(null);
+    const [imgCompressed, setImgCompressed] = useState<string | null>(null);
+    const [isCompressedReady, setIsCompressedReady] = useState<boolean>(false);
+    const [showFilmLoading, setShowFilmLoading] = useState(false);
     const [selectedImage, setSelectedImage] = useState(-1);
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const updateQuery = (params: Record<string, string>) => {
+        const currentParams = Object.fromEntries(searchParams.entries());
+        setSearchParams({ ...currentParams, ...params });
+    };
+
+    const handlePickingPhoto = async (id: string, ind: number) => {
+        updateQuery({ photoId: id });
+        setSelectedImage(ind);
+        const photo = images.find(image => image.id === id);
+        if (photo && folderId) {
+            setImgPreview(photo.url);
+            setShowFilmLoading(true);
+            const photoCompressed = await apiFetchPhotoById(folderId, id);
+            if (photoCompressed) {
+                setImgCompressed(photoCompressed.url);
+            }
+        }
+    };
+
+    useEffect(() => {
+        const photo = images.find(image => image.id === searchParams.get('photoId'));
+        const index = images.findIndex(image => image.id === searchParams.get('photoId'));
+        if (photo) {
+            handlePickingPhoto(photo.id, index);
+        }
+    }, [images, searchParams]);
 
     useEffect(() => {
         setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 10_000);
         apiFetchGalleryByFolderId(folderId, 'preview').then((images) => {
             setImages(images);
         }).finally(() => {
@@ -27,38 +56,32 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
     }, [folderId]);
 
     const handleImgClick = async (folderId: string, photoId: string, ind: number) => {
-        setSelectedImage(ind);
-        setShowImage(
-            images[images.findIndex(image => image.id === photoId)
-            ].url);
-        const photo = await apiFetchPhotoById(folderId, photoId);
-        if (photo) {
-            setShowImage(photo.url);
-        }
+        handlePickingPhoto(photoId, ind);
     };
 
     const handlePrevClick = async () => {
+        setIsCompressedReady(false);
         const prev = selectedImage - 1;
         if (prev >= 0) {
-            setSelectedImage(prev);
-            setShowImage(images[prev].url);
-            const photo = await apiFetchPhotoById(images[prev].folderId, images[prev].id);
-            if (photo) {
-                setShowImage(photo.url);
-            }
+            handlePickingPhoto(images[prev].id, prev);
+        } else {
+            setSelectedImage(-1);
+            setImgPreview(null);
+            setImgCompressed(null);
+            setShowFilmLoading(false);
         }
     };
 
     const handleNextClick = async () => {
-        console.log(selectedImage);
+        setIsCompressedReady(false);
         const next = selectedImage + 1;
         if (next >= 0 && images.length > next) {
-            setSelectedImage(next);
-            setShowImage(images[next].url);
-            const photo = await apiFetchPhotoById(images[next].folderId, images[next].id);
-            if (photo) {
-                setShowImage(photo.url);
-            }
+            handlePickingPhoto(images[next].id, next);
+        } else {
+            setSelectedImage(-1);
+            setImgPreview(null);
+            setImgCompressed(null);
+            setShowFilmLoading(false);
         }
     };
 
@@ -84,10 +107,17 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
                     ))}
                 </div>
 
-                {showImage ? <ImageModal
+                {(impPreview || imgCompressed) ? <ImageModal
                     photo={images[selectedImage]}
-                    src={`${showImage}`}
-                    onClose={(ev) => { setShowImage(null); ev.stopPropagation(); }}
+                    isLoading={showFilmLoading}
+                    srcPreview={`${impPreview}`}
+                    isCompressedReady={isCompressedReady}
+                    srcCompressed={`${imgCompressed}`}
+                    onLoad={() => {
+                        setIsCompressedReady(true);
+                        setShowFilmLoading(false);
+                    }}
+                    onClose={(ev) => { setImgCompressed(null); setImgPreview(null); ev.stopPropagation(); }}
                     next={(ev) => { handleNextClick(); ev.stopPropagation(); }}
                     prev={(ev) => { handlePrevClick(); ev.stopPropagation(); }}
                 /> : null}

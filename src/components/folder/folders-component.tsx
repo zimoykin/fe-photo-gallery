@@ -3,34 +3,45 @@ import Folder from "./folder-component";
 import { apiFetchUserFolders, IUserFolder } from "../../api/api-gallery";
 import { useDispatch } from "react-redux";
 import { storeFolders } from "../../features/folders/folders-slice";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import FolderSpinnerComponent from "./folder-spinner-component";
 import './styles/folders-style.css';
 
 const Folders: React.FC = () => {
+
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
-        apiFetchUserFolders().then((folders) => {
-            console.log(folders);
-            dispatch(
-                storeFolders(folders)
-            );
-            setFolders(folders);
-        }).finally(() => {
-            setTimeout(() => {
+        const userId = searchParams.get('userId');
+        if (userId) {
+            setIsLoading(true);
+            apiFetchUserFolders(userId).then((folders) => {
+                dispatch(
+                    storeFolders(folders)
+                );
+                setFolders(folders);
+
+                if (searchParams.get('folderId')) {
+                    const index = folders.findIndex(f => f.id === searchParams.get('folderId'));
+                    if (index >= 0) {
+                        setChoosen(index);
+                    }
+                }
+
+            }).finally(() => {
+                setTimeout(() => {
+                    setIsLoading(false);
+                }, 1000);
+            }).catch(() => {
+                setFolders([]);
                 setIsLoading(false);
-            }, 1000);
-        }).catch(() => {
-            setIsLoading(false);
-            navigate('/login');
-        });
-    }, [dispatch, navigate]);
+            });
+        }
+    }, [dispatch]);
 
     const [choosen, setChoosen] = useState(-1);
 
@@ -39,6 +50,9 @@ const Folders: React.FC = () => {
             setChoosen(-1);
         } else {
             setChoosen(ind);
+            const userId = searchParams.get('userId')!;
+            const folderId = folders[ind].id;
+            setSearchParams({ userId, folderId });
         }
     };
 
@@ -46,7 +60,7 @@ const Folders: React.FC = () => {
         <div className="folder-container">
             {isLoading ? <FolderSpinnerComponent /> : <>
                 {
-                    folders.map((folder, index) => {
+                    folders?.map((folder, index) => {
                         return (
                             <Folder
                                 bgColor={folder.bgColor}

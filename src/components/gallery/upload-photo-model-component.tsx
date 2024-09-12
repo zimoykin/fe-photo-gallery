@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import "./upload-photo-style.css";
+import React, { useRef, useState } from "react";
+import "./styles/upload-photo-style.css";
 import { apiUploadPhoto } from "../../api/api-gallery";
 import CameraSpinnerModal from "../camera-spinner/camera-spinner-modal.component";
 
@@ -11,22 +11,28 @@ interface Props {
 
 const UploadPhotoModal: React.FC<Props> = ({ folderId, onClose }: Props) => {
     const [images, setImages] = useState<{ src: string, name: string; file: File; }[]>([]);
-
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [camera, setCamera] = useState('Canon EOS 650');
     const [film, setFilm] = useState('Kodak ultra mx 400');
     const [lens, setLens] = useState('Sigma 50mm f/1.4');
     const [iso, setIso] = useState(400);
     const [location, setLocation] = useState('TOKYO, JP');
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
     };
 
+    const handleOpenLocalGallery = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
     const handleUpload = () => {
         setIsLoading(true);
         images.map(async image => {
-            // new File(imag.url);
             const formData = new FormData();
             formData.append('file', image.file);
             formData.append('camera', camera);
@@ -40,6 +46,18 @@ const UploadPhotoModal: React.FC<Props> = ({ folderId, onClose }: Props) => {
                 onClose();
             });
         });
+    };
+
+    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files ?? [];
+        if (files.length > 0) {
+            const imgs: { src: string, name: string; file: File; }[] = [];
+            for await (const file of files) {
+                const storageUrl = await loadFile(file);
+                imgs.push({ src: storageUrl, name: file.name, file: file });
+            }
+            setImages([...images, ...imgs]);
+        }
     };
 
     const loadFile = (file: File): Promise<string> => {
@@ -76,6 +94,7 @@ const UploadPhotoModal: React.FC<Props> = ({ folderId, onClose }: Props) => {
                     className="upload-photo-drag-area"
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
+                    onClick={handleOpenLocalGallery}
                 >
                     {!images.length && <h1>Drag and drop your photo here</h1>}
                     {images.length && <div className="uploaded-photos-container">
@@ -83,6 +102,14 @@ const UploadPhotoModal: React.FC<Props> = ({ folderId, onClose }: Props) => {
                             <img key={index} src={image} alt={`Uploaded ${index}`} className="uploaded-image" />
                         ))}
                     </div>}
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        multiple={true}
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                    />
                 </div>
                 <div className="upload-photo-info">
                     <input type="text" placeholder="Camera" value={camera} onChange={(e) => setCamera(e.target.value)} />

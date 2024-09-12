@@ -1,25 +1,19 @@
-.home-box-container {
+.gallery-box-container {
     /* padding-top: 10vh; */
     max-width: 1280px;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 }
 
-.gallery-box-container {
-    cursor: pointer;
-    /* background-color: tomato; */
-    height: 100%;
-}
-
-.home-box-container.dark-mode {
+.gallery-box-container.dark-mode {
     box-shadow: 2px 1px 33px 3px rgba(255, 255, 255, 0.33)
 }
 
-.home-box-container.light-mode {
+.gallery-box-container.light-mode {
     box-shadow: 2px 1px 33px 3px rgba(0, 0, 0, 0.33)
 }
 
-.home-container {
+.gallery-container {
     width: 100%;
     height: 100%;
     display: flex;
