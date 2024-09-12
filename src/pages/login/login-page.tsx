@@ -25,7 +25,7 @@ export const Login: React.FC = () => {
                         // Get user profile
                         apiMe().then((user) => {
                             dispatch(setUserProfile(user));
-                            navigate('/?userId=' + user.id);
+                            navigate(`/gallery/${user.id}`);
                         });
                     } else {
                         setError(new Error('Invalid credentials'));
@@ -57,7 +57,7 @@ export const Login: React.FC = () => {
                         <h1 className='logo-h1 '> make your gallery</h1>
                     </div>
                 </div>
-                {isAuthenticated ? <div className='user-data-container' style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+                {isAuthenticated ? <div className='user-data-container' style={{ cursor: 'pointer' }} onClick={() => navigate('/home')}>
                     <h1>You are already logged in</h1>
                     <h3>click here to continue using app</h3>
                 </div> : <>

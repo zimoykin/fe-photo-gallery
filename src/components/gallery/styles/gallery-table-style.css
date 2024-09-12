@@ -1,18 +1,18 @@
+.gallery-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-top:20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+}
 .gallery-container {
     width: 100%;
     overflow-x: auto;
     white-space: nowrap;
     -ms-overflow-style: none;
     /* scrollbar-width: none; */
-    padding: 30px;
-}
-
-.gallery-row {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    max-width: 1280px;
-    margin: 0 auto;
+    /* padding: 20px; */
 }
 
 .gallery-image-card {

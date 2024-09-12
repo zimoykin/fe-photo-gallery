@@ -1,14 +1,12 @@
 .folder-container {
     width: 100%;
-    height: calc(80vh - 20px);
     box-sizing: border-box;
     max-width: 1280px;
-    /* background-color: tomato; */
+    box-shadow: 2px 1px 33px 3px rgba(0, 0, 0, 0.33);
 }
 
 .folder-line {
-    padding-left: 40px;
-    padding-right: 20px;
+    padding: 20px;
     margin: 0px 0px 0px 0px;
     cursor: pointer;
     vertical-align: middle;
@@ -18,7 +16,11 @@
 }
 
 .folder-line-selected {
-    /* height: calc(70vh - 20px); */
+    word-break: break-word;
+    overflow-wrap: break-word; 
+}
+.folder-line-selected b {
+    padding: 10px;
 }
 
 .folder-spinner {

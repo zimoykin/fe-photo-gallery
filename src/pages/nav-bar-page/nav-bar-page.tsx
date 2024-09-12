@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import NavBar from "../../components/nav-bar/nav-bar-component";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import "./nav-bar-page-style.css";
 
 interface Props {
     // eslint-disable-next-line

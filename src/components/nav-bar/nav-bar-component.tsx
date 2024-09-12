@@ -12,16 +12,16 @@ import { RootState } from '../../store';
 const NavBar: React.FC = () => {
     const { theme, setTheme } = useTheme();
     const [iconSet, setIconSet] = useState<'home' | 'settings' | 'gallery'>('home');
-    
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
     const userProfile = useSelector((state: RootState) => state.profile);
 
     useEffect(() => {
-        if (location.pathname === '/settings') {
+        if (location.pathname.startsWith('/settings')) {
             setIconSet('settings');
-        } else if (location.pathname === '/gallery') {
+        } else if (location.pathname.startsWith('/gallery')) {
             setIconSet('gallery');
         } else {
             setIconSet('home');
@@ -35,13 +35,13 @@ const NavBar: React.FC = () => {
     const handleIconClick = (page: 'home' | 'gallery' | 'settings') => {
         switch (page) {
             case 'home':
-                navigate('/?userId=' + userProfile.user!.id);
+                navigate(`/home`);
                 break;
             case 'gallery':
-                navigate('/gallery?userId=' + userProfile.user!.id);
+                navigate(`/gallery/${userProfile.user!.id}`);
                 break;
             case 'settings':
-                navigate('/settings?userId=' + userProfile.user!.id);
+                navigate(`/settings`);
                 break;
             default:
                 break;
