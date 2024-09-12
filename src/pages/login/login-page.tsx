@@ -9,9 +9,10 @@ import CameraSpinnerModal from '../../components/camera-spinner/camera-spinner-m
 import { setUserProfile } from '../../features/profile/profile-slice';
 
 export const Login: React.FC = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    
 
     const handleLogin = async () => {
         if (email?.length > 0 && password?.length > 0) {
