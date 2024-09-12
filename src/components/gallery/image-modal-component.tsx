@@ -16,7 +16,6 @@ interface Props {
 }
 
 const ImageModal: React.FC<Props> = ({ srcPreview, srcCompressed, isCompressedReady, onClose, next, prev, photo, isLoading, onLoad }: Props) => {
-
     const [showInfo, setShowInfo] = useState(false);
     const [showInfoMouseEnter, setShowInfoMouseEnter] = useState(false);
 
@@ -94,7 +93,8 @@ const ImageModal: React.FC<Props> = ({ srcPreview, srcCompressed, isCompressedRe
                 <i className="fas fa-arrow-left" onClick={prev} />
                 <i className="fas fa-arrow-right" onClick={next} />
                 <i className={showInfo ? "fas fa-info-circle" : "fas fa-info"}
-                    onClick={() => { setShowInfo(!showInfo); }
+                    onClick={
+                        () => { setShowInfo(!showInfo); }
                     }
                     onMouseEnter={() => setShowInfoMouseEnter(true)}
                     onMouseLeave={() => setShowInfoMouseEnter(false)} />

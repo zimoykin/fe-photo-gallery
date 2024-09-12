@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../features/auth/auth-slice';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
-import { apilogin } from '../../api/login-api';
+import { apilogin, apiMe } from '../../api/login-api';
 import CameraSpinnerModal from '../../components/camera-spinner/camera-spinner-modal.component';
+import { setUserProfile } from '../../features/profile/profile-slice';
 
 export const Login: React.FC = () => {
 
@@ -18,11 +19,14 @@ export const Login: React.FC = () => {
             apilogin(email, password)
                 .then((tokens) => {
                     if (tokens.accessToken && tokens.refreshToken) {
-                        console.log('Login successful');
                         dispatch(
                             login([tokens.accessToken, tokens.refreshToken])
                         );
-                        navigate('/');
+                        // Get user profile
+                        apiMe().then((user) => {
+                            dispatch(setUserProfile(user));
+                            navigate('/?userId=' + user.id);
+                        });
                     } else {
                         setError(new Error('Invalid credentials'));
                     }

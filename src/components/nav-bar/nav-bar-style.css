@@ -10,6 +10,9 @@
     width: 100%;
     box-sizing: border-box;
 }
+.nav-bar-icon:hover {
+    background-color: tomato;
+}
 
 .nav-bar-command-panel {
     width: 100%;

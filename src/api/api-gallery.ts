@@ -23,8 +23,8 @@ export interface IPhoto {
     url: string;
 }
 
-export const apiFetchUserFolders = async () => {
-    return apiClient.get<IUserFolder[]>('/folders')
+export const apiFetchUserFolders = async (userId: string) => {
+    return apiClient.get<IUserFolder[]>(`/folders`, { params: { userId } })
         .then((response) => {
             if (response?.status !== 200) {
                 throw new Error('Failed to get folders');

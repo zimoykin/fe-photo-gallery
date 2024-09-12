@@ -14,3 +14,11 @@ export const apilogin = async (email: string, password: string): Promise<LoginRe
     } else
         return response.data as LoginResponse;
 };
+
+export const apiMe = async () => {
+    const response = await api.get('/auth/me');
+    if (response.status !== 200) {
+        throw new Error('Failed to get user');
+    } else
+        return response.data;
+}; 

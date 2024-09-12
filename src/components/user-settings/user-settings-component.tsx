@@ -5,11 +5,12 @@ import { RootState } from '../../store';
 import { apiDeleteFolderById, apiFetchUserFolders, IUserFolder } from '../../api/api-gallery';
 import FolderView from '../folder/folder-view-component';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
-import UploadPhotoModal from '../gallery/upload-photo-model';
+import UploadPhotoModal from '../gallery/upload-photo-model-component';
 
 const UserSettings: React.FC = () => {
 
     const foldersStore = useSelector((state: RootState) => state.folders);
+    const userStore = useSelector((state: RootState) => state.profile);
     const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [showModalFolderView, setShowModalFolderView] = useState(false);
@@ -32,13 +33,15 @@ const UserSettings: React.FC = () => {
     };
 
     const updateFolderStore = () => {
-        setIsLoading(true);
-        apiFetchUserFolders()
-            .then(folders => {
-                setFolders([...folders]);
-            }).finally(() => {
-                setIsLoading(false);
-            });
+        if (userStore.user?.id) {
+            setIsLoading(true);
+            apiFetchUserFolders(userStore.user?.id)
+                .then(folders => {
+                    setFolders([...folders]);
+                }).finally(() => {
+                    setIsLoading(false);
+                });
+        }
     };
 
     const folderViewOnClose = () => {
@@ -51,15 +54,13 @@ const UserSettings: React.FC = () => {
             apiDeleteFolderById(folders[selectedFolder].id).then(() => {
                 setFolders([...folders.filter((f, i) => i !== selectedFolder)]);
                 setSelectedFolder(-1);
-            }).catch(e => console.log(e));
+            });
         }
     };
 
     const handleDragEnd = (e: React.DragEvent, ind: number) => {
-        console.log(dragFolder, ind);
     };
     const handleDragStart = (e: React.DragEvent, ind: number) => {
-        console.log(ind, e.detail);
         setDragFolder([ind, 0]);
     };
 

@@ -3,7 +3,7 @@
     height: calc(80vh - 20px);
     box-sizing: border-box;
     max-width: 1280px;
-    background-color: tomato;
+    /* background-color: tomato; */
 }
 
 .folder-line {

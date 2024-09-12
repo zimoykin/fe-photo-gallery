@@ -4,6 +4,7 @@ import './App.css';
 import { Login, Home } from './pages';
 import { Settings } from './pages/settings/settings-page';
 import { NavBarPage } from './pages/nav-bar-page/nav-bar-page';
+import { Gallery } from './pages/gallery/gallery-page';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,10 @@ const App: React.FC = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/settings" element={
               <NavBarPage child={<Settings />}
+              />}
+            />
+            <Route path="/gallery" element={
+              <NavBarPage child={<Gallery />}
               />}
             />
             <Route path="*" element={

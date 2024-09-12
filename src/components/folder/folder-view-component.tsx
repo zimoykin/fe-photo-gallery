@@ -67,7 +67,7 @@ const FolderView: React.FC<Props> = ({ onClose, folder }: Props) => {
                             height: '100%', borderRadius: '10px', padding: '20px',
                             fontWeight: 'bold', fontSize: '26px', textAlign: 'start', display: 'flex', alignItems: 'center'
                         }} >
-                            <i className="fas fa-times" style={{ backgroundColor: 'tomato', fontSize: '44px' }} onClick={onClose} title="save" />
+                            <i className="fas fa-times" style={{ fontSize: '44px' }} onClick={onClose} title="save" />
                             <i className="fas fa-check" style={{ backgroundColor: 'green', fontSize: '44px' }} onClick={handleSaveBtn} />
                         </div>
                     </div>
