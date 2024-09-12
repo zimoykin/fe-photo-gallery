@@ -1,4 +1,5 @@
 import React from "react";
+import './styles/folders-style.css';
 
 const FolderSpinnerComponent: React.FC = () => {
     return (

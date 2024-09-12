@@ -24,6 +24,12 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
         setSearchParams({ ...currentParams, ...params });
     }, [searchParams, setSearchParams]);
 
+    const removeQueryParam = useCallback((param: string) => {
+        const currentParams = Object.fromEntries(searchParams.entries());
+        delete currentParams[param];
+        setSearchParams({ ...currentParams });
+    }, [searchParams, setSearchParams]);
+
     const handlePickingPhoto = useCallback(async (id: string, ind: number) => {
         updateQuery({ photoId: id });
         setSelectedImage(ind);
@@ -117,7 +123,13 @@ const Gallery: React.FC<Props> = ({ folderId }: Props) => {
                         setIsCompressedReady(true);
                         setShowFilmLoading(false);
                     }}
-                    onClose={(ev) => { setImgCompressed(null); setImgPreview(null); ev.stopPropagation(); }}
+                    onClose={(ev) => {
+                        setSelectedImage(-1);
+                        setImgCompressed(null);
+                        setImgPreview(null);
+                        removeQueryParam('photoId');
+                        ev.stopPropagation();
+                    }}
                     next={(ev) => { handleNextClick(); ev.stopPropagation(); }}
                     prev={(ev) => { handlePrevClick(); ev.stopPropagation(); }}
                 /> : null}

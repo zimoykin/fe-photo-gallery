@@ -3,56 +3,59 @@ import Folder from "./folder-component";
 import { apiFetchUserFolders, IUserFolder } from "../../api/api-gallery";
 import { useDispatch } from "react-redux";
 import { storeFolders } from "../../features/folders/folders-slice";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import FolderSpinnerComponent from "./folder-spinner-component";
 import './styles/folders-style.css';
 
 const Folders: React.FC = () => {
-
     const dispatch = useDispatch();
     const [searchParams, setSearchParams] = useSearchParams();
-
+    const { userId } = useParams<{ userId: string; }>();
     const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [choosen, setChoosen] = useState(-1);
 
     useEffect(() => {
-        const userId = searchParams.get('userId');
+        const folderIdFromSearchParams = searchParams.get('folderId');
+        if (folderIdFromSearchParams && folders.length > 0) {
+            const index = folders.findIndex(f => f.id === folderIdFromSearchParams);
+            if (index >= 0) {
+                setChoosen(index);
+            }
+        }
+    }, [folders, searchParams]);
+
+    useEffect(() => {
         if (userId) {
             setIsLoading(true);
-            apiFetchUserFolders(userId).then((folders) => {
-                dispatch(
-                    storeFolders(folders)
-                );
-                setFolders(folders);
-
-                if (searchParams.get('folderId')) {
-                    const index = folders.findIndex(f => f.id === searchParams.get('folderId'));
-                    if (index >= 0) {
-                        setChoosen(index);
-                    }
-                }
-
-            }).finally(() => {
-                setTimeout(() => {
+            apiFetchUserFolders(userId)
+                .then((folders) => {
+                    dispatch(
+                        storeFolders(folders)
+                    );
+                    setFolders(folders);
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        setIsLoading(false);
+                    }, 1000);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    setFolders([]);
                     setIsLoading(false);
-                }, 1000);
-            }).catch(() => {
-                setFolders([]);
-                setIsLoading(false);
-            });
+                });
         }
-    }, [dispatch, searchParams]);
-
-    const [choosen, setChoosen] = useState(-1);
+    }, [dispatch, userId]);
 
     const onClickLine = (ind: number) => {
         if (ind === choosen) {
             setChoosen(-1);
+            setSearchParams({ });
         } else {
             setChoosen(ind);
-            const userId = searchParams.get('userId')!;
             const folderId = folders[ind].id;
-            setSearchParams({ userId, folderId });
+            setSearchParams({ folderId });
         }
     };
 

@@ -4,7 +4,7 @@ import './gallery-style.css';
 
 export const Gallery: React.FC = () => {
     return (
-        <div className="gallery-container">
+        <div className="page-gallery-container">
             <div className="gallery-box-container">
                 <Folders />
             </div>

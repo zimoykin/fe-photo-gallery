@@ -15,7 +15,6 @@ const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, o
     const folderRef = useRef<HTMLDivElement>(null);
 
     const handleClick = () => {
-        onClick();
         setTimeout(() => {
             if (folderRef.current) {
                 const rect = folderRef.current.getBoundingClientRect();
@@ -29,6 +28,7 @@ const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, o
                 });
             }
         }, 500);
+        onClick();
     };
 
     return (
@@ -41,8 +41,8 @@ const Folder: React.FC<Props> = ({ folderId, bgColor, textColor, text, isOpen, o
                     color: textColor,
                 }} onClick={handleClick}>
 
-                <div style={{ paddingLeft: '20px', paddingTop: '10px', fontSize: `${isOpen ? '35px' : '18px'}` }}>
-                    <b>{text.toUpperCase()}</b>
+                <div style={{ fontSize: `${isOpen ? '28px' : '18px'}` }}>
+                    <b>{`${text.toUpperCase().slice(0, 20)}${text.length > 20 ? '...' : ''}`}</b>
                 </div>
                 {isOpen
                     ? <Galery folderId={folderId}
