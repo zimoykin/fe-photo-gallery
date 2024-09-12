@@ -18,7 +18,6 @@ const UploadPhotoModal: React.FC<Props> = ({ folderId, onClose }: Props) => {
     const [lens, setLens] = useState('Sigma 50mm f/1.4');
     const [iso, setIso] = useState(400);
     const [location, setLocation] = useState('TOKYO, JP');
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();

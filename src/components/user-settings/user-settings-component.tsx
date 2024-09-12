@@ -59,6 +59,7 @@ const UserSettings: React.FC = () => {
     };
 
     const handleDragEnd = (e: React.DragEvent, ind: number) => {
+        console.log(ind, dragFolder);
     };
     const handleDragStart = (e: React.DragEvent, ind: number) => {
         setDragFolder([ind, 0]);
