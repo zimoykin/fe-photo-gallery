@@ -62,6 +62,10 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fa-solid fa-bell" />
                         <i className="nav-bar-icon fas fa-image" onClick={() => handleIconClick('gallery')} />
                         <i className="nav-bar-icon fas fa-cog" onClick={() => handleIconClick('settings')} />
+                        {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
+                        <i className="nav-bar-icon fa fa-sign-out"
+                            onClick={handleOnClick}
+                        />
                     </div>
                 }
 
@@ -70,6 +74,10 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fa-solid fa-bell" />
                         <i className="nav-bar-icon fas fa-home" onClick={() => handleIconClick('home')} />
                         <i className="nav-bar-icon fas fa-cog" onClick={() => handleIconClick('settings')} />
+                        {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
+                        <i className="nav-bar-icon fa fa-sign-out"
+                            onClick={handleOnClick}
+                        />
                     </div>
                 }
 
@@ -78,13 +86,12 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fa-solid fa-bell" />
                         <i className="nav-bar-icon fas fa-home" onClick={() => handleIconClick('home')} />
                         <i className="nav-bar-icon fas fa-image" onClick={() => handleIconClick('gallery')} />
+                        {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
+                        <i className="nav-bar-icon fa fa-sign-out"
+                            onClick={handleOnClick}
+                        />
                     </div>
                 }
-
-                {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
-                <i className="nav-bar-icon fa fa-sign-out"
-                    onClick={handleOnClick}
-                />
             </div>
         </div>
 

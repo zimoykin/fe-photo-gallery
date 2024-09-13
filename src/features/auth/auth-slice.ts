@@ -23,6 +23,7 @@ const authSlice = createSlice({
       state.refreshToken = refreshToken;
     },
     logout: (state) => {
+      debugger
       state.isAuthenticated = false;
       state.accessToken = null;
       state.refreshToken = null;
