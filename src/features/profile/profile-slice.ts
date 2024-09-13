@@ -5,6 +5,9 @@ interface ProfileState {
         id: string;
         email: string;
         name: string;
+        image?: string;
+        camera?: string;
+        lens?: string;
     } | null;
 }
 

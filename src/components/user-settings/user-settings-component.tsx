@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import UserFolders from './user-folders/user-folders-component';
 import UserEquipment from './user-equipment/user-equipment-component';
+import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
 
 
 const UserSettings: React.FC = () => {
@@ -31,6 +32,15 @@ const UserSettings: React.FC = () => {
             //TODO: add camera and lens to user model
             // setCamera(profile.user.camera);
             // setLens(profile.user.lens);
+            if (profile.user.image) {
+                setAva(profile.user.image);
+            }
+            if (profile.user.camera) {
+                setCamera(profile.user.camera);
+            }
+            if (profile.user.lens) {
+                setLens(profile.user.lens);
+            }
         }
 
     }, [profile]);
@@ -85,6 +95,7 @@ const UserSettings: React.FC = () => {
                     </div>
                 </div>
             </div>
+            {isLoading && <CameraSpinnerModal />}
         </>
     );
 };
