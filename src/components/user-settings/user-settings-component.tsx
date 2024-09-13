@@ -1,129 +1,101 @@
 import React, { useEffect, useState } from 'react';
 import './user-settings-style.css';
-import { useSelector } from 'react-redux';
+import { logout } from '../../features/auth/auth-slice';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { apiDeleteFolderById, apiFetchUserFolders, IUserFolder } from '../../api/api-gallery';
-import FolderView from '../folder/folder-view-component';
+import UserFolders from './user-folders/user-folders-component';
+import UserEquipment from './user-equipment/user-equipment-component';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
-import UploadPhotoModal from '../gallery/upload-photo-model-component';
+
 
 const UserSettings: React.FC = () => {
-
-    const foldersStore = useSelector((state: RootState) => state.folders);
-    const userStore = useSelector((state: RootState) => state.profile);
-    const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [showModalFolderView, setShowModalFolderView] = useState(false);
-    const [showUploadImg, setShowUploadImg] = useState(false);
-    const [dragFolder, setDragFolder] = useState<[number, number] | null>(null);
-    const [selectedFolder, setSelectedFolder] = useState(-1);
+    const [ava, setAva] = useState('ava-mock.jpg');
+    const [email, setEmail] = useState('john.doe@me.com');
+    const [name, setName] = useState('John Doe');
+    const [camera, setCamera] = useState('Canon EOS 650');
+    const [lens, setLens] = useState('Canon Ef 50mm f/1.4L USM');
+
+    const profile = useSelector((state: RootState) => state.profile);
+    const dispatch = useDispatch();
+    const handleLogoutClick = () => {
+        console.log('handleLogoutClick');
+        setIsLoading(true);
+        dispatch(logout());
+    };
+
 
     useEffect(() => {
-        setFolders([...foldersStore.folders].sort((a, b) => {
-            return a.sortOrder - b.sortOrder;
-        }));
-    }, [foldersStore]);
-
-    const handleSelectedFolder = (ind: number) => {
-        if (selectedFolder === ind) {
-            setSelectedFolder(-1);
-        } else {
-            setSelectedFolder(ind);
+        if (profile.user) {
+            setEmail(profile.user.email);
+            setName(profile.user.name);
+            //TODO: add camera and lens to user model
+            // setCamera(profile.user.camera);
+            // setLens(profile.user.lens);
+            if (profile.user.image) {
+                setAva(profile.user.image);
+            }
+            if (profile.user.camera) {
+                setCamera(profile.user.camera);
+            }
+            if (profile.user.lens) {
+                setLens(profile.user.lens);
+            }
         }
-    };
 
-    const updateFolderStore = () => {
-        if (userStore.user?.id) {
-            setIsLoading(true);
-            apiFetchUserFolders(userStore.user?.id)
-                .then(folders => {
-                    setFolders([...folders]);
-                }).finally(() => {
-                    setIsLoading(false);
-                });
-        }
-    };
-
-    const folderViewOnClose = () => {
-        setShowModalFolderView(false);
-        updateFolderStore();
-    };
-
-    const handleDeleteFolder = () => {
-        if (selectedFolder >= 0) {
-            apiDeleteFolderById(folders[selectedFolder].id).then(() => {
-                setFolders([...folders.filter((f, i) => i !== selectedFolder)]);
-                setSelectedFolder(-1);
-            });
-        }
-    };
-
-    const handleDragEnd = (e: React.DragEvent, ind: number) => {
-        console.log(ind, dragFolder);
-    };
-    const handleDragStart = (e: React.DragEvent, ind: number) => {
-        setDragFolder([ind, 0]);
-    };
-
-    const handleDragOver = (e: React.DragEvent, ind: number) => {
-        setDragFolder([ind, (dragFolder?.[1] ?? 0) + 1]);
-    };
-
-    const handleUploadPhotoClick = () => {
-        setShowUploadImg(true);
-    };
+    }, [profile]);
 
     return (
         <>
-            <div id='user-settings-container'>
-                <div className='command-panel'>
-                    <div className='icon'>
-                        <i className="fas fa-plus" onClick={() => { setSelectedFolder(-1); setShowModalFolderView(true); }} />
+            <div className='user-settings-container'>
+                <div className='user-settings-box'>
+                    <div className='user-info-container'>
+                        <div
+                            className="avatar"
+                        >
+                            <div>
+                                <img className="avatar-img"
+                                    alt=''
+                                    src={ava} />
+
+                            </div>
+                        </div>
+                        <div className='user-info-user-data'>
+                            <h1>{name}</h1>
+                            <h3
+                                onClick={() => {
+                                    window.location.href = `mailto:${email}`;
+                                }}
+                            >{email}</h3>
+                            <h3>{camera}</h3>
+                            <h3>{lens}</h3>
+                        </div>
+                        <div className='user-info-buttons-folder-equip-container'>
+                            <button className='user-settings-button'>
+                                <h1>folders</h1>
+                            </button>
+                            <button className='user-settings-button'>
+                                <h1>Equipment</h1>
+                            </button>
+                        </div>
+                        <div className='user-info-button-container'>
+                            <button className='user-settings-button'
+                                onClick={handleLogoutClick} >
+                                <h1>logout</h1>
+                            </button>
+                        </div>
                     </div>
-                    {selectedFolder >= 0 ? <div className='icon'>
-                        <i className="fas fa-minus" onClick={handleDeleteFolder} />
+                    <div className='user-folders-equipment-container'>
+                        <div className='user-folders-equipment-container-box'>
+                            <UserFolders />
+                        </div>
+                        <div className='user-folders-equipment-container-box'>
+                            <UserEquipment />
+                        </div>
                     </div>
-                        : null}
-                    {selectedFolder >= 0 ? <div className='icon'>
-                        <i className="fas fa-edit" onClick={() => setShowModalFolderView(true)} />
-                    </div> : null}
-                    {selectedFolder >= 0 ? <div className='icon'> <i className="fas fa-camera" onClick={handleUploadPhotoClick} /> </div> : null}
-
-                </div>
-                <div className='user-settings-page'>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>FOLDERS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                folders.map((folder, ind) => <tr
-
-                                    draggable
-                                    onDragStart={(e) => handleDragStart(e, ind)}
-                                    onDragOver={(e) => handleDragOver(e, ind)}
-                                    onDragEnd={(e) => handleDragEnd(e, ind)}
-
-                                    onClick={() => handleSelectedFolder(ind)}
-                                    className={selectedFolder === ind ? 'table-line folder-selected' : 'table-line'}
-                                    key={folder.id} >
-                                    <td style={{ width: '10%', backgroundColor: folder.bgColor }}></td>
-                                    <td style={{ width: '10%', backgroundColor: folder.color }}></td>
-                                    <td style={{}}> {folder.sortOrder} </td>
-                                    <td style={{}} className={'table-line'}>{folder.title}</td>
-                                    <td style={{}}> {folder.description} </td>
-                                    <td> {Math.floor(Math.random() * 10)} </td>
-                                </tr>)
-                            }
-                        </tbody>
-                    </table>
                 </div>
             </div>
-            {showModalFolderView ? <FolderView onClose={folderViewOnClose} folder={folders[selectedFolder]} /> : null}
-            {isLoading ? <CameraSpinnerModal /> : null}
-            {showUploadImg ? <UploadPhotoModal folderId={folders[selectedFolder].id} onClose={() => setShowUploadImg(false)} /> : null}
+            {isLoading && <CameraSpinnerModal />}
         </>
     );
 };

@@ -1,4 +1,4 @@
 .page-nav-bar {
-  /* height: 100%; */
+  height: calc(100vh - 80px);
   padding: 10px;
 }
