@@ -12,6 +12,7 @@
 }
 .nav-bar-icon:hover {
     background-color: tomato;
+    scale: 1.1;
 }
 
 .nav-bar-command-panel {

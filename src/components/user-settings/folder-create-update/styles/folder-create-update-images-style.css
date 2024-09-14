@@ -1,0 +1,76 @@
+.folder-create-update-images-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.folder-create-update-images-container-card {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    background-color: lightgray;
+    border-radius: 5%;
+    box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px
+}
+
+.folder-create-update-images-container-card:hover {
+    background-color: #FFF;
+}
+
+.folder-create-update-images-container-card-wrapper {
+    position: relative;
+}
+
+.folder-create-update-images-container-card img {
+    border-radius: 20px;
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: contain;
+    object-position: center;
+    z-index: 1;
+}
+
+.folder-create-update-images-container-card-photo-info {
+    line-height: 0;
+    font-size: 12px;
+}
+
+.folder-create-update-images-container-card-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    padding: 4px;
+    border-radius: 25px 25px 0px 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    z-index: 4;
+}
+
+.folder-create-update-images-container-card-overlay i {
+    padding: 5px;
+}
+
+.folder-create-update-images-container-card-overlay i:hover {
+    background-color: tomato;
+}
+
+@media (max-width: 768px) {
+    .folder-create-update-images-container {
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+}

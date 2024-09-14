@@ -1,0 +1,110 @@
+.upload-images-table-line {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: row;
+    width: 100%;
+    padding: 10px;
+    background-color: #D9D9D9;
+}
+
+.upload-images-table-line:hover {
+    background-color: #E9E9E9;
+    border-radius: 10px;
+    scale: 1.01;
+}
+
+.upload-images-images-container-img {
+    object-fit: cover;
+    object-position: center;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 5px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.upload-images-images-container-column {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    width: calc(100% / 5 - 10px);
+    height: 100%;
+    /* flex: 1; */
+    padding: 10px;
+    gap: 20px;
+}
+
+.upload-images-images-container-column>input {
+    padding: 10px;
+    flex: 1;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 5px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.upload-images-images-container-column>button {
+    padding: 10px;
+    flex: 1;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 5px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.upload-images-images-container-column>div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+    gap: 10px;
+    height: 100%;
+}
+
+.upload-images-images-container-column>div>button {
+    padding: 10px;
+    flex: 1;
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 5px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.upload-images-images-container-column>div>button:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.upload-images-images-container-column>input:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+.upload-images-images-container-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+    font-size: '18px';
+}
+
+
+@media (max-width: 768px) {
+    .upload-images-table-line { 
+        flex-direction: column;
+    }
+    .upload-images-images-container-img {
+        width: 100%;
+        height: 100%;
+    }
+    .upload-images-images-container-column {
+        width: 100%;
+        gap: 20px;
+    }
+    .upload-images-images-container-column>input {
+        padding: 20px;
+    }
+}

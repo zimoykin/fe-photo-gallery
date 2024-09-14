@@ -1,14 +1,25 @@
 
 import React, { useEffect, useState } from 'react';
 import './user-folders-style.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { apiDeleteFolderById, IUserFolder } from '../../../api/api-gallery';
+import { apiDeleteFolderById, apiFetchUserFolders, IUserFolder } from '../../../api/api-gallery';
 import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
+// import FolderCreateUpdate from '../folder-create-update/folder-create-update-component';
+import { storeFolders } from '../../../features/folders/folders-slice';
+import { useNavigate } from 'react-router-dom';
 
-const UserFolders: React.FC = () => {
+interface Props {
+    folders: IUserFolder[];
+    handleClickCreateFolder: () => void;
+    handleClickEditFolder: (index: number) => void;
+}
 
-    const { folders } = useSelector((state: RootState) => state.folders) ?? [];
+const UserFolders: React.FC<Props> = ({ folders, handleClickCreateFolder, handleClickEditFolder }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { user } = useSelector((state: RootState) => state.profile);
+
     const [userFolders, setUserFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -17,6 +28,16 @@ const UserFolders: React.FC = () => {
             setUserFolders(folders);
         }
     }, [folders]);
+
+    useEffect(() => {
+        if (user?.id) {
+            apiFetchUserFolders(user.id)
+                .then((folders) => {
+                    dispatch(storeFolders(folders));
+                });
+        }
+
+    }, [user, dispatch]);
 
 
     const handleFolderClick = (folderId: string) => {
@@ -27,11 +48,15 @@ const UserFolders: React.FC = () => {
             .finally(() => setIsLoading(false));
     };
 
+    const hnadleUploadImages = (folderId: string) => {
+        navigate(`/settings/upload/${folderId}`);
+    };
 
     return (
         <div>
             <div className='user-folders-command-panel' >
-                <i className="user-folders-icon fa-solid fa-plus" />
+                <i className="user-folders-icon fa-solid fa-plus"
+                    onClick={handleClickCreateFolder} />
                 {/* <i className="user-folders-icon fas fa-image" /> */}
             </div>
             <div className='user-folders-table'>
@@ -43,8 +68,12 @@ const UserFolders: React.FC = () => {
                             <h3>{folder.title}</h3>
                         </div>
                         <div className='user-folders-folder-comannd'>
-                            <i className="user-folders-icon fas fa-image" />
-                            <i className="user-folders-icon fas fa-pen" />
+                            <i className="user-folders-icon fas fa-image"
+                                onClick={() => hnadleUploadImages(folder.id)}
+                            />
+                            <i className="user-folders-icon fas fa-pen"
+                                onClick={() => handleClickEditFolder(index)}
+                            />
                             <i className="user-folders-icon fas fa-trash"
                                 onClick={() => handleFolderClick(folder.id)}
                             />
