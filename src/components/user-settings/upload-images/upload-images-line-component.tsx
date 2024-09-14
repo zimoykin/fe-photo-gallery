@@ -75,7 +75,7 @@ const UploadImagesLine: React.FC<Props> = (params: Props) => {
         } else {
             setIsUpdated(false);
         }
-    }, [camera, descr, lens, iso, location, film, params.camera, params.descr, params.lens, params.iso, params.location, params.film]);
+    }, [camera, descr, lens, iso, location, film, params.camera, params.descr, params.lens, params.iso, params.location, params.film, params.photoId]);
 
     return (
         <>
