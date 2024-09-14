@@ -14,6 +14,9 @@
     height: 20%;
     animation: 'fadeIn' 0.5s ease-in-out;
 }
+.folder-line:hover {
+    scale: 1.05;
+}
 
 .folder-line-selected {
     word-break: break-word;

@@ -6,9 +6,15 @@ import { RootState } from '../../store';
 import UserFolders from './user-folders/user-folders-component';
 import UserEquipment from './user-equipment/user-equipment-component';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
+import FolderCreateUpdate from './folder-create-update/folder-create-update-component';
 
 
 const UserSettings: React.FC = () => {
+    const profile = useSelector((state: RootState) => state.profile);
+    const dispatch = useDispatch();
+
+    const { folders } = useSelector((state: RootState) => state.folders) ?? [];
+
     const [isLoading, setIsLoading] = useState(false);
     const [ava, setAva] = useState('ava-mock.jpg');
     const [email, setEmail] = useState('john.doe@me.com');
@@ -16,22 +22,34 @@ const UserSettings: React.FC = () => {
     const [camera, setCamera] = useState('Canon EOS 650');
     const [lens, setLens] = useState('Canon Ef 50mm f/1.4L USM');
 
-    const profile = useSelector((state: RootState) => state.profile);
-    const dispatch = useDispatch();
+    const [selectedFolder, setSelectedFolder] = useState<number>(-1);
+    const [showFolderCreateUpdate, setShowCreateUpdateFolder] = useState<boolean>(false);
+
     const handleLogoutClick = () => {
         console.log('handleLogoutClick');
         setIsLoading(true);
         dispatch(logout());
     };
 
+    const handleClickEditFolder = (index: number) => {
+        setSelectedFolder(index);
+        setShowCreateUpdateFolder(true);
+    };
+
+    const handleClickCreateFolder = () => {
+        setSelectedFolder(-1);
+        setShowCreateUpdateFolder(true);
+    };
+
+    const handleFolderCreateUpdateClose = () => {
+        setShowCreateUpdateFolder(false);
+    };
 
     useEffect(() => {
         if (profile.user) {
             setEmail(profile.user.email);
             setName(profile.user.name);
             //TODO: add camera and lens to user model
-            // setCamera(profile.user.camera);
-            // setLens(profile.user.lens);
             if (profile.user.image) {
                 setAva(profile.user.image);
             }
@@ -72,22 +90,26 @@ const UserSettings: React.FC = () => {
                         </div>
                         <div className='user-info-buttons-folder-equip-container'>
                             <button className='user-settings-button'>
-                                <h1>folders</h1>
+                                <h3>folders</h3>
                             </button>
                             <button className='user-settings-button'>
-                                <h1>Equipment</h1>
+                                <h3>Equipment</h3>
                             </button>
                         </div>
                         <div className='user-info-button-container'>
                             <button className='user-settings-button'
                                 onClick={handleLogoutClick} >
-                                <h1>logout</h1>
+                                <h3>logout</h3>
                             </button>
                         </div>
                     </div>
                     <div className='user-folders-equipment-container'>
                         <div className='user-folders-equipment-container-box'>
-                            <UserFolders />
+                            <UserFolders
+                                folders={folders}
+                                handleClickCreateFolder={handleClickCreateFolder}
+                                handleClickEditFolder={handleClickEditFolder}
+                            />
                         </div>
                         <div className='user-folders-equipment-container-box'>
                             <UserEquipment />
@@ -95,6 +117,10 @@ const UserSettings: React.FC = () => {
                     </div>
                 </div>
             </div>
+            {showFolderCreateUpdate && <FolderCreateUpdate
+                onClose={handleFolderCreateUpdateClose}
+                folderId={folders[selectedFolder]?.id}
+            />}
             {isLoading && <CameraSpinnerModal />}
         </>
     );

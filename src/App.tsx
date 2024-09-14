@@ -5,6 +5,7 @@ import { Login, Home } from './pages';
 import { Settings } from './pages/settings/settings-page';
 import { NavBarPage } from './pages/nav-bar-page/nav-bar-page';
 import { Gallery } from './pages/gallery/gallery-page';
+import { UploadImagesPage } from './pages/upload-images/upload-images-page';
 
 const App: React.FC = () => {
   return (
@@ -20,6 +21,9 @@ const App: React.FC = () => {
             <Route path="/gallery/:userId" element={
               <NavBarPage child={<Gallery />}
               />}
+            />
+            <Route path="/settings/upload/:folderId" element={
+              <NavBarPage child={<UploadImagesPage />} />}
             />
             <Route path="*" element={
               <NavBarPage child={<Home />} />}

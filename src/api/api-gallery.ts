@@ -71,6 +71,18 @@ export const apiCreateFolder = async (folder: Omit<IUserFolder, 'id'>) => {
         });
 };
 
+export const apiFetchUserFolderByFolderId = async (id: string) => {
+    return apiClient.get<IUserFolder>(`/folders/${id}`).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get folders');
+        }
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+        throw error;
+    });
+};
+
 export const apiDeleteFolderById = async (id: string) => {
     return apiClient.delete(`/folders/${id}`).then((response) => {
         if (response?.status !== 200) {
@@ -88,6 +100,18 @@ export const apiUploadPhoto = async (formData: FormData, folderId: string) => {
             'Content-Type': 'multipart/form-data'
         }
     }).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get folders');
+        }
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+    });
+};
+
+export const apiDeletePhotoByIdAndFolderId = async (folderId: string, photoId: string) => {
+    return apiClient.delete(`/photos/${folderId}/${photoId}`).then((response) => {
+        debugger
         if (response?.status !== 200) {
             throw new Error('Failed to get folders');
         }

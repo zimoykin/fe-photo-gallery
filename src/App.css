@@ -50,12 +50,6 @@ body.dark-theme {
   transition: box-shadow 0.3s ease;
 }
 
-/* Light mode styles */
-/* .light-mode * {
-  box-shadow: 2px 1px 33px 3px rgba(0, 0, 0, 0.33);
-  color: #000000;
-} */
-
 /* Dark mode text defaultstyles */
 .dark-mode р,
 h1,
@@ -71,7 +65,7 @@ input,
 textarea,
 select,
 option {
-  color: wheat !important;
+  color: wheat;
 }
 
 
@@ -90,7 +84,7 @@ input,
 textarea,
 select,
 option {
-  color: black !important;
+  color: black;
 }
 
 
