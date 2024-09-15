@@ -5,3 +5,4 @@ export * from './gallery/gallery-page';
 export * from './settings/settings-page';
 export * from './upload-images/upload-images-page';
 export * from './nav-bar-page/nav-bar-page';
+export * from './unavailable/unavailable-page';

@@ -5,7 +5,7 @@ import './styles/palitra.css';
 import './styles/width-height.css';
 import './styles/text-tags.css';
 import './styles/icons.css';
-import { Gallery, Home, LoginV2Page, NavBarPage, Settings, UploadImagesPage } from './pages';
+import { Gallery, Home, LoginV2Page, NavBarPage, Settings, UnavailablePage, UploadImagesPage } from './pages';
 
 const App: React.FC = () => {
   return (
@@ -22,11 +22,14 @@ const App: React.FC = () => {
               <NavBarPage child={<Gallery />}
               />}
             />
+            <Route path="/home" element={
+              <NavBarPage child={<Home />} />}
+            />
             <Route path="/settings/upload/:folderId" element={
               <NavBarPage child={<UploadImagesPage />} />}
             />
             <Route path="*" element={
-              <NavBarPage child={<Home />} />}
+              <NavBarPage child={<UnavailablePage />} />}
             />
           </Routes>
         </div>

@@ -1,14 +1,13 @@
 .nav-bar {
     position: sticky;
-    /* background-color: tomato; */
     top: 0;
     right: 10px;
     display: flex;
     justify-content: center;
     padding: 10px;
-    /* max-width: 1280px; */
     width: 100%;
     box-sizing: border-box;
+    z-index: 5;
 }
 .nav-bar-icon:hover {
     background-color: tomato;

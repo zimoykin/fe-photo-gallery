@@ -7,6 +7,7 @@ import CameraSpinnerModal from '../../components/camera-spinner/camera-spinner-m
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/auth/auth-slice';
 import { useNavigate } from 'react-router-dom';
+import BackgroundWithImage from '../../components/background/background-component';
 
 
 export const LoginV2Page: React.FC = () => {
@@ -42,21 +43,8 @@ export const LoginV2Page: React.FC = () => {
     };
 
     return (
-        <div className="page-container login-v2-img-container">
-            <div className='global-background-layer'>
-                <div className='login-v2-layer-container'>
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                </div>
-            </div>
+        <div className="page-container">
+            <BackgroundWithImage />
             <div className='login-v2-sign-in-container-top'>
                 <Palitra />
             </div>
