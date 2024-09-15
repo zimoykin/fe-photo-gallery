@@ -5,7 +5,7 @@ import './styles/palitra.css';
 import './styles/width-height.css';
 import './styles/text-tags.css';
 import './styles/icons.css';
-import { Gallery, Home, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage } from './pages';
+import { Gallery, Home, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage, RecoveryPage } from './pages';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +16,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<LoginV2Page />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
+            <Route path="/recovery" element={<RecoveryPage />} />
             <Route path="/settings" element={
               <NavBarPage child={<Settings />}
               />}

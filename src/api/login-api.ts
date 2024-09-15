@@ -34,6 +34,14 @@ export const apiConfirmation = async (token: string, code: string) => {
         return response.data;
 };
 
+export const apiRecovery = async (email: string) => {
+    const response = await api.post('/recovery/start-process', { email });
+    if (response.status !== 200) {
+        throw new Error('Failed to recovery');
+    } else
+        return response.data;
+};
+
 export const apiMe = async () => {
     const response = await api.get('/auth/me');
     if (response.status !== 200) {
