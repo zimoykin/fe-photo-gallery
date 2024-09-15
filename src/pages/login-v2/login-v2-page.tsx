@@ -50,9 +50,9 @@ export const LoginV2Page: React.FC = () => {
             </div>
 
             <div
-                className='login-v2-sign-in-container global-background-layer shadow'
+                className='login-v2-sign-in-container shadow'
             >
-                <div className='login-v2-sign-in-container-full shadow'>
+                <div className='login-v2-sign-in-container-full  global-background-layer shadow'>
                 </div>
                 <div className='login-v2-sign-in-container-left'>
                     <Palitra />
@@ -89,7 +89,7 @@ export const LoginV2Page: React.FC = () => {
                     </div>
 
                     <div className='login-v2-sign-in-container-create-account scale-m'>
-                        <span>Don't have an account? <a href="/register">Create one</a></span>
+                        <span>Do not have an account? <a href="/register">Create one</a></span>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import './styles/palitra.css';
 import './styles/width-height.css';
 import './styles/text-tags.css';
 import './styles/icons.css';
-import { Gallery, Home, LoginV2Page, NavBarPage, Settings, UnavailablePage, UploadImagesPage } from './pages';
+import { Gallery, Home, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage } from './pages';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +14,8 @@ const App: React.FC = () => {
         <div className='app-container'>
           <Routes>
             <Route path="/login" element={<LoginV2Page />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/settings" element={
               <NavBarPage child={<Settings />}
               />}

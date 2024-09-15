@@ -15,6 +15,25 @@ export const apilogin = async (email: string, password: string): Promise<LoginRe
         return response.data as LoginResponse;
 };
 
+export const apiRegister = async (email: string, password: string, name: string) => {
+    const response = await api.post('/auth/register', {
+        email, password, name, url: 'https://photo.gallery.io'
+    });
+    if (response.status !== 200) {
+        throw new Error('Failed to register');
+    } else {
+        return response.data;
+    }
+};
+
+export const apiConfirmation = async (token: string, code: string) => {
+    const response = await api.post('/auth/confirm', { token, code });
+    if (response.status !== 200) {
+        throw new Error('Failed to confirm');
+    } else
+        return response.data;
+};
+
 export const apiMe = async () => {
     const response = await api.get('/auth/me');
     if (response.status !== 200) {

@@ -10,7 +10,15 @@
     z-index: 5;
 }
 .nav-bar-icon:hover {
-    background-color: tomato;
+    background-color: #fd5900cd ;
+    scale: 1.1;
+}
+.dark-theme .nav-bar-icon:hover {
+    background-color: #005f61ea ;
+    scale: 1.1;
+}
+.light-theme .nav-bar-icon:hover {
+    background-color: #fd5900cd ;
     scale: 1.1;
 }
 

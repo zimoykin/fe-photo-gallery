@@ -104,12 +104,12 @@ option {
 }
 
 .dark-theme .global-background-layer {
-  background-color: #249fa1c9;
+  background-color: #005f61de;
   color: #FAAB35;
 }
 
 .light-theme .global-background-layer {
-  background-color: #036b6ddf;
+  background-color: #249fa1ed;
   color: #FAAB35;
 }
 
@@ -119,11 +119,11 @@ option {
 }
 
 .dark-theme .global-secondary-background-layer {
-  background-color: #005f61df;
+  background-color: #249fa1ed;
 }
 
 .light-theme .global-secondary-background-layer {
-  background-color: #005f61f6;
+  background-color: #005f61f1;
 }
 
 .shadow {
@@ -164,8 +164,8 @@ option {
   border-radius: 10px;
   padding: 10px;
   background-color: rgba(139, 242, 255, 0.9);
-  min-height: 50px;
-  min-width: 50px;
+  min-height: 40px;
+  min-width: 40px;
   font-size: medium;
   text-align: center;
   color: black;
@@ -196,26 +196,30 @@ option {
 }
 
 
-button {
+.global-button {
   transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
   font-size: 24px;
   border-radius: 20px;
-  padding: 20px;
-  min-width: 50px;
-  min-height: 50px;
+  padding: 10px;
+  min-width: 40px;
+  min-height: 40px;
   width: 100%;
 }
 
-button:hover {
+.global-button:hover {
   scale: 1.02;
 }
 
-.dark-theme button {
+.global-button:active {
+  scale: 0.98;
+}
+
+.dark-theme .global-button {
   color: white;
   background-color: #F78105;
 }
 
-.light-theme button {
+.light-theme .global-button {
   color: black;
   background-color: #FAAB35;
 }

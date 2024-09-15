@@ -111,7 +111,6 @@ export const apiUploadPhoto = async (formData: FormData, folderId: string) => {
 
 export const apiDeletePhotoByIdAndFolderId = async (folderId: string, photoId: string) => {
     return apiClient.delete(`/photos/${folderId}/${photoId}`).then((response) => {
-        debugger
         if (response?.status !== 200) {
             throw new Error('Failed to get folders');
         }
