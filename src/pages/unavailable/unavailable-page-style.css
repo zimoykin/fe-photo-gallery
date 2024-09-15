@@ -1,0 +1,12 @@
+.unavailable-page-container {
+    transition: width 0.3s ease;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

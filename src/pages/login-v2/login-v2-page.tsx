@@ -7,6 +7,7 @@ import CameraSpinnerModal from '../../components/camera-spinner/camera-spinner-m
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/auth/auth-slice';
 import { useNavigate } from 'react-router-dom';
+import BackgroundWithImage from '../../components/background/background-component';
 
 
 export const LoginV2Page: React.FC = () => {
@@ -42,29 +43,16 @@ export const LoginV2Page: React.FC = () => {
     };
 
     return (
-        <div className="page-container login-v2-img-container">
-            <div className='global-background-layer'>
-                <div className='login-v2-layer-container'>
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                    <div className='login-v2-layer-column' />
-                </div>
-            </div>
+        <div className="page-container">
+            <BackgroundWithImage />
             <div className='login-v2-sign-in-container-top'>
                 <Palitra />
             </div>
 
             <div
-                className='login-v2-sign-in-container global-background-layer shadow'
+                className='login-v2-sign-in-container shadow'
             >
-                <div className='login-v2-sign-in-container-full shadow'>
+                <div className='login-v2-sign-in-container-full  global-background-layer shadow'>
                 </div>
                 <div className='login-v2-sign-in-container-left'>
                     <Palitra />
@@ -101,7 +89,7 @@ export const LoginV2Page: React.FC = () => {
                     </div>
 
                     <div className='login-v2-sign-in-container-create-account scale-m'>
-                        <span>Don't have an account? <a href="/register">Create one</a></span>
+                        <span>Do not have an account? <a href="/register">Create one</a></span>
                     </div>
                 </div>
             </div>

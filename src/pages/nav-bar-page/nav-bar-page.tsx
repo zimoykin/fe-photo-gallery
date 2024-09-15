@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import NavBar from "../../components/nav-bar/nav-bar-component";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
@@ -15,9 +15,12 @@ export const NavBarPage: React.FC<Props> = (
 ) => {
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     const navigate = useNavigate();
-    if (!isAuthenticated) {
-        navigate("/login");
-    }
+    useEffect(() => {
+        if (!isAuthenticated) {
+            navigate("/login");
+        }
+    }, [isAuthenticated, navigate]);
+
     return (<div className="page-nav-bar">
         {isAuthenticated && <>
             <NavBar />

@@ -1,0 +1,104 @@
+.register-page-container {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: row;
+    width: 70%;
+    height: 70%;
+    border-radius: 20px;
+    transition: width 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.register-page-container-left {
+    left: 0;
+    width: 40%;
+    padding: 10px;
+    height: 100%;
+    z-index: 5;
+    border-radius: 20px;
+    transition: width 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.register-page-container-right {
+    left: 0;
+    width: 60%;
+    padding: 1rem;
+    height: 100%;
+    z-index: 5;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    transition: width 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.register-page-container-top {
+    visibility: hidden;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    z-index: 6;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    transition: width 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.register-page-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-page-nice-to-meet-you{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 2px solid;
+    margin: 0 20px 0 20px;
+}
+
+.register-page-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    padding: 2rem;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .register-page-container { 
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        height: 80%;
+        border-radius: 0;
+    }
+    .register-page-container-left {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .register-page-container-right {
+        visibility: hidden;
+        width: 0;
+        padding: 0;
+    }
+    .register-page-container-top {
+        visibility: visible;
+    }
+}

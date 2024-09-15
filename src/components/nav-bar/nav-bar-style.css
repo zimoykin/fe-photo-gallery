@@ -1,17 +1,24 @@
 .nav-bar {
     position: sticky;
-    /* background-color: tomato; */
     top: 0;
     right: 10px;
     display: flex;
     justify-content: center;
     padding: 10px;
-    /* max-width: 1280px; */
     width: 100%;
     box-sizing: border-box;
+    z-index: 5;
 }
 .nav-bar-icon:hover {
-    background-color: tomato;
+    background-color: #fd5900cd ;
+    scale: 1.1;
+}
+.dark-theme .nav-bar-icon:hover {
+    background-color: #005f61ea ;
+    scale: 1.1;
+}
+.light-theme .nav-bar-icon:hover {
+    background-color: #fd5900cd ;
     scale: 1.1;
 }
 
