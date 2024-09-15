@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Login, Home } from './pages';
-import { Settings } from './pages/settings/settings-page';
-import { NavBarPage } from './pages/nav-bar-page/nav-bar-page';
-import { Gallery } from './pages/gallery/gallery-page';
-import { UploadImagesPage } from './pages/upload-images/upload-images-page';
+import './styles/palitra.css';
+import './styles/width-height.css';
+import './styles/text-tags.css';
+import './styles/icons.css';
+import { Gallery, Home, LoginV2Page, NavBarPage, Settings, UploadImagesPage } from './pages';
 
 const App: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <Router>
         <div className='app-container'>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<LoginV2Page />} />
             <Route path="/settings" element={
               <NavBarPage child={<Settings />}
               />}

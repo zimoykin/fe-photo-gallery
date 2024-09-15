@@ -87,6 +87,141 @@ option {
   color: black;
 }
 
+.page-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.global-background-layer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #249fa1cc
+}
+
+.dark-theme .global-background-layer {
+  background-color: #249fa1c9;
+  color: #FAAB35;
+}
+
+.light-theme .global-background-layer {
+  background-color: #036b6ddf;
+  color: #FAAB35;
+}
+
+.global-secondary-background-layer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #249fa1df
+}
+
+.dark-theme .global-secondary-background-layer {
+  background-color: #005f61df;
+}
+
+.light-theme .global-secondary-background-layer {
+  background-color: #005f61f6;
+}
+
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
+  text-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
+}
+
+.scale-s:hover {
+  scale: 1.02;
+  transition: scale 0.3s ease;
+}
+
+.scale-m:hover {
+  scale: 1.05;
+  transition: scale 0.3s ease;
+}
+
+.scale-l:hover {
+  scale: 1.1;
+  transition: scale 0.3s ease;
+}
+
+.global-div-color {
+  color: #F78105;
+}
+
+.light-theme .global-div-color {
+  color: #FAAB35;
+}
+
+.darkt-theme .global-div-color {
+  color: #F78105;
+}
+
+
+.global-input {
+  box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(139, 242, 255, 0.9);
+  min-height: 50px;
+  min-width: 50px;
+  font-size: medium;
+  text-align: center;
+  color: black;
+  width: 100%;
+  transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
+
+.global-input:hover {
+  scale: 1.02;
+}
+
+.dark-theme .global-input {
+  background-color: #249EA1;
+  color: white;
+}
+
+.light-theme .global-input {
+  background-color: #8BF2FF;
+  color: black;
+}
+
+.light-theme .global-input::placeholder {
+  color: black;
+}
+
+.dark-theme .global-input::placeholder {
+  color: white;
+}
+
+
+button {
+  transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+  font-size: 24px;
+  border-radius: 20px;
+  padding: 20px;
+  min-width: 50px;
+  min-height: 50px;
+  width: 100%;
+}
+
+button:hover {
+  scale: 1.02;
+}
+
+.dark-theme button {
+  color: white;
+  background-color: #F78105;
+}
+
+.light-theme button {
+  color: black;
+  background-color: #FAAB35;
+}
+
+/* ======================== */
+/* ======================== */
 
 @keyframes fadeIn {
   0% {

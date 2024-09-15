@@ -1,0 +1,57 @@
+span {
+    transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+    font-size: 16px;
+}
+
+.dark-theme span {
+    color: #FAAB35;
+}
+
+.light-theme span {
+    color: #F78105;
+}
+
+.global-title {
+    line-height: 1%;
+    font-size: 78px;
+    font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
+    transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
+
+
+.light-theme .global-title,
+h1,
+h4 {
+    color: #FAAB35;
+}
+
+.darkt-theme .global-title,
+h1,
+h4 {
+    color: #F78105;
+}
+
+h4 {
+    line-height: 10px;
+    font-size: 30px;
+}
+
+a {
+    transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+    font-size: 18px;
+}
+
+.dark-theme a {
+    color: #FAAB35;
+}
+
+.light-theme a {
+    color: #F78105;
+}
+
+@media (max-width: 1280px) {
+    .global-title {
+        font-size: 52px;
+    }
+}

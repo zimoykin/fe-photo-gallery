@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import store, { persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ThemeProvider } from './contexts/theme/theme-context';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,6 +22,7 @@ root.render(
         </ThemeProvider>
       </PersistGate>
     </Provider>
+    <ToastContainer />
   </React.StrictMode>
 );
 
