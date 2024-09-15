@@ -8,11 +8,14 @@ import { apilogin, apiMe } from '../../api/login-api';
 import CameraSpinnerModal from '../../components/camera-spinner/camera-spinner-modal.component';
 import { setUserProfile } from '../../features/profile/profile-slice';
 
+/**
+ * @deprecated
+ */
 export const Login: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    
+
 
     const handleLogin = async () => {
         if (email?.length > 0 && password?.length > 0) {
