@@ -21,3 +21,60 @@
 .palitra-6 {
     background-color: #005F61;
 }
+
+
+.palitra-color-1 {
+    color: #FD5900;
+}
+
+.palitra-color-2 {
+    color: #F78105;
+}
+
+.palitra-color-3 {
+    color: #FAAB35;
+}
+
+.palitra-color-4 {
+    color: #249EA1;
+}
+
+.palitra-color-5 {
+    color: #008083;
+}
+
+.palitra-color-6 {
+    color: #005F61;
+}
+
+.palitra-tab {
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: transparent;
+    color: #005F61;
+}
+
+.palitra-tab-active {
+    transition: color 0.3s ease, background-color 0.3s ease;
+    background-color: #249EA1;
+    color: #F78105;
+}
+
+.dark-theme .palitra-tab {
+    background-color: transparent;
+    color: #FAAB35 !important;
+}
+.dark-theme .palitra-tab-active {
+    background-color: #F78105;
+    color: #005F61 !important;
+}
+
+
+.light-theme .palitra-tab {
+    background-color: transparent;
+    color: #005F61 !important;
+}
+
+.light-theme .palitra-tab-active {
+    background-color: #005F61;
+    color: #F78105 !important;
+}

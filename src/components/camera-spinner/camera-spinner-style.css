@@ -12,11 +12,15 @@
     z-index: 999;
 }
 
+.spinner-box {
+    min-width: 200px;
+    min-height: 200px;
+}
+
 .spinner {
-    position: relative;
+    display: flex;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
     background-color: transparent;
     animation: shot 1.5s ease-out infinite, rotate 1.5s ease-in-out reverse infinite;
 }

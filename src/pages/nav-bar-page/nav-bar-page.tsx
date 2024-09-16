@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
     // eslint-disable-next-line
-    child: ReactElement<any, any>;
+    child: ReactElement;
+    secure?: boolean;
 }
 
 export const NavBarPage: React.FC<Props> = (
