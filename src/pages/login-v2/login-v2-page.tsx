@@ -20,6 +20,10 @@ export const LoginV2Page: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const handleSignInWithGoogleClick = () => {
+        toast.info('Unfortunately, this feature is not implemented yet 😵‍💫');
+    };
+
     const handleLogin = () => {
         if (email?.length > 0 && password?.length > 0) {
             setIsLoading(true);
@@ -83,7 +87,8 @@ export const LoginV2Page: React.FC = () => {
                             <span>or</span>
                         </div>
 
-                        <div className='login-v2-sign-in-container-google scale-s'>
+                        <div className='login-v2-sign-in-container-google scale-s'
+                            onClick={handleSignInWithGoogleClick}>
                             <div className='google-icon' />
                             <span>Sign in with Google</span>
                         </div>
