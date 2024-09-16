@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './nav-bar-style.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../features/auth/auth-slice';
 import { useTheme } from '../../contexts/theme/theme-context';
 import { toDark, toLight } from '../../features/thema/thema-slice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
+import { dropFolders } from '../../features/folders/folders-slice';
+import { clearUserProfile } from '../../features/profile/profile-slice';
 
 
 const NavBar: React.FC = () => {
@@ -28,7 +29,9 @@ const NavBar: React.FC = () => {
         }
     }, [location, theme, setTheme]);
 
-    const handleOnClick = () => {
+    const handleOnClickLogOut = () => {
+        dispatch(dropFolders());
+        dispatch(clearUserProfile());
         dispatch(logout());
     };
 
@@ -64,7 +67,7 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fas fa-cog" onClick={() => handleIconClick('settings')} />
                         {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
                         <i className="nav-bar-icon fa fa-sign-out"
-                            onClick={handleOnClick}
+                            onClick={handleOnClickLogOut}
                         />
                     </div>
                 }
@@ -76,7 +79,7 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fas fa-cog" onClick={() => handleIconClick('settings')} />
                         {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
                         <i className="nav-bar-icon fa fa-sign-out"
-                            onClick={handleOnClick}
+                            onClick={handleOnClickLogOut}
                         />
                     </div>
                 }
@@ -88,7 +91,7 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fas fa-image" onClick={() => handleIconClick('gallery')} />
                         {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
                         <i className="nav-bar-icon fa fa-sign-out"
-                            onClick={handleOnClick}
+                            onClick={handleOnClickLogOut}
                         />
                     </div>
                 }

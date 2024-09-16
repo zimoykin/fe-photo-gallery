@@ -5,7 +5,10 @@ import './styles/palitra.css';
 import './styles/width-height.css';
 import './styles/text-tags.css';
 import './styles/icons.css';
+import './styles/display.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Gallery, Home, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage, RecoveryPage } from './pages';
+import { RecoveryConfirmPage } from './pages/recovery-confirm/recovery-confirm-page';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +20,7 @@ const App: React.FC = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/recovery" element={<RecoveryPage />} />
+            <Route path="/recovery/confirm" element={<RecoveryConfirmPage />} />
             <Route path="/settings" element={
               <NavBarPage child={<Settings />}
               />}

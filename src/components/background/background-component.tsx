@@ -21,8 +21,7 @@ const BackgroundWithImage: React.FC = () => {
                 </div>
             </div>
             <footer className="bg-footer">
-                <span>{`Copyright © ${new Date().getFullYear()}.`}</span>
-                <span>{`All rights reserved. | Dmitrii Zimoikin`}</span>
+                <span>{`© ${new Date().getFullYear()} | Dmitrii Zimoikin`}</span>
             </footer>
         </>
     );

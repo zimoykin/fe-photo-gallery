@@ -5,11 +5,13 @@ import Palitra from "../../components/palitra/palitra-component";
 import { toast } from "react-toastify";
 import { apiRegister } from "../../api/login-api";
 import CameraSpinnerModal from "../../components/camera-spinner/camera-spinner-modal.component";
+import { useNavigate } from "react-router-dom";
 
 const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/;
 
 export const RegisterPage: React.FC = () => {
 
+    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,6 +25,7 @@ export const RegisterPage: React.FC = () => {
                     setIsLoading(true);
                     apiRegister(email, password, name).then(() => {
                         toast.success('Registration successful, check your email for confirmation');
+                        navigate('/login');
                     }).catch((error) => {
                         toast.error('Registration failed');
                         toast.error(error.message);

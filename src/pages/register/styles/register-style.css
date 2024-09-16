@@ -9,7 +9,7 @@
     align-items: start;
     flex-direction: row;
     width: 70%;
-    height: 70%;
+    height: 80vh;
     border-radius: 20px;
     transition: width 0.3s ease, color 0.3s ease, background-color 0.3s ease;
 }

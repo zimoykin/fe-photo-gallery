@@ -26,7 +26,6 @@ export const LoginV2Page: React.FC = () => {
             apilogin(email, password).then((tokens) => {
                 if (tokens.accessToken && tokens.refreshToken) {
                     dispatch(login([tokens.accessToken, tokens.refreshToken]));
-                    toast.success('Login successful');
                     navigate('/home');
                 }
                 else {
@@ -46,7 +45,9 @@ export const LoginV2Page: React.FC = () => {
         <div className="page-container">
             <BackgroundWithImage />
             <div className='login-v2-sign-in-container-top'>
-                <Palitra />
+                <div className='w-80 flex-center'>
+                    <Palitra />
+                </div>
             </div>
 
             <div
@@ -66,7 +67,7 @@ export const LoginV2Page: React.FC = () => {
                         <input placeholder='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} className='global-input ' />
                     </div>
                     <div className='login-v2-sign-in-container-forgot-password'>
-                        <a href="/forgotten-password">
+                        <a href="/recovery">
                             <span>Forgot password?</span>
                         </a>
                     </div>
@@ -77,7 +78,7 @@ export const LoginV2Page: React.FC = () => {
                             className='global-button w-80 shadow'> Sign in </button>
                     </div>
 
-                    <div className='login-v2-sign-in-container-signin-w-google'>
+                    <div className='login-v2-sign-in-container-signin-w-google global-div-color'>
                         <div className='login-v2-sign-in-container-sign-or'>
                             <span>or</span>
                         </div>
