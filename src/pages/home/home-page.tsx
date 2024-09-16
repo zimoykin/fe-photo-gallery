@@ -18,7 +18,7 @@ export const Home: React.FC = () => {
                 dispatch(setUserProfile(user));
             });
         }
-    }, [profile, navigate]);
+    }, [profile, navigate, auth.isAuthenticated, dispatch]);
 
     return (
         <div className="home-page-container">

@@ -6,8 +6,7 @@ import { toast } from "react-toastify";
 import { apiRegister } from "../../api/login-api";
 import CameraSpinnerModal from "../../components/camera-spinner/camera-spinner-modal.component";
 import { useNavigate } from "react-router-dom";
-
-const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{6,}$/;
+import { validatePassword } from "../../shared/password-validate.helper";
 
 export const RegisterPage: React.FC = () => {
 
@@ -19,28 +18,43 @@ export const RegisterPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleRegisterClick = () => {
-        if (name?.length > 0 && email?.length > 0 && password?.length > 0 && confirmPassword?.length > 0) {
-            if (password === confirmPassword) {
-                if (regex.test(password)) {
-                    setIsLoading(true);
-                    apiRegister(email, password, name).then(() => {
-                        toast.success('Registration successful, check your email for confirmation');
-                        navigate('/login');
-                    }).catch((error) => {
-                        toast.error('Registration failed');
-                        toast.error(error.message);
-                    }).finally(() => {
-                        setIsLoading(false);
-                    });
-                } else {
-                    toast.error('Password must contain at least one uppercase letter, one number, and one special character');
-                }
-            } else {
-                toast.error('Passwords do not match');
-            }
-        } else {
-            toast.error('Please enter all fields');
+
+        if (!name?.length) {
+            toast.error('Please enter name');
+            return;
         }
+        if (!email?.length) {
+            toast.error('Please enter email');
+            return;
+        }
+
+        if (!password?.length) {
+            toast.error('Please enter password');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            toast.error('Password must contain at least one uppercase letter, one number, and one special character');
+            return;
+        }
+
+        setIsLoading(true);
+        
+        apiRegister(email, password, name).then(() => {
+            toast.success('Registration successful, check your email for confirmation');
+            navigate('/login');
+        }).catch((error) => {
+            toast.error('Registration failed');
+            toast.error(error.message);
+        }).finally(() => {
+            setIsLoading(false);
+        });
+
     };
 
     return (

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import CameraSpinnerModal from "../../components/camera-spinner/camera-spinner-modal.component";
 import { apiRecoveryConfirm } from "../../api/login-api";
+import { validatePassword } from "../../shared/password-validate.helper";
 
 export const RecoveryConfirmPage: React.FC = () => {
     const [code, setCode] = useState('');
@@ -25,19 +26,36 @@ export const RecoveryConfirmPage: React.FC = () => {
             return;
         }
 
-        if (code?.length > 0) {
-            setIsLoading(true);
-            apiRecoveryConfirm(token, code, password).then(() => {
-                navigate('/login');
-            }).catch((error) => {
-                console.log(error);
-                toast.error('Invalid code or token');
-            }).finally(() => {
-                setIsLoading(false);
-            });
-        } else {
-            toast.error('Please enter code or password');
+        if (!code?.length) {
+            toast.error('Please enter code, you can find it in your email');
+            return;
         }
+
+        if (!password?.length) {
+            toast.error('Please enter password');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+        }
+
+        if (!validatePassword(password)) {
+            toast.error('Password must contain at least one uppercase letter, one number, and one special character');
+            return;
+        }
+
+
+        setIsLoading(true);
+        apiRecoveryConfirm(token, code, password).then(() => {
+            navigate('/login');
+        }).catch((error) => {
+            console.log(error);
+            toast.error('Invalid code or token');
+        }).finally(() => {
+            setIsLoading(false);
+        });
     };
 
 
@@ -70,8 +88,8 @@ export const RecoveryConfirmPage: React.FC = () => {
                     <div className="recovery-confirm-box-input-code">
                         <input
                             placeholder="confirm password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             className="global-input shadow"
                             type="password" />
                     </div>
