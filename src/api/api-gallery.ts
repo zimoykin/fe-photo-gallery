@@ -1,3 +1,4 @@
+import { IPhotoOfTheDay } from "../interfaces/photo-of-the-day.interface";
 import apiClient from "./api-gallery-client";
 
 export interface IUserFolder {
@@ -126,10 +127,22 @@ export const apiFetchPhotoById = async (
 ) => {
     return apiClient.get<IPhoto>(`/photos/${folderId}/${photoId}/compressed`).then((response) => {
         if (response?.status !== 200) {
-            throw new Error('Failed to get folders');
+            throw new Error('Failed to get photo');
         }
         return response.data;
     }).catch(error => {
         console.error(error);
+    });
+};
+
+export const apiGetPhotoOfTheDay = async (): Promise<IPhotoOfTheDay> => {
+    return apiClient.get<IPhotoOfTheDay>(`/public/photos/photo-of-the-day`).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get photo');
+        }
+        return response.data as IPhotoOfTheDay;
+    }).catch(error => {
+        console.error(error);
+        throw error;
     });
 };

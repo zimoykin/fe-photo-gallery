@@ -1,34 +1,29 @@
-import React, { useEffect } from 'react';
-import './home-style.css';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { apiMe } from '../../api/login-api';
-import { setUserProfile } from '../../features/profile/profile-slice';
+import React, { } from 'react';
+import './styles/home-style.css';
+import BackgroundWithImage from '../../components/background/background-component';
+import PhotoOfTheDay from '../../components/photo-of-the-day/photo-of-the-day-component';
+import CameraLensChart from '../../components/camera-lens-chart/camera-lens-chart.component';
+import News from '../../components/news/news-component';
 
-export const Home: React.FC = () => {
-    const navigate = useNavigate();
-    const profile = useSelector((state: RootState) => state.profile);
-    const auth = useSelector((state: RootState) => state.auth);
-    const dispatch = useDispatch();
+export const HomePage: React.FC = () => {
 
-    useEffect(() => {
-        if (auth.isAuthenticated && !profile.user?.id) {
-            apiMe().then((user) => {
-                dispatch(setUserProfile(user));
-            });
-        }
-    }, [profile, navigate, auth.isAuthenticated, dispatch]);
 
     return (
-        <div className="home-page-container">
-            <div className="home-box-container">
-                {profile.user?.id && <div
-                    className='home-page-navigate-to-gallery'
-                    onClick={() => navigate('/gallery?userId=' + profile.user?.id)}>
-                    {'Your gallery is here.'}
-                </div>}
+        <>
+            <BackgroundWithImage />
+            <div className="page-container home-page">
+                <div className='home-page-container'>
+                    <div className='home-page-content-left shadow global-background-layer'>
+                        <PhotoOfTheDay />
+                        <CameraLensChart />
+                    </div>
+                    <div className='home-page-content-right shadow global-secondary-background-layer'>
+                        <div className='home-page-news-container'>
+                            <News />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 };

@@ -12,7 +12,6 @@ import BackgroundWithImage from '../../components/background/background-componen
 
 export const LoginV2Page: React.FC = () => {
 
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

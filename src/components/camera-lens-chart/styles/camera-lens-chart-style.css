@@ -1,0 +1,89 @@
+.camera-lens-chart-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    z-index: 6;
+    overflow: scroll;
+    scrollbar-width: none;
+    -moz-scrollbar-width: none;
+}
+
+.camera-lens-chart-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    z-index: 6;
+    transition: width 0.3s ease, height 0.3s ease;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    height: 100%;
+    
+}
+
+.camera-lens-chart-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+
+.camera-lens-cammand-panel {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.camera-lens-cammand-panel-camera {
+    width: 50%;
+    /* height: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: width 0.3s ease, height 0.3s ease;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.camera-lens-cammand-panel-lens {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: width 0.3s ease, height 0.3s ease;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.camera-lens-chart-group-table {
+    width: 100%;
+    padding: 10px 0 0 0;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .camera-lens-chart-container {
+        width: 100%;
+    }
+
+    .camera-lens-chart-box {
+        width: 100%;
+        height: auto;
+    }
+
+    .camera-lens-chart-group {
+        /* width: 100%; */
+    }
+
+}

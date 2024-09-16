@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import './styles/palitra.css';
-import './styles/width-height.css';
-import './styles/text-tags.css';
+import './styles/fonts.css';
+import './styles/sizes.css';
 import './styles/icons.css';
 import './styles/display.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Gallery, Home, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage, RecoveryPage } from './pages';
+import { Gallery, HomePage, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage, RecoveryPage } from './pages';
 import { RecoveryConfirmPage } from './pages/recovery-confirm/recovery-confirm-page';
 
 const App: React.FC = () => {
@@ -30,7 +30,7 @@ const App: React.FC = () => {
               />}
             />
             <Route path="/home" element={
-              <NavBarPage child={<Home />} />}
+              <NavBarPage child={<HomePage />} />}
             />
             <Route path="/settings/upload/:folderId" element={
               <NavBarPage child={<UploadImagesPage />} />}
