@@ -1,4 +1,4 @@
-.recovery-container {
+.recovery-confirm-container {
     position: absolute;
     z-index: 3;
     top: 50%;
@@ -16,7 +16,7 @@
 
 }
 
-.recovery-box {
+.recovery-confirm-box {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@
     justify-content: center;
 }
 
-.recovery-box-title {
+.recovery-confirm-box-title {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -32,11 +32,11 @@
     justify-content: center;
 }
 
-.recovery-inputs-container{
+.recovery-confirm-inputs-container{
     width: 50%;
 }
 
-.recovery-box-input-code {
+.recovery-confirm-box-input-code {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,22 +45,23 @@
     gap: 10px;
 }
 
-.recovery-box-input-code>input,
-.recovery-box-input-code>button {
+.recovery-confirm-box-input-code>input,
+.recovery-confirm-box-input-code>button {
     padding: 20px;
 }
 
 @media (max-width: 768px) {
-    .recovery-container {
+    .recovery-confirm-container {
         width: 100%;
-        height: 80%;
+        height: 100%;
+        border-radius: 0;
     }
 
-    .recovery-box-title h1 {
+    .recovery-confirm-box-title h1 {
         font-size: 2rem;
     }
 
-    .recovery-inputs-container{
+    .recovery-confirm-inputs-container{
         width: 100%;
     }
 }
