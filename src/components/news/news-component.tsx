@@ -22,8 +22,15 @@ const News: React.FC = () => {
                 {news?.map((item, index) => (
                     <div className='news-box-item-group' key={index}>
                         <div className='news-box-item global-background-layer shadow'>
-                            <h1>{item.topic}</h1>
-                            <img src={item.url} alt="" />
+                            <div className='news-box-item-title-box'>
+                                <div className='news-box-item-title-box-author '>
+                                    <img className='news-box-item-title-box-author-img shadow scale-s' src="/ava-mock.jpg" alt="" />
+                                </div>
+                                <div className='news-box-item-title-box-news-title scale-m'>
+                                    <h1>{item.topic}</h1>
+                                </div>
+                            </div>
+                            <img className='shadow scale-s' src={item.url} alt="" />
                             <span>{item.content}</span>
                         </div>
                     </div>

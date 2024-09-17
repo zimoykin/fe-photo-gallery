@@ -30,7 +30,7 @@ const UploadImages: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (folderId) {
+        if (folderId && profile.user?.id) {
             setIsLoading(true);
             apiFetchUserFolderByFolderId(folderId)
                 .then((data) => {
@@ -50,7 +50,7 @@ const UploadImages: React.FC = () => {
                     });
                 }).finally(() => setIsLoading(false));
         }
-    }, [folderId]);
+    }, [folderId, profile]);
 
 
     const loadFile = (file: File): Promise<string> => {

@@ -12,8 +12,8 @@ span {
 }
 
 .global-title {
-    line-height: 10px;
-    font-size: 70px;
+    line-height: 2rem;
+    font-size: 5rem;
     font-weight: 900;
     text-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
     transition: color 0.3s ease, font-size 0.3s ease;

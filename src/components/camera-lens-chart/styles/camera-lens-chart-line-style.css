@@ -47,3 +47,8 @@
     width: 20%;
     flex-wrap: nowrap;
 }
+
+.light-theme .camera-lens-chart-line-box-left>span, 
+.light-theme .camera-lens-chart-line-box-right>span {
+    color: black;
+}

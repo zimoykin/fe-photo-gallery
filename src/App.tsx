@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import './styles/palitra.css';
 import './styles/fonts.css';
@@ -16,13 +16,14 @@ const App: React.FC = () => {
       <Router>
         <div className='app-container'>
           <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/login" element={<LoginV2Page />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/recovery" element={<RecoveryPage />} />
             <Route path="/recovery/confirm" element={<RecoveryConfirmPage />} />
             <Route path="/settings" element={
-              <NavBarPage child={<Settings />}
+              <NavBarPage secure={true} child={<Settings />}
               />}
             />
             <Route path="/gallery/:userId" element={
@@ -33,10 +34,10 @@ const App: React.FC = () => {
               <NavBarPage child={<HomePage />} />}
             />
             <Route path="/settings/upload/:folderId" element={
-              <NavBarPage child={<UploadImagesPage />} />}
+              <NavBarPage secure={true} child={<UploadImagesPage />} />}
             />
-            <Route path="*" element={
-              <NavBarPage child={<UnavailablePage />} />}
+            <Route path="*"
+              element={<UnavailablePage />}
             />
           </Routes>
         </div>

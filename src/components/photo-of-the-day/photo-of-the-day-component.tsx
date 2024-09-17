@@ -32,7 +32,7 @@ const PhotoOfTheDay: React.FC = () => {
     return (
         <div className="photo-of-the-day-container">
             <div className="photo-of-the-day-box scale-s">
-                {showPhotoOfTheDay && <div className="photo-of-the-day-box-text scale-s">
+                {showPhotoOfTheDay && <div className="photo-of-the-day-box-text scale-m">
                     <h1> Photo of the day </h1>
                 </div>}
                 <img

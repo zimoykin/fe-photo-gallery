@@ -9,6 +9,7 @@
     overflow: scroll;
     scrollbar-width: none;
     -moz-scrollbar-width: none;
+    padding-top: .5rem;
 }
 
 .camera-lens-chart-box {
@@ -17,7 +18,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 10px;
     width: 100%;
     z-index: 6;
     transition: width 0.3s ease, height 0.3s ease;
@@ -47,13 +47,12 @@
 
 .camera-lens-cammand-panel-camera {
     width: 50%;
-    /* height: 100%; */
+    padding: .5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
     transition: width 0.3s ease, height 0.3s ease;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px 0px 0px 0px;
 }
 
 .camera-lens-cammand-panel-lens {
@@ -61,14 +60,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
     transition: width 0.3s ease, height 0.3s ease;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0px 10px 0px 0px;
+    padding: .5rem;
 }
 
 .camera-lens-chart-group-table {
     width: 100%;
-    padding: 10px 0 0 0;
     border-radius: 10px;
 }
 

@@ -1,44 +1,40 @@
-.nav-bar {
-    position: sticky;
-    top: 0;
-    right: 10px;
+.nav-bar-container {
+    position: relative;
     display: flex;
     justify-content: center;
-    padding: 10px;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
-    box-sizing: border-box;
     z-index: 5;
+    padding: .5rem;
 }
+
 .nav-bar-icon:hover {
-    background-color: #fd5900cd ;
-    scale: 1.1;
+    background-color: #fd5900cd;
+    scale: 1.2;
 }
+
 .dark-theme .nav-bar-icon:hover {
-    background-color: #005f61ea ;
-    scale: 1.1;
+    background-color: #005f61ea;
 }
+
 .light-theme .nav-bar-icon:hover {
-    background-color: #fd5900cd ;
-    scale: 1.1;
+    background-color: #fd5900cd;
 }
 
 .nav-bar-command-panel {
     width: 100%;
     max-width: 1280px;
     display: flex;
-    /* background-color: cadetblue; */
     justify-content: flex-end;
 }
 
-.nav-bar i {
-    padding: 5px;
-    margin: 5px 5px;
+.nav-bar-command-panel>i {
+    padding: .2rem;
+    margin: .1rem;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 24px;
     border: 2px solid;
-    min-width: 40px;
-    min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,9 +42,8 @@
 }
 
 
-@media (min-width: 1280px) {
-    .nav-bar {
-        left: auto;
-        right: calc(50% - 640px);
+@media (min-width: 768px) {
+    .nav-bar-container {
+        padding: .2rem;
     }
 }
