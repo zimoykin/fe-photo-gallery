@@ -6,6 +6,7 @@ const BackgroundWithImage: React.FC = () => {
         <>
             <div className="page-container bg-img-container">
                 <div className='global-background-layer'>
+                    <div className="bg-vignette"></div>
                     <div className='bg-layer-container'>
                         <div className='bg-layer-column' />
                         <div className='bg-layer-column' />

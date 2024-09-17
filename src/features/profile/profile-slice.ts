@@ -19,14 +19,14 @@ const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        setUserProfile: (state, action: PayloadAction<ProfileState['user']>) => {
+        storeProfile: (state, action: PayloadAction<ProfileState['user']>) => {
             state.user = action.payload;
         },
-        clearUserProfile: (state) => {
+        dropProfile: (state) => {
             state.user = null;
         },
     },
 });
 
-export const { setUserProfile, clearUserProfile } = profileSlice.actions;
+export const { storeProfile, dropProfile } = profileSlice.actions;
 export default profileSlice.reducer;

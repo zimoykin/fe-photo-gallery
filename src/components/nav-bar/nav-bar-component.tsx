@@ -7,7 +7,7 @@ import { toDark, toLight } from '../../features/thema/thema-slice';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { dropFolders } from '../../features/folders/folders-slice';
-import { clearUserProfile } from '../../features/profile/profile-slice';
+import { dropProfile } from '../../features/profile/profile-slice';
 
 
 const NavBar: React.FC = () => {
@@ -18,6 +18,7 @@ const NavBar: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const userProfile = useSelector((state: RootState) => state.profile);
+    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
 
     useEffect(() => {
         if (location.pathname.startsWith('/settings')) {
@@ -31,7 +32,7 @@ const NavBar: React.FC = () => {
 
     const handleOnClickLogOut = () => {
         dispatch(dropFolders());
-        dispatch(clearUserProfile());
+        dispatch(dropProfile());
         dispatch(logout());
     };
 
@@ -58,7 +59,7 @@ const NavBar: React.FC = () => {
 
     return (
         <div
-            className='nav-bar'>
+            className='nav-bar-container'>
             <div className='nav-bar-command-panel'>
                 {iconSet === 'home' &&
                     <div className='nav-bar-command-panel'>
@@ -66,9 +67,15 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fas fa-image" onClick={() => handleIconClick('gallery')} />
                         <i className="nav-bar-icon fas fa-cog" onClick={() => handleIconClick('settings')} />
                         {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
-                        <i className="nav-bar-icon fa fa-sign-out"
+                        {isAuthenticated ? <i className="nav-bar-icon fa fa-sign-out"
                             onClick={handleOnClickLogOut}
                         />
+                            :
+                            !isAuthenticated &&
+                            <i className="nav-bar-icon fas fa-user"
+                                onClick={() => navigate('/login')}
+                            />
+                        }
                     </div>
                 }
 
@@ -78,9 +85,15 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fas fa-home" onClick={() => handleIconClick('home')} />
                         <i className="nav-bar-icon fas fa-cog" onClick={() => handleIconClick('settings')} />
                         {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
-                        <i className="nav-bar-icon fa fa-sign-out"
+                        {isAuthenticated ? <i className="nav-bar-icon fa fa-sign-out"
                             onClick={handleOnClickLogOut}
                         />
+                            :
+                            !isAuthenticated &&
+                            <i className="nav-bar-icon fas fa-user"
+                                onClick={() => navigate('/login')}
+                            />
+                        }
                     </div>
                 }
 
@@ -90,9 +103,15 @@ const NavBar: React.FC = () => {
                         <i className="nav-bar-icon fas fa-home" onClick={() => handleIconClick('home')} />
                         <i className="nav-bar-icon fas fa-image" onClick={() => handleIconClick('gallery')} />
                         {theme === 'dark' ? <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} /> : <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />}
-                        <i className="nav-bar-icon fa fa-sign-out"
+                        {isAuthenticated ? <i className="nav-bar-icon fa fa-sign-out"
                             onClick={handleOnClickLogOut}
                         />
+                            :
+                            !isAuthenticated &&
+                            <i className="nav-bar-icon fas fa-user"
+                                onClick={() => navigate('/login')}
+                            />
+                        }
                     </div>
                 }
             </div>

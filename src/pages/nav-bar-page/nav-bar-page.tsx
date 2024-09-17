@@ -6,26 +6,25 @@ import "./nav-bar-page-style.css";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-    // eslint-disable-next-line
     child: ReactElement;
     secure?: boolean;
 }
 
 export const NavBarPage: React.FC<Props> = (
-    { child }: Props
+    { child, secure }: Props
 ) => {
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
     const navigate = useNavigate();
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!isAuthenticated && secure) {
             navigate("/login");
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, navigate, secure]);
 
     return (<div className="page-nav-bar">
-        {isAuthenticated && <>
+        <>
             <NavBar />
             {child}
-        </>}
+        </>
     </div>);
 };
