@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUserFolder } from '../../api/api-gallery';
+import { IUserFolder } from '../../interfaces/folder.interface';
 
 interface FoldersState {
     folders: IUserFolder[];

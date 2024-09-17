@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import './styles/folder-view-style.css';
-import { apiCreateFolder, apiUpdateFolderById, IUserFolder } from "../../api/api-gallery";
+import { apiCreateFolder, apiUpdateFolderById } from "../../api/api-gallery";
 import CameraSpinnerModal from "../camera-spinner/camera-spinner-modal.component";
 import { ColorResult, SketchPicker } from 'react-color';
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { IUserFolder } from "../../interfaces/folder.interface";
 
 interface Props {
     onClose: () => void,

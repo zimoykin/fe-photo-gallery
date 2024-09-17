@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './styles/upload-images-line-style.css';
-import { apiDeletePhotoByIdAndFolderId, apiUploadPhoto, IPhoto } from '../../../api/api-gallery';
+import { apiDeletePhotoByIdAndFolderId, apiUploadPhoto } from '../../../api/api-gallery';
 import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
+import { IPhoto } from '../../../interfaces/photo.interface';
 
 interface Props {
     imageUrl: string;

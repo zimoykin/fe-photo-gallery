@@ -42,7 +42,7 @@ const NavBar: React.FC = () => {
                 navigate(`/home`);
                 break;
             case 'gallery':
-                navigate(`/gallery/${userProfile.user!.id}`);
+                navigate(`/gallery/${userProfile.profile?.id}`);
                 break;
             case 'settings':
                 navigate(`/settings`);

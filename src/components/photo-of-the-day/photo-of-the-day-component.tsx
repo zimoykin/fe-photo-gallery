@@ -4,7 +4,6 @@ import { apiGetPhotoOfTheDay } from "../../api/api-gallery";
 import { toast } from "react-toastify";
 import { IPhotoOfTheDay } from "../../interfaces/photo-of-the-day.interface";
 import { useNavigate } from "react-router-dom";
-import CameraSpinner from "../camera-spinner/camera-spinner.component";
 
 const PhotoOfTheDay: React.FC = () => {
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ const PhotoOfTheDay: React.FC = () => {
 
     const handlePhotoOfTheDayClick = () => {
         if (!photo) return;
-        navigate(`/gallery/${photo.userId}`);
+        navigate(`/gallery/${photo.profileId}`);
     };
 
 

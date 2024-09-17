@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react';
 import './user-folders-style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { apiDeleteFolderById, apiFetchUserFolders, IUserFolder } from '../../../api/api-gallery';
+import { apiDeleteFolderById, apiFetchUserFolders, } from '../../../api/api-gallery';
 import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
 // import FolderCreateUpdate from '../folder-create-update/folder-create-update-component';
 import { storeFolders } from '../../../features/folders/folders-slice';
 import { useNavigate } from 'react-router-dom';
+import { IUserFolder } from '../../../interfaces/folder.interface';
 
 interface Props {
     folders: IUserFolder[];
@@ -18,7 +19,7 @@ interface Props {
 const UserFolders: React.FC<Props> = ({ folders, handleClickCreateFolder, handleClickEditFolder }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { user } = useSelector((state: RootState) => state.profile);
+    const { profile } = useSelector((state: RootState) => state.profile);
 
     const [userFolders, setUserFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -30,14 +31,14 @@ const UserFolders: React.FC<Props> = ({ folders, handleClickCreateFolder, handle
     }, [folders]);
 
     useEffect(() => {
-        if (user?.id) {
-            apiFetchUserFolders(user.id)
+        if (profile?.id) {
+            apiFetchUserFolders(profile.id)
                 .then((folders) => {
                     dispatch(storeFolders(folders));
                 });
         }
 
-    }, [user, dispatch]);
+    }, [profile?.id, dispatch]);
 
 
     const handleFolderClick = (folderId: string) => {

@@ -10,7 +10,7 @@ import FolderCreateUpdate from './folder-create-update/folder-create-update-comp
 
 
 const UserSettings: React.FC = () => {
-    const profile = useSelector((state: RootState) => state.profile);
+    const { profile } = useSelector((state: RootState) => state.profile);
     const dispatch = useDispatch();
 
     const { folders } = useSelector((state: RootState) => state.folders) ?? [];
@@ -46,19 +46,12 @@ const UserSettings: React.FC = () => {
     };
 
     useEffect(() => {
-        if (profile.user) {
-            setEmail(profile.user.email);
-            setName(profile.user.name);
-            //TODO: add camera and lens to user model
-            if (profile.user.image) {
-                setAva(profile.user.image);
-            }
-            if (profile.user.camera) {
-                setCamera(profile.user.camera);
-            }
-            if (profile.user.lens) {
-                setLens(profile.user.lens);
-            }
+        if (profile) {
+            setEmail(profile?.email ?? '');
+            setName(profile.name ?? '');
+            setCamera(profile?.equipment?.cameras?.find(eq => eq.favorite)?.name ?? '');
+            setLens(profile?.equipment?.lenses?.find(eq => eq.favorite)?.name ?? '');
+            setAva(profile?.url ?? 'ava-mock.jpg');
         }
 
     }, [profile]);

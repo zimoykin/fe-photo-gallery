@@ -26,7 +26,7 @@ const App: React.FC = () => {
               <NavBarPage secure={true} child={<Settings />}
               />}
             />
-            <Route path="/gallery/:userId" element={
+            <Route path="/gallery/:profileId" element={
               <NavBarPage child={<Gallery />}
               />}
             />
