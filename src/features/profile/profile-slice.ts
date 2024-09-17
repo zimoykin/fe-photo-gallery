@@ -8,8 +8,11 @@ interface ProfileState {
         image?: string;
         camera?: string;
         lens?: string;
+
+        location?: string;
     } | null;
 }
+export type Profile = ProfileState['user'];
 
 const initialState: ProfileState = {
     user: null,
