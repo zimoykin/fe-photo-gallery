@@ -1,29 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IProfile } from '../../interfaces/profile.interface';
 
 interface ProfileState {
-    user: {
-        id: string;
-        email: string;
-        name: string;
-        image?: string;
-        camera?: string;
-        lens?: string;
-    } | null;
+    profile?: IProfile | null;
 }
 
 const initialState: ProfileState = {
-    user: null,
+    profile: null,
 };
 
 const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        storeProfile: (state, action: PayloadAction<ProfileState['user']>) => {
-            state.user = action.payload;
+        storeProfile: (state, action: PayloadAction<IProfile>) => {
+            state.profile = action.payload;
         },
         dropProfile: (state) => {
-            state.user = null;
+            state.profile = null;
         },
     },
 });

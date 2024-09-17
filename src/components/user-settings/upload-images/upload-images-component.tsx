@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import './styles/upload-images-style.css';
 import UploadImagesLine from "./upload-images-line-component";
-import { apiFetchGalleryByFolderId, apiFetchUserFolderByFolderId, IPhoto, IUserFolder } from "../../../api/api-gallery";
+import { apiFetchGalleryByFolderId, apiFetchUserFolderByFolderId } from "../../../api/api-gallery";
 import CameraSpinnerModal from "../../camera-spinner/camera-spinner-modal.component";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
+import { IUserFolder } from "../../../interfaces/folder.interface";
+import { IPhoto } from "../../../interfaces/photo.interface";
 
 interface IUploadImage {
     id: string;
@@ -22,7 +24,7 @@ interface IUploadImage {
 const UploadImages: React.FC = () => {
 
     const { folderId } = useParams<{ folderId: string; }>();
-    const profile = useSelector((state: RootState) => state.profile);
+    const { profile } = useSelector((state: RootState) => state.profile);
 
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [images, setImages] = useState<IUploadImage[]>([]);
@@ -30,7 +32,7 @@ const UploadImages: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (folderId && profile.user?.id) {
+        if (folderId && profile?.id) {
             setIsLoading(true);
             apiFetchUserFolderByFolderId(folderId)
                 .then((data) => {
@@ -50,7 +52,7 @@ const UploadImages: React.FC = () => {
                     });
                 }).finally(() => setIsLoading(false));
         }
-    }, [folderId, profile]);
+    }, [folderId, profile?.id, profile?.equipment]);
 
 
     const loadFile = (file: File): Promise<string> => {
@@ -78,10 +80,10 @@ const UploadImages: React.FC = () => {
                 const storageUrl = await loadFile(file);
                 imgs.push({
                     id: '',
-                    camera: profile.user?.camera ?? '',
                     film: '',
                     iso: '',
-                    lens: profile.user?.lens ?? '',
+                    camera: profile?.equipment?.cameras?.find(l => l.favorite)?.name ?? '',
+                    lens: profile?.equipment?.lenses?.find(l => l.favorite)?.name ?? '',
                     location: '',
                     description: '',
                     url: storageUrl,

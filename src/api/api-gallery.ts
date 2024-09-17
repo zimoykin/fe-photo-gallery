@@ -1,28 +1,9 @@
+import { IUserFolder } from "../interfaces/folder.interface";
 import { IPhotoOfTheDay } from "../interfaces/photo-of-the-day.interface";
+import { IPhoto } from "../interfaces/photo.interface";
+import { IProfile } from "../interfaces/profile.interface";
 import apiClient from "./api-gallery-client";
 
-export interface IUserFolder {
-    id: string;
-    title: string;
-    bgColor: string;
-    color: string;
-    description: string;
-    sortOrder: number;
-}
-
-export interface IPhoto {
-    id: string;
-    iso?: string;
-    sortOrder: number;
-    description?: string;
-    location?: string;
-    film?: string;
-    camera?: string;
-    lens?: string;
-    userId: string;
-    folderId: string;
-    url: string;
-}
 
 export const apiFetchUserFolders = async (userId: string) => {
     return apiClient.get<IUserFolder[]>(`/folders`, { params: { userId } })
@@ -146,3 +127,41 @@ export const apiGetPhotoOfTheDay = async (): Promise<IPhotoOfTheDay> => {
         throw error;
     });
 };
+
+
+export const apiFetchUserProfileById = async (id: string) => {
+    return apiClient.get<IProfile>(`/public/profiles/${id}`).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get user');
+        }
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+        throw error;
+    });
+};
+
+export const apiFetchFoldersByProfileId = async (profileId: string) => {
+    return apiClient.get<IUserFolder[]>(`/public/folders/${profileId}`)
+        .then((response) => {
+            if (response?.status !== 200) {
+                throw new Error('Failed to get folders');
+            }
+            return response.data;
+        }).catch(error => {
+            console.error(error);
+            throw error;
+        });
+};
+
+export const apiFetchUserProfile = async () => {
+    return apiClient.get<IProfile>(`/profiles/me`).then((response) => {
+        if (response?.status !== 200) {
+            throw new Error('Failed to get user');
+        }
+        return response.data;
+    }).catch(error => {
+        console.error(error);
+        throw error;
+    });
+}

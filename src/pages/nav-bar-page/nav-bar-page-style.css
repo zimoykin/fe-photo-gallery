@@ -1,16 +1,14 @@
 .page-nav-bar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   width: 100vw;
   height: 100vh;
-  padding: 1rem 0 2rem 0;
-  /* background-color: brown; */
 }
 
 @media (max-width: 768px) {
-    .page-nav-bar {
-      padding: 1rem 0 0 0;
-    }
+  .page-nav-bar {
+    padding: 0 0 0 0;
+  }
 }

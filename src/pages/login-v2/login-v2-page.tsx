@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles/login-v2-style.css';
 import Palitra from '../../components/palitra/palitra-component';
-import { apilogin, apiMe } from '../../api/login-api';
+import { apilogin } from '../../api/login-api';
 import { toast } from 'react-toastify';
 import CameraSpinnerModal from '../../components/camera-spinner/camera-spinner-modal.component';
 import { useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import { login } from '../../features/auth/auth-slice';
 import { useNavigate } from 'react-router-dom';
 import BackgroundWithImage from '../../components/background/background-component';
 import { storeProfile } from '../../features/profile/profile-slice';
-import { apiFetchUserFolders } from '../../api/api-gallery';
+import { apiFetchUserFolders, apiFetchUserProfile } from '../../api/api-gallery';
 import { storeFolders } from '../../features/folders/folders-slice';
 
 
@@ -33,13 +33,11 @@ export const LoginV2Page: React.FC = () => {
                 if (tokens.accessToken && tokens.refreshToken) {
                     dispatch(login([tokens.accessToken, tokens.refreshToken]));
 
-                    const user = await apiMe();
+                    const user = await apiFetchUserProfile();
                     dispatch(storeProfile(user));
 
                     const folders = await apiFetchUserFolders(user.id);
                     dispatch(storeFolders(folders));
-
-
 
                     navigate('/home');
                 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { apiDeletePhotoByIdAndFolderId, apiFetchGalleryByFolderId, IPhoto } from '../../../api/api-gallery';
+import { apiDeletePhotoByIdAndFolderId, apiFetchGalleryByFolderId } from '../../../api/api-gallery';
 import './styles/folder-create-update-images-style.css';
 import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
+import { IPhoto } from '../../../interfaces/photo.interface';
 
 interface Props {
     folderId?: string;

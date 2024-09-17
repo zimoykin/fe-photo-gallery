@@ -4,28 +4,23 @@ import { apiGetPhotoOfTheDay } from "../../api/api-gallery";
 import { toast } from "react-toastify";
 import { IPhotoOfTheDay } from "../../interfaces/photo-of-the-day.interface";
 import { useNavigate } from "react-router-dom";
-import CameraSpinner from "../camera-spinner/camera-spinner.component";
 
 const PhotoOfTheDay: React.FC = () => {
     const navigate = useNavigate();
     const [photo, setPhoto] = useState<IPhotoOfTheDay | null>(null);
     const [showPhotoOfTheDay, setShowPhotoOfTheDay] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
         apiGetPhotoOfTheDay().then((photo) => {
             if (photo) setPhoto(photo);
         }).catch(error => {
             toast.error(error.message);
-        }).finally(() => {
-            setIsLoading(false);
-        });
+        })
     }, []);
 
     const handlePhotoOfTheDayClick = () => {
         if (!photo) return;
-        navigate(`/gallery/${photo.userId}`);
+        navigate(`/gallery/${photo.profileId}`);
     };
 
 
@@ -41,7 +36,7 @@ const PhotoOfTheDay: React.FC = () => {
             </div>
 
             {showPhotoOfTheDay && <div className="photo-of-the-day-box-by-author-container">
-                <div className="photo-of-the-day-box-group shadow global-secondary-background-layer scale-s">
+                <div className="photo-of-the-day-box-group scale-s">
                     <div className="photo-of-the-day-box-by-author-left">
                         <i className="fas fa-heart scale-l"></i>
                         <span className="shadow">{photo?.likes}</span>
@@ -57,7 +52,6 @@ const PhotoOfTheDay: React.FC = () => {
                     </div>
                 </div>
             </div>}
-            {isLoading && <div style={{ minHeight: '200px', minWidth: '200px' }}><CameraSpinner /></div>}
         </div>
     );
 };

@@ -9,6 +9,7 @@
 }
 
 .photo-of-the-day-box {
+    background-color: gray;
     position: relative;
     display: flex;
     justify-content: center;
