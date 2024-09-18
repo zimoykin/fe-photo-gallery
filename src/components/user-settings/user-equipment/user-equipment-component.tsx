@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import './user-equipment-style.css';
 import { IEquipment } from '../../../interfaces/eqiupment.interface';
 

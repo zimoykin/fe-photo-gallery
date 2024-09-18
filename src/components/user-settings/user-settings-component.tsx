@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './user-settings-style.css';
-import { logout } from '../../features/auth/auth-slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import UserFolders from './user-folders/user-folders-component';
@@ -10,9 +9,8 @@ import FolderCreateUpdate from './folder-create-update/folder-create-update-comp
 import Avatar from '../avatar/avatar-component';
 import { useNavigate } from 'react-router-dom';
 import { apiFetchUserProfile, apiUpdateProfile } from '../../api/api-gallery';
-import { dropProfile, storeProfile } from '../../features/profile/profile-slice';
+import { storeProfile } from '../../features/profile/profile-slice';
 import { IProfile } from '../../interfaces/profile.interface';
-import { dropFolders } from '../../features/folders/folders-slice';
 import { IEquipment } from '../../interfaces/eqiupment.interface';
 
 

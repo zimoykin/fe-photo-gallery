@@ -24,7 +24,7 @@ const GalleryV2: React.FC = () => {
                 const _userProfile = await apiFetchUserProfileById(profileId);
                 const _folders = await apiFetchFoldersByProfileId(profileId);
                 setUserProfile(_userProfile);
-                setFolders((fld) => [..._folders]);
+                setFolders([..._folders]);
             }
         };
 
