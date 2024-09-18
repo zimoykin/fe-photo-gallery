@@ -193,12 +193,29 @@ option {
 
 .global-button {
   transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-  font-size: 24px;
-  border-radius: 20px;
-  padding: 10px;
-  min-width: 40px;
-  min-height: 40px;
+  font-size: 1rem;
+  border-radius: 10px;
+  min-width: 2rem;
+  min-height: 2rem;
   width: 100%;
+}
+
+.dark-theme .global-button.primary {
+  color: white;
+  background-color: darkgreen;
+}
+.dark-theme .global-button.danger {
+  color: white;
+  background-color: darkgoldenrod;
+}
+
+.light-theme .global-button.primary {
+  color: black;
+  background-color: greenyellow;
+}
+.light-theme .global-button.danger {
+  color: black;
+  background-color: coral;
 }
 
 .global-button:hover {
@@ -209,10 +226,6 @@ option {
   scale: 0.98;
 }
 
-.dark-theme .global-button {
-  color: white;
-  background-color: #F78105;
-}
 
 .light-theme .global-button {
   color: black;

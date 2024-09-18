@@ -9,5 +9,7 @@ export interface IProfile {
     name?: string;
     website?: string;
     url?: string;
-    equipment?: IEquipment;
+    equipment?: IEquipment[];
+
+    privateAccess?: boolean;
 };

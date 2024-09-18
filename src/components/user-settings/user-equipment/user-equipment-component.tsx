@@ -1,91 +1,57 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './user-equipment-style.css';
-import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
+import { IEquipment } from '../../../interfaces/eqiupment.interface';
 
-interface IUserEquipment {
-    id: string;
-    camera?: string;
-    lens?: string;
+interface Props {
+    equipment: IEquipment;
+    editMode: boolean;
+    addStar: () => void;
+    deleteEquipment: () => void;
+
+    onChangeName: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeType: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const UserEquipment: React.FC = () => {
-
-    const [equipment, setEquipment] = useState<IUserEquipment[]>([{
-        id: '1',
-        camera: 'Canon EOS 6D',
-    }, {
-        id: '2',
-        lens: 'Canon EF 35mm f/1.2L',
-    }, {
-        id: '3',
-        lens: 'Canon EF 35-80mm f/3.5-5.6L USM',
-    }]);
-
-    const [favoriteCamera, setFavoriteCamera] = useState<string>();
-    const [favoriteLens, setFavoriteLens] = useState<string>();
-
-
-    const [userEquipment, setUserEquipment] = useState<IUserEquipment[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-
-    useEffect(() => {
-        if (equipment) {
-            setUserEquipment(equipment);
-        }
-    }, [equipment]);
-
-
-    const handleEquipmentRemoveClick = (equipmentId: string) => {
-        setIsLoading(true);
-        setTimeout(() => {
-            setEquipment(equipment.filter(equip => equip.id !== equipmentId));
-            setIsLoading(false);
-        }, 3000);
-    };
-
-
-    const handleEquipmentStarClick = ({ camera, lens, id }: IUserEquipment) => {
-        if (camera) {
-            setFavoriteCamera(id);
-        } else if (lens) {
-            setFavoriteLens(id);
-        }
-    };
+const UserEquipment: React.FC<Props> = ({ equipment, addStar, deleteEquipment, editMode, onChangeName, onChangeType }) => {
 
     return (
         <div>
-            <div className='user-equipment-command-panel' >
-                <i className="user-equipment-icon fa-solid fa-plus" />
-                {/* <i className="user-equipment-icon fas fa-image" /> */}
-            </div>
             <div className='user-equipment-table'>
-                {userEquipment.map((equip, index) => (
-                    <div className='user-equipment-equipment-line'
-                        key={index}
-                    >
-                        <div className='user-equipment-equipment-title'>
-                            <h3>{equip.camera ?? equip.lens}</h3>
-                        </div>
-                        <div className='user-equipment-equipment-comannd'>
-                            <i className="user-equipment-icon fas fa-star"
-                                onClick={() => {
-                                    handleEquipmentStarClick({
-                                        id: equip.id,
-                                        camera: equip.camera,
-                                        lens: equip.lens
-                                    });
-                                }}
-                                style={(favoriteCamera === equip.id || favoriteLens === equip.id) ? { color: 'yellow' } : {}}
-                            />
-                            <i className="user-equipment-icon fas fa-trash"
-                                onClick={() => handleEquipmentRemoveClick(equip.id)}
-                            />
-                        </div>
+
+                <div className='user-equipment-equipment-line global-secondary-background-layer shadow scale-s'
+                >
+                    <div className='user-equipment-equipment-title p-10'>
+                        {editMode ? <input
+                            className='global-input w-80 p-10' type="text" defaultValue={equipment.name}
+                            onChange={onChangeName}
+                        />
+                            : <h3>{equipment.name}</h3>}
                     </div>
-                ))}
+
+                    <div className='user-equipment-equipment-title p-10'>
+                        {editMode ?
+                            <select className='global-input w-100' name="type" id="type" defaultValue={equipment.type}
+
+                                onChange={onChangeType}>
+                                <option value="camera">camera</option>
+                                <option value="lens">lens</option>
+                                <option value="other">other</option>
+                            </select>
+                            : <h3>{equipment.type}</h3>}
+                    </div>
+
+                    <div className='user-equipment-equipment-comannd  p-10'>
+                        <i className="user-equipment-icon fas fa-star p-10"
+                            onClick={addStar}
+                            style={(equipment.favorite) ? { color: 'yellow' } : {}}
+                        />
+                        <i className="user-equipment-icon fas fa-trash"
+                            onClick={deleteEquipment}
+                        />
+                    </div>
+                </div>
             </div>
-            {isLoading && <CameraSpinnerModal />}
         </div>
     );
 };
