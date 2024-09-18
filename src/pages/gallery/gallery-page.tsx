@@ -7,7 +7,7 @@ import GalleryV2 from '../../components/gallery-v2/gallery-component';
 export const Gallery: React.FC = () => {
     return (<>
         <BackgroundWithImage />
-        <div id='container' className="page-container">
+        <div className="page-container">
             <div className='gallery-box-container'>
                 <GalleryV2 />
             </div>

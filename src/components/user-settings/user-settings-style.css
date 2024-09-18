@@ -1,11 +1,14 @@
 .user-settings-container {
-    /* position: fixed; */
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
     width: 100%;
-    padding: 10px;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    z-index: 1;
 }
 
 .user-settings-box {
@@ -16,14 +19,12 @@
     width: 100%;
     height: 100%;
     gap: 20px;
-
+    z-index: 1;
 }
 
 .user-info-container {
     height: 100%;
     width: 40%;
-    background-color: rgba(142, 216, 203, 0.7);
-    opacity: 0.8;
     border-radius: 10px;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
@@ -32,66 +33,28 @@
 .user-folders-equipment-container {
     height: 100%;
     width: 60%;
-    background-color: rgba(142, 216, 203, 0.7);
     border-radius: 10px;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
+
 }
 
 .user-folders-equipment-container-box {
     height: 50%;
     overflow: auto;
     scrollbar-width: none;
-}
-
-.avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.avatar>div {
-    border-radius: 50%;
-    overflow: hidden;
-    max-width: 250px;
-    max-height: 250px;
-    margin: 10px;
-    border: rgb(255, 230, 0) 5px solid;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.avatar>div:hover {
-    border: rgb(255, 230, 0) 1px solid;
-    box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
-}
-
-.avatar>div:active {
-    transform: scale(1.1);
-}
-
-
-.avatar-img {
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.avatar-img:hover {
-    transform: scale(1.1);
+    /* background-color: tomato; */
 }
 
 .user-info-user-data {
     text-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
     text-align: center;
-}
-
-.user-info-user-data h3 {
-    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 }
 
 .user-info-user-data>h1:hover,
@@ -123,7 +86,6 @@
     text-transform: uppercase;
     cursor: pointer;
     background-color: rgba(124, 149, 123, 0.7);
-    opacity: 0.8;
     min-height: 50px;
     min-width: 50px;
     font-size: x-small;
@@ -138,21 +100,45 @@
     margin: 10px;
     cursor: pointer;
     background-color: rgba(124, 149, 123, 0.7);
-    opacity: 0.8;
     text-transform: uppercase;
 }
 
-.user-info-button-container button:hover {
-    opacity: 1;
-}
 
 .user-info-button-container button:active {
     transform: scale(1.1);
 }
 
+
+.user-equipment-command-panel {
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.user-equipment-command-panel i {
+    font-weight: 900;
+    font-size: 24px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 4px;
+}
+
+.user-equipment-command-panel i:hover {
+    background-color: tomato;
+}
+
+
 @media (max-width: 768px) {
     .user-settings-container {
-        gap: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    .user-settings-box {
+        display: block;
+        height: 100%;
+        width: 100%;
     }
 
     .user-info-container {
@@ -160,9 +146,8 @@
     }
 
     .user-folders-equipment-container {
-        width: 0;
-        padding: 0;
-        visibility: hidden;
+        height: 100%;
+        width: 100%;
     }
 
     .user-info-user-data h3 {
@@ -173,6 +158,7 @@
     .user-info-buttons-folder-equip-container {
         width: 100%;
         padding: 10px;
-        visibility: visible;
+        display: flex;
+        /* visibility: visible; */
     }
 }

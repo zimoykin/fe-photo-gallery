@@ -1,36 +1,5 @@
-.user-equipment-command-panel {
-    padding: 10px;
-    margin: 10px;
-    display: flex;
-    border-bottom: 2px solid rgb(0, 0, 0);
-}
-.user-equipment-command-panel i {
-    font-weight: 900;
-    font-size: 24px;
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 4px;
-}
-
-.user-equipment-command-panel i:hover {
-    background-color: tomato;
-}
-
 .user-equipment-table {
-    /* background-color: tomato; */
-    padding: 10px;
-}
-
-.user-equipment-table>div {
-    background-color: #B3B3B3;
-    opacity: .7;
-    padding: 2px;
-    margin: 2px;
-}
-
-.user-equipment-equipment-line:hover {
-    scale: 1.04;
-    background-color: #636363;
+    padding: .3rem;
 }
 
 .user-equipment-equipment-line {
@@ -39,13 +8,7 @@
     align-items: center;
 }
 
-.user-equipment-equipment-line > div {
-    padding-right: 10px;
-    padding-left: 10px ;
-}
-.user-equipment-equipment-comannd i {
-    padding: 10px;
-}
+
 
 .user-equipment-equipment-comannd i:hover {
     background-color: tomato;

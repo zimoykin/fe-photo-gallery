@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './styles/gallery-style.css';
-import CameraSpinner from '../camera-spinner/camera-spinner.component';
 import { useParams } from 'react-router-dom';
 import { IProfile } from '../../interfaces/profile.interface';
 import { IUserFolder } from '../../interfaces/folder.interface';
 import { apiFetchFoldersByProfileId, apiFetchUserProfileById } from '../../api/api-gallery';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
+import FolderV2 from '../folders/folder-component';
+import Avatar from '../avatar/avatar-component';
 
 const GalleryV2: React.FC = () => {
 
@@ -23,7 +24,7 @@ const GalleryV2: React.FC = () => {
                 const _userProfile = await apiFetchUserProfileById(profileId);
                 const _folders = await apiFetchFoldersByProfileId(profileId);
                 setUserProfile(_userProfile);
-                setFolders(_folders);
+                setFolders([..._folders]);
             }
         };
 
@@ -40,39 +41,33 @@ const GalleryV2: React.FC = () => {
 
     return (
         <div className='gallery-v2-container'>
-            <div className='gallery-v2-box'>
+            <div className='gallery-v2-box shadow'>
                 <div className={`gallery-v2-box-owner ${showUserData && 'global-background-layer'}`}>
                     <div className='gallery-v2-box-person'>
-                        {!showUserData && <div><CameraSpinner /></div>}
-                        <img hidden={!showUserData}
-                            className='shadow scale-s'
-                            src={userProfile?.url ?? 'ava'} alt=""
-                            onLoad={() => setShowData(true)}
-                        />
-                        {showUserData && <div className='gallery-v2-box-person-data'>
+                        <Avatar url={userProfile?.url} canShowImage={(res) => setShowData(res)} />
+                        <div className='gallery-v2-box-person-data'>
                             <h1 className='global-title'>{userProfile?.name}</h1>
                             <span className='scale-m'>{userProfile?.location ?? 'no location'}</span>
-                            <br />
+                            {/* <br /> */}
                             <span>{folders?.length} folders</span>
                             <span>{folders?.length * 10} photos</span>
-                            <br />
+                            {/* <br /> */}
                             <span className='scale-m'>
-                                {userProfile?.equipment?.cameras?.find(e => (e.favorite))?.name ?? 'no information'}
-                                ({userProfile?.equipment?.cameras?.length ?? 0})
+                                {userProfile?.equipment?.find(e => (e.type === 'camera' && e.favorite))?.name ?? 'no information'}
+                                ({userProfile?.equipment?.filter(e => e.type === 'camera')?.length ?? 0})
                             </span>
                             <span className='scale-m'>
-                                {userProfile?.equipment?.lenses?.find(e => (e.favorite))?.name ?? 'no information'}
-                                ({userProfile?.equipment?.lenses?.length ?? 0})
+                                {userProfile?.equipment?.find(e => (e.type === 'lens' && e.favorite))?.name ?? 'no information'}
+                                ({userProfile?.equipment?.filter(e => e.type === 'lens')?.length ?? 0})
                             </span>
-                        </div>}
-                        <br />
+                        </div>
                     </div>
                 </div>
 
                 <div className='gallery-v2-box-gallery '>
                     {folders?.map((folder) => (
                         <div className='gallery-v2-box-folder' key={folder.id}>
-                            <h3>{folder.title}</h3>
+                            <FolderV2 folder={folder} />
                         </div>
                     ))}
                 </div>

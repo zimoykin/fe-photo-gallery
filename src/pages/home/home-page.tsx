@@ -11,7 +11,7 @@ export const HomePage: React.FC = () => {
     return (
         <>
             <BackgroundWithImage />
-            <div className="page-container home-page">
+            <div className="page-container">
                 <div className='home-page-container'>
                     <div className='home-page-content-left shadow global-background-layer'>
                         <PhotoOfTheDay />

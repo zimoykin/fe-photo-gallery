@@ -1,6 +1,6 @@
 .user-folders-command-panel {
-    padding: 10px;
-    margin: 10px;
+    padding: 1rem;
+    /* margin: 10px; */
     display: flex;
     border-bottom: 2px solid rgb(0, 0, 0);
 }
@@ -9,7 +9,6 @@
     font-size: 24px;
     border: 1px solid;
     border-radius: 5px;
-    padding: 4px;
 }
 
 .user-folders-command-panel i:hover {
@@ -23,7 +22,6 @@
 
 .user-folders-table>div {
     background-color: #B3B3B3;
-    opacity: .7;
     padding: 2px;
     margin: 2px;
 }

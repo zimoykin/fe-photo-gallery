@@ -1,4 +1,4 @@
-import { IUserFolder } from "../interfaces/folder.interface";
+import { IFolder, IUserFolder } from "../interfaces/folder.interface";
 import { IPhotoOfTheDay } from "../interfaces/photo-of-the-day.interface";
 import { IPhoto } from "../interfaces/photo.interface";
 import { IProfile } from "../interfaces/profile.interface";
@@ -29,7 +29,7 @@ export const apiFetchGalleryByFolderId = async (id: string, type: 'preview' | 'o
     });
 };
 
-export const apiUpdateFolderById = async (id: string, folder: Omit<IUserFolder, 'id'>) => {
+export const apiUpdateFolderById = async (id: string, folder:IFolder) => {
     return apiClient.put<IUserFolder>(`/folders/${id}`, folder).then((response) => {
         if (response?.status !== 200) {
             throw new Error('Failed to get folders');
@@ -40,7 +40,7 @@ export const apiUpdateFolderById = async (id: string, folder: Omit<IUserFolder, 
     });
 };
 
-export const apiCreateFolder = async (folder: Omit<IUserFolder, 'id'>) => {
+export const apiCreateFolder = async (folder: IFolder) => {
     return apiClient.post<IUserFolder>('/folders', folder)
         .then((response) => {
             if (response?.status !== 200) {
@@ -165,3 +165,17 @@ export const apiFetchUserProfile = async () => {
         throw error;
     });
 }
+
+
+export const apiUpdateProfile = async (profile: IProfile) => {
+    return apiClient.put<IProfile>(`/profiles`, profile)
+        .then((response) => {
+            if (response?.status !== 200) {
+                throw new Error('Failed to get folders');
+            }
+            return response.data;
+        }).catch(error => {
+            console.error(error);
+            return null;
+        });
+ };

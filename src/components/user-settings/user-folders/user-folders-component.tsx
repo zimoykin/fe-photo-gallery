@@ -1,11 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
-import './user-folders-style.css';
+import './styles/user-folders-style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { apiDeleteFolderById, apiFetchUserFolders, } from '../../../api/api-gallery';
 import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
-// import FolderCreateUpdate from '../folder-create-update/folder-create-update-component';
 import { storeFolders } from '../../../features/folders/folders-slice';
 import { useNavigate } from 'react-router-dom';
 import { IUserFolder } from '../../../interfaces/folder.interface';
@@ -56,7 +55,7 @@ const UserFolders: React.FC<Props> = ({ folders, handleClickCreateFolder, handle
     return (
         <div>
             <div className='user-folders-command-panel' >
-                <i className="user-folders-icon fa-solid fa-plus"
+                <i className="user-folders-icon fa-solid fa-plus "
                     onClick={handleClickCreateFolder} />
                 {/* <i className="user-folders-icon fas fa-image" /> */}
             </div>
