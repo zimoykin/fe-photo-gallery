@@ -43,7 +43,7 @@ const UserSettings: React.FC = () => {
         } else {
             navigate('/home');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, dispatch, navigate]);
 
     // const handleLogoutClick = () => {
     //     setIsLoading(true);
