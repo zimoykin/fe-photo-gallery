@@ -11,7 +11,7 @@ const Avatar: React.FC<Props> = ({
     url
 }: Props) => {
 
-    const [loading, setLoading] = useState(true);
+    const [, setLoading] = useState(true);
 
     const handleOnImageLoad = () => {
         setLoading(false);

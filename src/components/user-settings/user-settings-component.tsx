@@ -8,7 +8,7 @@ import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component
 import FolderCreateUpdate from './folder-create-update/folder-create-update-component';
 import Avatar from '../avatar/avatar-component';
 import { useNavigate } from 'react-router-dom';
-import { apiFetchFoldersByProfileId, apiFetchUserFolders, apiFetchUserProfile, apiUpdateProfile } from '../../api/api-gallery';
+import { apiFetchFoldersByProfileId, apiFetchUserProfile, apiUpdateProfile } from '../../api/api-gallery';
 import { storeProfile } from '../../features/profile/profile-slice';
 import { IProfile } from '../../interfaces/profile.interface';
 import { IEquipment } from '../../interfaces/eqiupment.interface';
@@ -20,7 +20,6 @@ const UserSettings: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { folders: StoredFolders } = useSelector((state: RootState) => state.folders) ?? [];
     const { isAuthenticated } = useSelector((state: RootState) => state.auth);
     const { profile: storedProfile } = useSelector((state: RootState) => state.profile);
 
@@ -50,7 +49,7 @@ const UserSettings: React.FC = () => {
         } else {
             navigate('/home');
         }
-    }, [isAuthenticated, dispatch, navigate]);
+    }, [isAuthenticated, dispatch, navigate, profile?.id]);
 
 
     const handleClickEditFolder = (index: number) => {
