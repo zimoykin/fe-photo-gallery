@@ -30,10 +30,9 @@ const Avatar: React.FC<Props> = ({
 
     return (
         <div className='avatar-container-person'>
-            <img
-                hidden={loading}
-                className='shadow scale-s'
-                src={url ?? 'ava-mock.jpg'} alt=""
+            <div
+                className='avatar-container-person-img shadow scale-s'
+                style={{ backgroundImage: `url(${url})` }}
                 onLoad={handleOnImageLoad}
                 onError={(er) => handleOnImageError(er)}
             />

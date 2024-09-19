@@ -8,22 +8,25 @@ import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component
 import FolderCreateUpdate from './folder-create-update/folder-create-update-component';
 import Avatar from '../avatar/avatar-component';
 import { useNavigate } from 'react-router-dom';
-import { apiFetchUserProfile, apiUpdateProfile } from '../../api/api-gallery';
+import { apiFetchFoldersByProfileId, apiFetchUserFolders, apiFetchUserProfile, apiUpdateProfile } from '../../api/api-gallery';
 import { storeProfile } from '../../features/profile/profile-slice';
 import { IProfile } from '../../interfaces/profile.interface';
 import { IEquipment } from '../../interfaces/eqiupment.interface';
+import { storeFolders } from '../../features/folders/folders-slice';
+import { IUserFolder } from '../../interfaces/folder.interface';
 
 
 const UserSettings: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { folders } = useSelector((state: RootState) => state.folders) ?? [];
+    const { folders: StoredFolders } = useSelector((state: RootState) => state.folders) ?? [];
     const { isAuthenticated } = useSelector((state: RootState) => state.auth);
     const { profile: storedProfile } = useSelector((state: RootState) => state.profile);
 
     const [isLoading, setIsLoading] = useState(false);
     const [profile, setProfile] = useState<IProfile | null>(null);
+    const [folders, setFolders] = useState<IUserFolder[]>([]);
 
     const [editMode, setEditMode] = useState<boolean>(false);
     const [editModeEquipment, setEditModeEquipment] = useState<boolean>(false);
@@ -39,20 +42,16 @@ const UserSettings: React.FC = () => {
                     dispatch(storeProfile(profile));
                     setProfile(profile);
                 }).catch((error) => console.log(error));
-
+            apiFetchFoldersByProfileId(profile?.id!)
+                .then((folders) => {
+                    dispatch(storeFolders(folders));
+                    setFolders(folders);
+                }).catch((error) => console.log(error));
         } else {
             navigate('/home');
         }
     }, [isAuthenticated, dispatch, navigate]);
 
-    // const handleLogoutClick = () => {
-    //     setIsLoading(true);
-    //     dispatch(dropProfile());
-    //     dispatch(dropFolders());
-    //     dispatch(logout());
-    //     setIsLoading(false);
-    //     navigate('/home');
-    // };
 
     const handleClickEditFolder = (index: number) => {
         setSelectedFolder(index);

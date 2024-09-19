@@ -29,7 +29,7 @@ export const apiFetchGalleryByFolderId = async (id: string, type: 'preview' | 'o
     });
 };
 
-export const apiUpdateFolderById = async (id: string, folder:IFolder) => {
+export const apiUpdateFolderById = async (id: string, folder: IFolder) => {
     return apiClient.put<IUserFolder>(`/folders/${id}`, folder).then((response) => {
         if (response?.status !== 200) {
             throw new Error('Failed to get folders');
@@ -155,7 +155,7 @@ export const apiFetchFoldersByProfileId = async (profileId: string) => {
 };
 
 export const apiFetchUserProfile = async () => {
-    return apiClient.get<IProfile>(`/profiles/me`).then((response) => {
+    return apiClient.get<IProfile>(`/profiles/me`, { withCredentials: true }).then((response) => {
         if (response?.status !== 200) {
             throw new Error('Failed to get user');
         }
@@ -164,7 +164,7 @@ export const apiFetchUserProfile = async () => {
         console.error(error);
         throw error;
     });
-}
+};
 
 
 export const apiUpdateProfile = async (profile: IProfile) => {
@@ -178,4 +178,4 @@ export const apiUpdateProfile = async (profile: IProfile) => {
             console.error(error);
             return null;
         });
- };
+};
