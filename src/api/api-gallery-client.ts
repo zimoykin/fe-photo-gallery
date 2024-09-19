@@ -8,6 +8,8 @@ const apiClient = axios.create({
     baseURL: REACT_APP_API_URL,
 });
 
+axios.defaults.withCredentials = true;
+
 // Add a request interceptor to include the token in headers
 apiClient.interceptors.request.use(
     (config) => {
@@ -17,7 +19,6 @@ apiClient.interceptors.request.use(
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
-
         return config;
     },
     (error) => Promise.reject(error)
