@@ -1,0 +1,17 @@
+.charts-box {
+    position: relative;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: scroll; 
+    /* height: 45%; */
+    width: 100%;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    /* background-color: tomato; */
+}
+
+.pointer {
+    cursor: pointer;
+}

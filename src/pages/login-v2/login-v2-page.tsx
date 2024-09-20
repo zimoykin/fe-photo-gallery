@@ -9,8 +9,10 @@ import { login } from '../../features/auth/auth-slice';
 import { useNavigate } from 'react-router-dom';
 import BackgroundWithImage from '../../components/background/background-component';
 import { storeProfile } from '../../features/profile/profile-slice';
-import { apiFetchUserFolders, apiFetchUserProfile } from '../../api/api-gallery';
 import { storeFolders } from '../../features/folders/folders-slice';
+import { ApiClient } from '../../api/networking/api-client';
+import { IProfile } from '../../interfaces/profile.interface';
+import { IUserFolder } from '../../interfaces/folder.interface';
 
 
 export const LoginV2Page: React.FC = () => {
@@ -33,11 +35,18 @@ export const LoginV2Page: React.FC = () => {
                 if (tokens.accessToken && tokens.refreshToken) {
                     dispatch(login([tokens.accessToken, tokens.refreshToken]));
 
-                    const user = await apiFetchUserProfile();
-                    dispatch(storeProfile(user));
+                    ApiClient.get<IProfile>('/profiles/login')
+                        .then((user) => {
+                            dispatch(storeProfile(user));
+                            ApiClient.get<IUserFolder[]>(`/folders`).then((folders) => {
+                                dispatch(storeFolders(folders));
+                            }).catch((error) => {
+                                toast.error(error);
+                            });
 
-                    const folders = await apiFetchUserFolders(user.id);
-                    dispatch(storeFolders(folders));
+                        }).catch((error) => {
+                            toast.error(error);
+                        });
 
                     navigate('/home');
                 }

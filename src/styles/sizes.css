@@ -57,9 +57,19 @@
 .p-3 {
     padding: .5rem;
 }
+
 .p-10 {
     padding: 1rem;
 }
-.m-10{
+
+.pt-10 {
+    padding-top: 1rem;
+}
+
+.pb-10 {
+    padding-bottom: 1rem;
+}
+
+.m-10 {
     margin: 1rem;
 }

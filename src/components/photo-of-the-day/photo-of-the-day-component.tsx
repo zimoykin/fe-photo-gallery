@@ -1,57 +1,65 @@
 import React, { useEffect, useState } from "react";
 import "./styles/photo-of-the-day-style.css";
-import { apiGetPhotoOfTheDay } from "../../api/api-gallery";
 import { toast } from "react-toastify";
 import { IPhotoOfTheDay } from "../../interfaces/photo-of-the-day.interface";
 import { useNavigate } from "react-router-dom";
+import { ApiClient } from "../../api/networking/api-client";
 
 const PhotoOfTheDay: React.FC = () => {
     const navigate = useNavigate();
     const [photo, setPhoto] = useState<IPhotoOfTheDay | null>(null);
-    const [showPhotoOfTheDay, setShowPhotoOfTheDay] = useState(false);
 
     useEffect(() => {
-        apiGetPhotoOfTheDay().then((photo) => {
-            if (photo) setPhoto(photo);
+        ApiClient.get<IPhotoOfTheDay>('/public/photos/photo-of-the-day').then((photo) => {
+            if (photo) {
+                setPhoto(photo);
+            }
+
         }).catch(error => {
             toast.error(error.message);
-        })
+        });
     }, []);
 
     const handlePhotoOfTheDayClick = () => {
         if (!photo) return;
-        navigate(`/gallery/${photo.profileId}`);
+        navigate(`/gallery/${photo.profile.id}`);
     };
 
 
     return (
         <div className="photo-of-the-day-container">
-            <div className="photo-of-the-day-box scale-s">
-                {showPhotoOfTheDay && <div className="photo-of-the-day-box-text scale-m">
-                    <h1> Photo of the day </h1>
-                </div>}
-                <img
-                    onLoad={() => setShowPhotoOfTheDay(true)}
-                    className="shadow" src={photo?.url} alt={photo?.camera} />
+            <div className="photo-of-the-day-box p-10 scale-s">
+                <div
+                    className="photo-of-the-day-box-img shadow"
+                    style={{ backgroundImage: `url(${photo?.photo.url})` }}
+                >
+                    <div className="photo-of-the-day-box-text p-10 scale-m">
+                        <span> Photo of the day </span>
+                    </div>
+                </div>
             </div>
 
-            {showPhotoOfTheDay && <div className="photo-of-the-day-box-by-author-container">
-                <div className="photo-of-the-day-box-group scale-s">
+            <div className="photo-of-the-day-box-by-author-container">
+                <div className="photo-of-the-day-box-group p-10 scale-s">
                     <div className="photo-of-the-day-box-by-author-left">
-                        <i className="fas fa-heart scale-l"></i>
-                        <span className="shadow">{photo?.likes}</span>
+                        <i className="fas fa-heart scale-l p-3"/>
+                        <span className="shadow">{photo?.photo.likes ?? 0}</span>
                     </div>
                     <div className="photo-of-the-day-box-by-author-right"
                         onClick={handlePhotoOfTheDayClick}
                     >
                         <div className="photo-of-the-day-box-by-author-right-text">
-                            <i className="fas fa-camera scale-l"></i>
-                            <span>{'Canon R8'}</span>
+                            <i className="fas fa-camera scale-l p-3"/>
+                            <span>
+                                {photo?.photo?.camera}
+                            </span>
                         </div>
-                        <span>by {"John Doe"}</span>
+                        <span> by {
+                            photo?.profile.name ?? 'Unknown'
+                        }</span>
                     </div>
                 </div>
-            </div>}
+            </div>
         </div>
     );
 };

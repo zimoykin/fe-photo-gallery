@@ -1,5 +1,4 @@
 import { IFolder, IUserFolder } from "../interfaces/folder.interface";
-import { IPhotoOfTheDay } from "../interfaces/photo-of-the-day.interface";
 import { IPhoto } from "../interfaces/photo.interface";
 import { IProfile } from "../interfaces/profile.interface";
 import apiClient from "./api-gallery-client";
@@ -76,20 +75,6 @@ export const apiDeleteFolderById = async (id: string) => {
     });
 };
 
-export const apiUploadPhoto = async (formData: FormData, folderId: string) => {
-    return apiClient.post<IPhoto>(`/photos/${folderId}`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    }).then((response) => {
-        if (response?.status !== 200) {
-            throw new Error('Failed to get folders');
-        }
-        return response.data;
-    }).catch(error => {
-        console.error(error);
-    });
-};
 
 export const apiDeletePhotoByIdAndFolderId = async (folderId: string, photoId: string) => {
     return apiClient.delete(`/photos/${folderId}/${photoId}`).then((response) => {
@@ -116,18 +101,6 @@ export const apiFetchPhotoById = async (
     });
 };
 
-export const apiGetPhotoOfTheDay = async (): Promise<IPhotoOfTheDay> => {
-    return apiClient.get<IPhotoOfTheDay>(`/public/photos/photo-of-the-day`).then((response) => {
-        if (response?.status !== 200) {
-            throw new Error('Failed to get photo');
-        }
-        return response.data as IPhotoOfTheDay;
-    }).catch(error => {
-        console.error(error);
-        throw error;
-    });
-};
-
 
 export const apiFetchUserProfileById = async (id: string) => {
     return apiClient.get<IProfile>(`/public/profiles/${id}`).then((response) => {
@@ -141,30 +114,30 @@ export const apiFetchUserProfileById = async (id: string) => {
     });
 };
 
-export const apiFetchFoldersByProfileId = async (profileId: string) => {
-    return apiClient.get<IUserFolder[]>(`/public/folders/${profileId}`)
-        .then((response) => {
-            if (response?.status !== 200) {
-                throw new Error('Failed to get folders');
-            }
-            return response.data;
-        }).catch(error => {
-            console.error(error);
-            throw error;
-        });
-};
+// export const apiFetchFoldersByProfileId = async (profileId: string) => {
+//     return apiClient.get<IUserFolder[]>(`/public/folders/${profileId}`)
+//         .then((response) => {
+//             if (response?.status !== 200) {
+//                 throw new Error('Failed to get folders');
+//             }
+//             return response.data;
+//         }).catch(error => {
+//             console.error(error);
+//             throw error;
+//         });
+// };
 
-export const apiFetchUserProfile = async () => {
-    return apiClient.get<IProfile>(`/profiles/me`, { withCredentials: true }).then((response) => {
-        if (response?.status !== 200) {
-            throw new Error('Failed to get user');
-        }
-        return response.data;
-    }).catch(error => {
-        console.error(error);
-        throw error;
-    });
-};
+// export const apiFetchUserProfile = async () => {
+//     return apiClient.get<IProfile>(`/profiles/me`, { withCredentials: true }).then((response) => {
+//         if (response?.status !== 200) {
+//             throw new Error('Failed to get user');
+//         }
+//         return response.data;
+//     }).catch(error => {
+//         console.error(error);
+//         throw error;
+//     });
+// };
 
 
 export const apiUpdateProfile = async (profile: IProfile) => {

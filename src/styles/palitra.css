@@ -1,50 +1,77 @@
 .palitra-1 {
-    background-color: #FD5900;
+    background-color: var(--color-1);
+}
+
+.light-theme .palitra-1 {
+    background-color: var(--color-1-2);
 }
 
 .palitra-2 {
-    background-color: #F78105;
+    background-color: var(--color-2);
+}
+
+.light-theme .palitra-2 {
+    background-color: var(--color-2-2);
 }
 
 .palitra-3 {
-    background-color: #FAAB35;
+    background-color: var(--color-3);
+}
+
+.light-theme .palitra-3 {
+    background-color: var(--color-3-2);
 }
 
 .palitra-4 {
-    background-color: #249EA1;
+    background-color: var(--color-4);
+}
+
+.light-theme .palitra-4 {
+    background-color: var(--color-4-2);
 }
 
 .palitra-5 {
-    background-color: #008083;
+    background-color: var(--color-5);
+}
+
+.light-theme .palitra-5 {
+    background-color: var(--color-5-2);
 }
 
 .palitra-6 {
-    background-color: #005F61;
+    background-color: var(--color-6);
 }
+
+.light-theme .palitra-6 {
+    background-color: var(--color-6-2);
+}
+
+
+
 
 
 .palitra-color-1 {
-    color: #FD5900;
+    color: var(--color-1);
 }
 
 .palitra-color-2 {
-    color: #F78105;
+    color: var(--color-2)
 }
 
 .palitra-color-3 {
-    color: #FAAB35;
+    color: var(--color-3)
 }
 
 .palitra-color-4 {
-    color: #249EA1;
+    color: var(--color-4)
 }
 
 .palitra-color-5 {
-    color: #008083;
+    color: var(--color-5)
 }
 
 .palitra-color-6 {
-    color: #005F61;
+    color: var(--color-6)
 }
 
 .palitra-tab {
@@ -63,6 +90,7 @@
     background-color: transparent;
     color: #FAAB35 !important;
 }
+
 .dark-theme .palitra-tab-active {
     background-color: #F78105;
     color: #005F61 !important;

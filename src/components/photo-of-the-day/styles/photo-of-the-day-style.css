@@ -1,117 +1,70 @@
 .photo-of-the-day-container {
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     width: 100%;
-    z-index: 6;
 }
 
 .photo-of-the-day-box {
-    background-color: gray;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 6;
-    transition: width 0.3s ease, height 0.3s ease;
     width: 100%;
+    height: 100%;
+    transition: background-color 0.3s ease;
 }
 
-.photo-of-the-day-box-text {
+
+.photo-of-the-day-box-img {
+    width: 100%;
+    height: 240px;
+    background-position: center;
+    background-repeat: 'no-repeat';
+    background-size: cover;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.photo-of-the-day-box-text { 
     position: absolute;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-    transition: width 0.3s ease, height 0.3s ease, font-size 0.3s ease;
+    bottom: 0;
+    right: 0;
 }
-
-.photo-of-the-day-box>img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: width 0.3s ease, height 0.3s ease;
-}
-
 .photo-of-the-day-box-by-author-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    border-radius: 10px;
-    padding: 1rem 0 0 0;
+
     transition: width 0.3s ease, height 0.3s ease;
 }
 
 .photo-of-the-day-box-group {
+    /* background-color: blueviolet; */
     display: flex;
+    flex-direction: row;
     width: 100%;
-    border-radius: 10px;
-    height: 100%;
-    padding-top: .1rem;
-    padding-bottom: .1rem;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.photo-of-the-day-box-by-author-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    width: 50%;
 }
 
 .photo-of-the-day-box-by-author-left {
     width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    transition: width 0.3s ease, height 0.3s ease;
-    padding-left: .5rem;
 }
 
-.photo-of-the-day-box-by-author-right {
-    width: 50%;
-    height: 100%;
+.photo-of-the-day-box-by-author-right-text {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: end;
-    flex-direction: column;
-    padding-right: .5rem;
-    transition: width 0.3s ease;
-    cursor: pointer;
 }
 
-.photo-of-the-day-box-by-author-left>i,
-.photo-of-the-day-box-by-author-right-text>i {
-    padding: .3rem;
-}
 
 @media (max-width: 768px) {
-    .photo-of-the-day-box {
-        height: 100%;
-    }
-    .photo-of-the-day-box>img { 
-        max-height: 200px;
-        /* max-width: 200px; */
-    }
-    .photo-of-the-day-box-text { 
-        display: flex;
-        justify-content: end;
-        /* padding: .3rem; */
-        align-items: end;
-        flex-direction: column;
-        transform: rotate(0deg);
-    }
-    .photo-of-the-day-box-text>h1 {
-        padding: .3rem;
-        margin: 0;
-     } 
-        
-}
 
-@media (max-width: 1200px) and (min-width: 768px) {
-    .photo-of-the-day-box-text>h1 {
-        font-size: 18px !important;
+    .photo-of-the-day-container {
+        height: 100%;
+        width: 100%;
     }
 }

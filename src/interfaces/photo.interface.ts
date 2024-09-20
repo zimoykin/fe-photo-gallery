@@ -1,13 +1,14 @@
 export interface IPhoto {
     id: string;
-    iso?: string;
     sortOrder: number;
-    description?: string;
-    location?: string;
-    film?: string;
-    camera?: string;
-    lens?: string;
-    userId: string;
+    profileId: string;
     folderId: string;
+    camera: string;
+    lens?: string;
+    iso?: string;
+    film?: string;
+    location?: string;
+    description?: string;
+    likes?: number;
     url: string;
 }

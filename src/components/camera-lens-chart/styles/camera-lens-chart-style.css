@@ -1,15 +1,10 @@
 .camera-lens-chart-container {
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    /* height: 100%; */
     width: 100%;
-    z-index: 6;
-    overflow: scroll;
-    scrollbar-width: none;
-    -moz-scrollbar-width: none;
-    padding-top: .5rem;
+    bottom: 0;
+    background-color: tomato;
 }
 
 .camera-lens-chart-box {
@@ -17,71 +12,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 100%;
-    z-index: 6;
-    transition: width 0.3s ease, height 0.3s ease;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    height: 100%;
-    
-}
-
-.camera-lens-chart-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-}
-
-
-.camera-lens-cammand-panel {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.camera-lens-cammand-panel-camera {
-    width: 50%;
-    padding: .5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: width 0.3s ease, height 0.3s ease;
-    border-radius: 10px 0px 0px 0px;
-}
-
-.camera-lens-cammand-panel-lens {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: width 0.3s ease, height 0.3s ease;
-    border-radius: 0px 10px 0px 0px;
-    padding: .5rem;
-}
-
-.camera-lens-chart-group-table {
-    width: 100%;
-    border-radius: 10px;
-}
-
-@media (max-width: 768px) {
-    .camera-lens-chart-container {
-        width: 100%;
-    }
-
-    .camera-lens-chart-box {
-        width: 100%;
-        height: auto;
-    }
-
-    .camera-lens-chart-group {
-        /* width: 100%; */
-    }
-
+    background-color: tomato;
 }

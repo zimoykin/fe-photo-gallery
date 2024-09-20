@@ -1,7 +1,6 @@
 
 import React from 'react';
-import './user-equipment-style.css';
-import { IEquipment } from '../../../interfaces/eqiupment.interface';
+import { IEquipment } from '../../interfaces/eqiupment.interface';
 
 interface Props {
     equipment: IEquipment;
@@ -17,19 +16,18 @@ const UserEquipment: React.FC<Props> = ({ equipment, addStar, deleteEquipment, e
 
     return (
         <div>
-            <div className='user-equipment-table'>
-
-                <div className='user-equipment-equipment-line global-secondary-background-layer shadow scale-s'
+            <div className='table'>
+                <div className='table-line shadow scale-s'
                 >
-                    <div className='user-equipment-equipment-title p-10'>
+                    <div className='flex-center align-left p-10 w-70'>
                         {editMode ? <input
                             className='global-input w-80 p-10' type="text" defaultValue={equipment.name}
                             onChange={onChangeName}
                         />
-                            : <h3>{equipment.name}</h3>}
+                            : <span>{equipment.name}</span>}
                     </div>
 
-                    <div className='user-equipment-equipment-title p-10'>
+                    <div className='flex-center align-left p-10 w-70'>
                         {editMode ?
                             <select className='global-input w-100' name="type" id="type" defaultValue={equipment.type}
 
@@ -38,15 +36,15 @@ const UserEquipment: React.FC<Props> = ({ equipment, addStar, deleteEquipment, e
                                 <option value="lens">lens</option>
                                 <option value="other">other</option>
                             </select>
-                            : <h3>{equipment.type}</h3>}
+                            : <span>{equipment.type}</span>}
                     </div>
 
-                    <div className='user-equipment-equipment-comannd  p-10'>
-                        <i className="user-equipment-icon fas fa-star p-10"
+                    <div className='flex-cente align-right p-10 w-30'>
+                        <i className="scale-l hover-bg p-2  fas fa-star"
                             onClick={addStar}
                             style={(equipment.favorite) ? { color: 'yellow' } : {}}
                         />
-                        <i className="user-equipment-icon fas fa-trash"
+                        <i className="scale-l hover-bg p-2  fas fa-trash"
                             onClick={deleteEquipment}
                         />
                     </div>
