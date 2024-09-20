@@ -1,0 +1,54 @@
+.table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    padding: .3rem;
+}
+
+.table-command-panel {
+    padding: 1rem;
+    display: flex;
+    gap: .5rem;
+    border-bottom: .2rem solid rgb(0, 0, 0);
+}
+
+.table-command-panel i {
+    font-weight: 900;
+    font-size: 24px;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.table-line {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    max-height: max(3rem, 5vh);
+    background-color: #3e3e3e;
+    margin: .3rem;
+    padding: .3rem;
+    color: var(--color-2);
+}
+
+.table-line i {
+    color: aliceblue;
+}
+
+.light-theme .table-line {
+    background-color: #868686;
+    color: var(--color-2);
+}
+
+.light-theme .table-line:hover {
+    background-color: #B3B3B3;
+}
+
+.table-line:hover {
+    background-color: #636363;
+}

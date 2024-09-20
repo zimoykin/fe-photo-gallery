@@ -1,16 +1,15 @@
 
 import React, { useEffect, useState } from 'react';
-import './styles/user-folders-style.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
-import { apiDeleteFolderById, apiFetchUserFolders, } from '../../../api/api-gallery';
-import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
-import { storeFolders } from '../../../features/folders/folders-slice';
+import { RootState } from '../../store';
+import { apiDeleteFolderById, apiFetchUserFolders, } from '../../api/api-gallery';
+import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
+import { storeFolders } from '../../features/folders/folders-slice';
 import { useNavigate } from 'react-router-dom';
-import { IUserFolder } from '../../../interfaces/folder.interface';
+import { IFoldersAndTotal } from '../../interfaces/folder.interface';
 
 interface Props {
-    folders: IUserFolder[];
+    folders: IFoldersAndTotal[];
     handleClickCreateFolder: () => void;
     handleClickEditFolder: (index: number) => void;
 }
@@ -19,15 +18,8 @@ const UserFolders: React.FC<Props> = ({ folders, handleClickCreateFolder, handle
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { profile } = useSelector((state: RootState) => state.profile);
-
-    const [userFolders, setUserFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        if (folders) {
-            setUserFolders(folders);
-        }
-    }, [folders]);
 
     useEffect(() => {
         if (profile?.id) {
@@ -43,7 +35,6 @@ const UserFolders: React.FC<Props> = ({ folders, handleClickCreateFolder, handle
     const handleFolderClick = (folderId: string) => {
         setIsLoading(true);
         apiDeleteFolderById(folderId)
-            .then(() => setUserFolders(userFolders.filter(folder => folder.id !== folderId)))
             .catch((error) => console.log(error))
             .finally(() => setIsLoading(false));
     };
@@ -54,27 +45,27 @@ const UserFolders: React.FC<Props> = ({ folders, handleClickCreateFolder, handle
 
     return (
         <div>
-            <div className='user-folders-command-panel' >
-                <i className="user-folders-icon fa-solid fa-plus "
+            <div className='table-command-panel' >
+                <i className="fa-solid fa-plus hover-bg scale-l"
                     onClick={handleClickCreateFolder} />
                 {/* <i className="user-folders-icon fas fa-image" /> */}
             </div>
-            <div className='user-folders-table'>
-                {userFolders.map((folder, index) => (
-                    <div className='user-folders-folder-line'
+            <div className='table'>
+                {[...folders]?.map((folder, index) => (
+                    <div className='table-line shadow scale-s'
                         key={index}
                     >
-                        <div className='user-folders-folder-title'>
-                            <h3>{folder.title}</h3>
+                        <div className='flex-center align-left p-10 w-70'>
+                            <span>{folder.title} {`(${folder.totalPhotos})`} </span>
                         </div>
-                        <div className='user-folders-folder-comannd'>
-                            <i className="user-folders-icon fas fa-image"
+                        <div className='flex-cente align-right p-10 w-30'>
+                            <i className="scale-l hover-bg p-2 fas fa-image"
                                 onClick={() => hnadleUploadImages(folder.id)}
                             />
-                            <i className="user-folders-icon fas fa-pen"
+                            <i className="scale-l hover-bg p-2 fas fa-pen"
                                 onClick={() => handleClickEditFolder(index)}
                             />
-                            <i className="user-folders-icon fas fa-trash"
+                            <i className="scale-l hover-bg p-2 fas fa-trash"
                                 onClick={() => handleFolderClick(folder.id)}
                             />
                         </div>

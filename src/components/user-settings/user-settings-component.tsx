@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './user-settings-style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import UserFolders from './user-folders/user-folders-component';
-import UserEquipment from './user-equipment/user-equipment-component';
+import UserFolders from './user-folders-component';
+import UserEquipment from './user-equipment-component';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
 import FolderCreateUpdate from './folder-create-update/folder-create-update-component';
 import Avatar from '../avatar/avatar-component';
 import { useNavigate } from 'react-router-dom';
-import { apiFetchFoldersByProfileId, apiFetchUserProfile, apiUpdateProfile } from '../../api/api-gallery';
+import { apiUpdateProfile } from '../../api/api-gallery';
 import { storeProfile } from '../../features/profile/profile-slice';
 import { IProfile } from '../../interfaces/profile.interface';
 import { IEquipment } from '../../interfaces/eqiupment.interface';
 import { storeFolders } from '../../features/folders/folders-slice';
-import { IUserFolder } from '../../interfaces/folder.interface';
+import { IFoldersAndTotal } from '../../interfaces/folder.interface';
+import { ApiClient } from '../../api/networking/api-client';
+import { toast } from 'react-toastify';
 
 
 const UserSettings: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
     const { isAuthenticated } = useSelector((state: RootState) => state.auth);
     const { profile: storedProfile } = useSelector((state: RootState) => state.profile);
 
     const [isLoading, setIsLoading] = useState(false);
     const [profile, setProfile] = useState<IProfile | null>(null);
-    const [folders, setFolders] = useState<IUserFolder[]>([]);
+    const [folders, setFolders] = useState<IFoldersAndTotal[]>([]);
 
     const [editMode, setEditMode] = useState<boolean>(false);
     const [editModeEquipment, setEditModeEquipment] = useState<boolean>(false);
@@ -34,18 +37,33 @@ const UserSettings: React.FC = () => {
     const [showFolderCreateUpdate, setShowCreateUpdateFolder] = useState<boolean>(false);
 
     useEffect(() => {
+        if (storedProfile) setProfile(storedProfile);
+    }, [storedProfile]);
+
+    useEffect(() => {
         if (isAuthenticated) {
             setIsLoading(true);
-            apiFetchUserProfile().finally(() => setIsLoading(false))
+
+            ApiClient.get<IProfile>('/profiles/me')
                 .then((profile) => {
                     dispatch(storeProfile(profile));
                     setProfile(profile);
-                }).catch((error) => console.log(error));
-            apiFetchFoldersByProfileId(profile?.id!)
-                .then((folders) => {
-                    dispatch(storeFolders(folders));
-                    setFolders(folders);
-                }).catch((error) => console.log(error));
+                    ApiClient.get<IFoldersAndTotal[]>(`/folders`)
+                        .then((resp) => {
+                            if (resp) {
+                                dispatch(storeFolders(resp));
+                                setFolders(resp);
+                            }
+                        }).catch((error) => {
+                            toast.error(error);
+                            console.log(error);
+                        });
+                })
+                .finally(() => setIsLoading(false))
+                .catch(err => {
+                    toast.error(err);
+                });
+
         } else {
             navigate('/home');
         }
@@ -90,12 +108,42 @@ const UserSettings: React.FC = () => {
         }
     };
 
+    const handleAvatarClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files.length > 0) {
+            const file = event.target.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            setIsLoading(true);
+            ApiClient.postUpload('/profiles/photo/upload', formData)
+                .finally(() => setIsLoading(false))
+                .then(() => {
+                    toast.success('Avatar updated');
+                    setIsLoading(true);
+                    ApiClient.get<IProfile>('/profiles/me')
+                        .then((profile) => {
+                            dispatch(storeProfile(profile));
+                            setProfile(profile);
+                        }).finally(() => setIsLoading(false));
+                });
+        };
+    };
+
     return (
         <>
+            <input ref={fileInputRef} onChange={handleFileChange} type="file" style={{ display: 'none' }} id="avatar-input" accept="image/*" />
             <div className='user-settings-container'>
                 <div className='user-settings-box'>
                     <div className='user-info-container global-background-layer'>
-                        <Avatar url={profile?.url ?? 'ava-mock.jpg'} />
+                        <Avatar
+                            onClick={handleAvatarClick}
+                            url={profile?.url ?? 'ava-mock.jpg'} />
                         <div className='user-info-user-data'>
                             <div className='scale-s flex-row flex-center p-2'
                             >
@@ -202,8 +250,8 @@ const UserSettings: React.FC = () => {
                             />
                         </div>
                         <div className='user-folders-equipment-container-box'>
-                            <div className='user-equipment-command-panel gap' >
-                                <i className="user-equipment-icon fa-solid fa-plus"
+                            <div className='table-command-panel gap' >
+                                <i className="hover-bg scale-l fa-solid fa-plus"
                                     onClick={() => {
                                         if (profile) {
                                             setProfile({
@@ -218,15 +266,16 @@ const UserSettings: React.FC = () => {
                                         }
                                     }} />
 
-                                {!editModeEquipment && <i className="user-equipment-icon fa-solid fa-pen"
+                                {!editModeEquipment && <i className="hover-bg scale-l fa-solid fa-pen"
                                     onClick={() => setEditModeEquipment(true)} />}
-                                {editModeEquipment && <i className="p-2 fas fa-save palitra-4"
+
+                                {editModeEquipment && <i className="p-2 fas fa-save palitra-4 scale-l"
                                     onClick={() => {
                                         setEditModeEquipment(false);
                                         handleSaveProfileClick();
                                     }}
                                 />}
-                                {editModeEquipment && <i className="p-2 fas fas fa-history palitra-1"
+                                {editModeEquipment && <i className="p-2 fas fas fa-history palitra-1 scale-l"
                                     onClick={() => {
                                         setEditModeEquipment(false);
                                         handleCancelEditProfileClick();

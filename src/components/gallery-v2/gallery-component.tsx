@@ -3,10 +3,10 @@ import './styles/gallery-style.css';
 import { useParams } from 'react-router-dom';
 import { IProfile } from '../../interfaces/profile.interface';
 import { IUserFolder } from '../../interfaces/folder.interface';
-import { apiFetchFoldersByProfileId, apiFetchUserProfileById } from '../../api/api-gallery';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
 import FolderV2 from '../folders/folder-component';
 import Avatar from '../avatar/avatar-component';
+import { ApiClient } from '../../api/networking/api-client';
 
 const GalleryV2: React.FC = () => {
 
@@ -21,10 +21,11 @@ const GalleryV2: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             if (profileId) {
-                const _userProfile = await apiFetchUserProfileById(profileId);
-                const _folders = await apiFetchFoldersByProfileId(profileId);
-                setUserProfile(_userProfile);
-                setFolders([..._folders]);
+                const _profile = await ApiClient.get<IProfile>(`/public/profiles/${profileId}`);
+                setUserProfile(_profile);
+
+                const _folders = await ApiClient.get<IUserFolder[]>(`/public/folders/${profileId}`);
+                setFolders(_folders);
             }
         };
 
@@ -35,9 +36,6 @@ const GalleryV2: React.FC = () => {
         });
 
     }, [profileId]);
-
-
-
 
     return (
         <div className='gallery-v2-container'>

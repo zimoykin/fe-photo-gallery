@@ -6,6 +6,8 @@ import './styles/fonts.css';
 import './styles/sizes.css';
 import './styles/icons.css';
 import './styles/display.css';
+import './styles/pages.css';
+import './styles/tables.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Gallery, HomePage, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage, RecoveryPage } from './pages';
 import { RecoveryConfirmPage } from './pages/recovery-confirm/recovery-confirm-page';

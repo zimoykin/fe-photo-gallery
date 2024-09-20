@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { dropFolders } from '../../features/folders/folders-slice';
 import { dropProfile } from '../../features/profile/profile-slice';
+import { ApiClient } from '../../api/networking/api-client';
 
 
 const NavBar: React.FC = () => {
@@ -30,7 +31,8 @@ const NavBar: React.FC = () => {
         }
     }, [location, theme, setTheme]);
 
-    const handleOnClickLogOut = () => {
+    const handleOnClickLogOut = async () => {
+        await ApiClient.post<string>('profiles/logout')
         dispatch(dropFolders());
         dispatch(dropProfile());
         dispatch(logout());

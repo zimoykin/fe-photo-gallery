@@ -1,0 +1,42 @@
+.page-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 90vh;
+    width: 100%;
+    max-width: 1280px;
+    position: relative;
+    z-index: 4;
+    transition: width 0.3s ease;
+}
+
+@media(max-width: 768px) {
+    .page-box {
+        flex-direction: column;
+        overflow: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        width: 90%;
+    }
+}
+
+@media (max-width: 1280px) and (min-width: 768px) {
+    .page-box {
+        width: 90vw;
+    }
+}

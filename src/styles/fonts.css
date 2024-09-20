@@ -1,14 +1,14 @@
 span {
     transition: color 0.3s ease, font-size 0.3s ease;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .dark-theme span {
-    color: #FAAB35;
+    color: var(--color-3);
 }
 
 .light-theme span {
-    color: #F78105;
+    color: var(--color-2-2)
 }
 
 .global-title {

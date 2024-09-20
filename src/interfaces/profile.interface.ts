@@ -2,14 +2,14 @@ import { IEquipment } from "./eqiupment.interface";
 
 export interface IProfile {
     id: string;
-    userId?: string;
-    email?: string;
+    userId: string;
+    name?: string;
     location?: string;
     bio?: string;
-    name?: string;
     website?: string;
-    url?: string;
+    privateAccess: boolean;
     equipment?: IEquipment[];
+    url?: string;
 
-    privateAccess?: boolean;
+    email: string;
 };

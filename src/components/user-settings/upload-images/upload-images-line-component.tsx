@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './styles/upload-images-line-style.css';
-import { apiDeletePhotoByIdAndFolderId, apiUploadPhoto } from '../../../api/api-gallery';
+import { apiDeletePhotoByIdAndFolderId } from '../../../api/api-gallery';
 import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
 import { IPhoto } from '../../../interfaces/photo.interface';
+import { ApiClient } from '../../../api/networking/api-client';
 
 interface Props {
     imageUrl: string;
@@ -44,12 +45,7 @@ const UploadImagesLine: React.FC<Props> = (params: Props) => {
             formData.append('iso', iso.toString());
             formData.append('location', location);
 
-            return apiUploadPhoto(formData, params.folderId)
-                .then((data) => {
-                    if (data) {
-                        params.onUpload(data);
-                    }
-                })
+            return ApiClient.postUpload(`/photos/${params.folderId}`, formData)
                 .finally(() => {
                     setIsLoading(false);
                 });

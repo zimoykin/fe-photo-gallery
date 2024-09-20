@@ -1,30 +1,9 @@
-.App {
-  text-align: center;
-}
-
 .app-container {
   height: 100%;
 }
 
-
 * {
   box-sizing: border-box;
-}
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 body {
@@ -82,17 +61,6 @@ option {
   color: black;
 }
 
-.page-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .global-background-layer {
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: #249fa1cc
@@ -126,6 +94,14 @@ option {
   text-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
 }
 
+.scroll {
+  overflow: scroll;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .scale-s:hover {
   scale: 1.02;
   transition: scale 0.3s ease;
@@ -139,6 +115,17 @@ option {
 .scale-l:hover {
   scale: 1.1;
   transition: scale 0.3s ease;
+}
+
+.hover-bg {}
+
+.dark-theme .hover-bg:hover {
+  background-color: var(--color-5);
+  transition: background-color 0.3s ease;
+}
+.light-theme .hover-bg:hover {
+  background-color: var(--color-4);
+  transition: background-color 0.3s ease;
 }
 
 .global-div-color {
@@ -157,11 +144,11 @@ option {
 .global-input {
   box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 1rem;
   background-color: rgba(139, 242, 255, 0.9);
-  min-height: 40px;
-  min-width: 40px;
-  font-size: medium;
+  min-height: 2rem;
+  min-width: 2rem;
+  /* font-size: medium; */
   text-align: center;
   color: black;
   width: 100%;
@@ -173,12 +160,12 @@ option {
 }
 
 .dark-theme .global-input {
-  background-color: #249EA1;
+  background-color: var(--color-5);
   color: white;
 }
 
 .light-theme .global-input {
-  background-color: #8BF2FF;
+  background-color: var(--color-4);
   color: black;
 }
 
@@ -193,17 +180,19 @@ option {
 
 .global-button {
   transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-  font-size: 1rem;
-  border-radius: 10px;
+  border-radius: 1rem;
   min-width: 2rem;
-  min-height: 2rem;
+  min-height: 2.4rem;
   width: 100%;
+  font-size: 1.3rem;
+  font-weight: 500;
 }
 
 .dark-theme .global-button.primary {
   color: white;
   background-color: darkgreen;
 }
+
 .dark-theme .global-button.danger {
   color: white;
   background-color: darkgoldenrod;
@@ -213,6 +202,7 @@ option {
   color: black;
   background-color: greenyellow;
 }
+
 .light-theme .global-button.danger {
   color: black;
   background-color: coral;
@@ -228,12 +218,10 @@ option {
 
 
 .light-theme .global-button {
-  color: black;
-  background-color: #FAAB35;
+  color: var(--color-6);
+  background-color: var(--color-3);
 }
 
-/* ======================== */
-/* ======================== */
 
 @keyframes fadeIn {
   0% {

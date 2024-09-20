@@ -7,9 +7,7 @@ const { REACT_APP_API_URL } = process.env;
 const apiClient = axios.create({
     baseURL: REACT_APP_API_URL,
 });
-
 axios.defaults.withCredentials = true;
-
 // Add a request interceptor to include the token in headers
 apiClient.interceptors.request.use(
     (config) => {
@@ -19,16 +17,16 @@ apiClient.interceptors.request.use(
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
+        config.withCredentials = true;
         return config;
     },
     (error) => Promise.reject(error)
 );
 
-
 apiClient.interceptors.response.use(
     (response: AxiosResponse) => response,
     // eslint-disable-next-line
-    async (error: AxiosError<any, any>) => {
+    async (error: AxiosError<any, Response>) => {
         // eslint-disable-next-line
         const { config, response } = error as any; //TODO: fix type
         if ((response?.status === 401 || response?.status === 403) && !config._retry) {
