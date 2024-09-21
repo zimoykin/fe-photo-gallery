@@ -96,6 +96,8 @@ option {
 
 .scroll {
   overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .pointer {

@@ -34,12 +34,12 @@
     max-height: 20rem;
 }
 
-.folder-image-bg>img {
+.folder-image-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 20rem;
-    max-height: 20rem;
-    height: 100%;
-    object-fit: cover;
-    transition: width 0.3s ease;
+    height: 20rem;
 }
 
 .folder-title {

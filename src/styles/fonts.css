@@ -1,13 +1,16 @@
-span {
+.glo {
     transition: color 0.3s ease, font-size 0.3s ease;
     font-size: 1rem;
 }
+input{
+    background-color: transparent;
+}
 
-.dark-theme span {
+.dark-theme .glo {
     color: var(--color-3);
 }
 
-.light-theme span {
+.light-theme .glo {
     color: var(--color-2-2)
 }
 

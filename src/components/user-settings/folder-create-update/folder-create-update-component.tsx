@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './styles/folder-create-update-style.css';
-import { apiCreateFolder, apiFetchUserFolderByFolderId, apiUpdateFolderById } from "../../../api/api-gallery";
+import { apiCreateFolder, apiUpdateFolderById } from "../../../api/api-gallery";
 import CameraSpinnerModal from "../../camera-spinner/camera-spinner-modal.component";
 import { HexColorPicker } from "react-colorful";
 import FolderCreateUpdateImages from "./folder-create-update-images-component";
+import { ApiClient } from "../../../api/networking/api-client";
+import { IFolder } from "../../../interfaces/folder.interface";
 
 interface Props {
     folderId?: string;
@@ -28,15 +30,16 @@ const FolderCreateUpdate: React.FC<Props> = ({
     useEffect(() => {
         if (folderId) {
             setIsLoading(true);
-            apiFetchUserFolderByFolderId(folderId)
+            ApiClient.get<IFolder>(`/folders/${folderId}`).finally(() => setIsLoading(false))
                 .then((folder) => {
                     setTitle(folder.title);
                     setDescr(folder.description);
                     setBg(folder.bgColor);
                     setColor(folder.color);
                     setSortOrder(folder.sortOrder);
-                }).catch((error) => console.log(error))
-                .finally(() => setIsLoading(false));
+                }).catch(err => {
+                    console.log(err);
+                });
         }
     }, [folderId]);
 

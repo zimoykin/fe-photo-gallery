@@ -58,7 +58,7 @@ const Charts: React.FC = () => {
                 </div>
             </div>
             <div className="h-100 w-100 p-3 flex-column global-background-layer">
-                <div className="">
+                <div className="scroll">
                     {users.map((user, index) => (
                         <div key={index} className="flex-row w-100 p-3 scale-m"
                             onClick={() => handleUserClick(user.id)}

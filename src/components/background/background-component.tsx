@@ -22,7 +22,7 @@ const BackgroundWithImage: React.FC = () => {
                 </div>
             </div>
             <footer className="bg-footer">
-                <span>{`© ${new Date().getFullYear()} | Dmitrii Zimoikin`}</span>
+                <span>{`© ${new Date().getFullYear()} | Dmitrii Zimoikin 🧑‍💻`}</span>
             </footer>
         </>
     );

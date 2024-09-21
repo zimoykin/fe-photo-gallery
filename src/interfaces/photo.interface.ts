@@ -11,4 +11,9 @@ export interface IPhoto {
     description?: string;
     likes?: number;
     url: string;
+    favorite?: boolean;
+}
+
+export interface IPhotoWithImageFile extends Partial<IPhoto> {
+    file?: File;
 }

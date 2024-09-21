@@ -8,7 +8,6 @@ import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component
 import FolderCreateUpdate from './folder-create-update/folder-create-update-component';
 import Avatar from '../avatar/avatar-component';
 import { useNavigate } from 'react-router-dom';
-import { apiUpdateProfile } from '../../api/api-gallery';
 import { storeProfile } from '../../features/profile/profile-slice';
 import { IProfile } from '../../interfaces/profile.interface';
 import { IEquipment } from '../../interfaces/eqiupment.interface';
@@ -94,17 +93,12 @@ const UserSettings: React.FC = () => {
     const handleSaveProfileClick = () => {
         if (profile) {
             setIsLoading(true);
-            console.log(profile);
-            apiUpdateProfile(profile)
-                .then((resp) => {
-                    if (resp)
-                        dispatch(storeProfile(resp));
-                })
-                .finally(
-                    () => {
-                        setEditMode(false);
-                        setIsLoading(false);
-                    });
+            ApiClient.put<IProfile>('/profiles', profile).finally(() => setIsLoading(false))
+                .then(resp => {
+                    dispatch(storeProfile(resp));
+                    setEditMode(false);
+                    setProfile(resp);
+                });
         }
     };
 

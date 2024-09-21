@@ -20,7 +20,10 @@ export class ApiClient {
         path: string,
         config?: AxiosRequestConfig
     ) {
-        const response = await ApiClient.init().axiosInstance.get<T>(path, config);
+        const response = await ApiClient.init().axiosInstance.get<T>(path, config).catch(error => {
+            console.error(error);
+            throw error.message ?? 'an error';
+        });
         if (response?.status !== 200) {
             console.error(response?.statusText);
             throw new Error(response?.statusText);
@@ -33,7 +36,10 @@ export class ApiClient {
     }
 
     static async post<T>(path: string, data?: unknown, config?: AxiosRequestConfig) {
-        const response = await ApiClient.init().axiosInstance.post<T>(path, data, config);
+        const response = await ApiClient.init().axiosInstance.post<T>(path, data, config).catch(error => {
+            console.error(error);
+            throw error.message ?? 'an error';
+        });
         if (response.status !== 200) {
             console.error(response.statusText);
             throw new Error(response.statusText);
@@ -43,7 +49,10 @@ export class ApiClient {
         }
     }
     static async put<T>(path: string, data: unknown, config?: AxiosRequestConfig) {
-        const response = await ApiClient.init().axiosInstance.put<T>(path, data, config);
+        const response = await ApiClient.init().axiosInstance.put<T>(path, data, config).catch(error => {
+            console.error(error);
+            throw error.message ?? 'an error';
+        });
         if (response.status !== 200) {
             console.error(response.statusText);
             throw new Error(response.statusText);
@@ -53,7 +62,10 @@ export class ApiClient {
         }
     }
     static async patch<T>(path: string, data: unknown, config?: AxiosRequestConfig) {
-        const response = await ApiClient.init().axiosInstance.patch<T>(path, data, config);
+        const response = await ApiClient.init().axiosInstance.patch<T>(path, data, config).catch(error => {
+            console.error(error);
+            throw error.message ?? 'an error';
+        });
         if (response.status !== 200) {
             console.error(response.statusText);
             throw new Error(response.statusText);
@@ -63,7 +75,11 @@ export class ApiClient {
         }
     }
     static async delete<T>(patch: string, config?: AxiosRequestConfig) {
-        const response = await ApiClient.init().axiosInstance.delete<T>(patch, config);
+        const response = await ApiClient.init().axiosInstance.delete<T>(patch, config)
+            .catch(error => {
+                console.error(error);
+                throw error.message ?? 'an error';
+            });
         if (response.status !== 200) {
             console.error(response.statusText);
             throw new Error(response.statusText);
@@ -80,13 +96,16 @@ export class ApiClient {
                 ...config?.headers,
                 'Content-Type': 'multipart/form-data'
             }
+        }).catch(error => {
+            console.error(error);
+            throw error.message ?? 'an error';
         });
-        if (response.status !== 200) {
-            console.error(response.statusText);
-            throw new Error(response.statusText);
+        if (response?.status !== 200) {
+            console.error(response?.statusText);
+            throw new Error();
         }
         else {
-            return response.data;
+            return response?.data;
         }
     }
 }

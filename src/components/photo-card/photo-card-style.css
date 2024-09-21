@@ -1,0 +1,32 @@
+.photo-card-container {
+    position: relative;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.dark-theme .photo-card-container {
+    background-color: #222;
+}
+
+.photo-card-description {
+    color: wheat !important;
+    font-weight: 100;
+    font-size: .8rem
+}
+
+.dark-theme .photo-card-description {
+    color: #fff !important;
+}
+
+.light-theme .photo-card-description {
+    color: #000 !important;
+}
+
+.photo-card-new-element {
+    background-color: var(--color-6) !important;
+}
+
+.light-theme .photo-card-new-element {
+    background-color: var(--color-4) !important;
+}
