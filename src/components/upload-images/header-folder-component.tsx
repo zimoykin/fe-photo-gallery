@@ -39,7 +39,7 @@ const UploadImages: React.FC = () => {
 
             setFolder(updatedFolder);
         }
-    }, [folder, editMode, dispatch]);
+    }, [folder, dispatch]);
 
     useEffect(() => {
         if (folderId && profile?.id) {
