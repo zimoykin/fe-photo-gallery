@@ -16,13 +16,13 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
     const [photos, setPhotos] = useState<IPhotoWithImageFile[]>([]);
     const [newPhotos, setNewPhotos] = useState<IPhotoWithImageFile[]>([]);
 
-    useEffect(() => {
-        fetchPhotos().then(imgs => setPhotos(imgs));
-    }, [folderId]);
-
     const fetchPhotos = useCallback(async (): Promise<IPhoto[]> => {
         return await ApiClient.get<IPhoto[]>(`/photos/${folderId}/preview`);
     }, [folderId]);
+
+    useEffect(() => {
+        fetchPhotos().then(imgs => setPhotos(imgs));
+    }, [folderId, fetchPhotos]);
 
     const handleAddImageClick = () => {
         if (fileInputRef.current)
