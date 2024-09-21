@@ -22,7 +22,7 @@
     width: 200px;
     height: 200px;
     background-color: transparent;
-    animation: shot 1.5s ease-out infinite, rotate 1.5s ease-in-out reverse infinite;
+    animation: shot 1s ease-out infinite, rotate 1s ease-in-out reverse infinite;
 }
 
 .petal {
@@ -82,17 +82,14 @@
 
 @keyframes shot {
     0% {
-        width: 200px;
-        height: 200px;
+        scale: .8;
     }
 
     50% {
-        width: 200px;
-        height: 50px;
+        scale: 1.1;
     }
 
     100% {
-        width: 200px;
-        height: 200px;
+        scale: .8;
     }
 }

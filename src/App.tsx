@@ -8,9 +8,11 @@ import './styles/icons.css';
 import './styles/display.css';
 import './styles/pages.css';
 import './styles/tables.css';
+import './styles/images.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Gallery, HomePage, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage, RecoveryPage } from './pages';
 import { RecoveryConfirmPage } from './pages/recovery-confirm/recovery-confirm-page';
+import FolderPage from './pages/folder/folder-page';
 
 const App: React.FC = () => {
   return (
@@ -32,6 +34,7 @@ const App: React.FC = () => {
               <NavBarPage child={<Gallery />}
               />}
             />
+            <Route path='/folder/:folderId' element={<NavBarPage child={<FolderPage />} />} />
             <Route path="/home" element={
               <NavBarPage child={<HomePage />} />}
             />

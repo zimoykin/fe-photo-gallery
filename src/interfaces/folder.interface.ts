@@ -6,6 +6,7 @@ export interface IUserFolder {
     color: string;
     description: string;
     sortOrder: number;
+    url?: string;
 }
 
 export interface IFoldersAndTotal extends IUserFolder {

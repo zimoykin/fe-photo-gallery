@@ -1,3 +1,7 @@
+.w-10 {
+    width: 10%;
+}
+
 .w-25 {
     width: 25%;
 }
@@ -26,13 +30,13 @@
     width: 80%;
 }
 
+.w-90 {
+    width: 90%;
+}
+
 .w-100 {
     width: 100%;
 }
-
-
-
-
 
 .h-50 {
     height: 50%;
@@ -46,6 +50,7 @@
     height: 100%;
 }
 
+/* padding */
 .p-1 {
     padding: .1rem;
 }
@@ -58,8 +63,24 @@
     padding: .5rem;
 }
 
+.p-5 {
+    padding: .7rem;
+}
+
 .p-10 {
     padding: 1rem;
+}
+
+.pt-1 {
+    padding-top: .1rem;
+}
+
+.pt-3 {
+    padding-top: .3rem;
+}
+
+.pt-5 {
+    padding-top: .5rem;
 }
 
 .pt-10 {
@@ -69,6 +90,47 @@
 .pb-10 {
     padding-bottom: 1rem;
 }
+
+.pb-20 {
+    padding-bottom: 2rem;
+}
+
+.pb-30 {
+    padding-bottom: 3rem;
+}
+
+.pr-10 {
+    padding-right: 1rem;
+}
+
+.pr-20 {
+    padding-right: 2rem;
+}
+
+.pr-30 {
+    padding-right: 3rem;
+}
+
+.pr-40 {
+    padding-right: 4rem;
+}
+
+.pl-10 {
+    padding-left: 1rem;
+}
+
+.pl-20 {
+    padding-left: 2rem;
+}
+
+.pl-30 {
+    padding-left: 3rem;
+}
+
+.pl-40 {
+    padding-left: 4rem;
+}
+
 
 .m-10 {
     margin: 1rem;

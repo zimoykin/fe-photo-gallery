@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { apiDeletePhotoByIdAndFolderId, apiFetchGalleryByFolderId } from '../../../api/api-gallery';
 import './styles/folder-create-update-images-style.css';
 import CameraSpinnerModal from '../../camera-spinner/camera-spinner-modal.component';
 import { IPhoto } from '../../../interfaces/photo.interface';
+import { ApiClient } from '../../../api/networking/api-client';
 
 interface Props {
     folderId?: string;
@@ -17,21 +17,22 @@ const FolderCreateUpdateImages: React.FC<Props> = ({ folderId }) => {
     useEffect(() => {
         if (folderId) {
             setIsLoading(true);
-            apiFetchGalleryByFolderId(folderId, 'preview')
+            ApiClient.get<IPhoto[]>(`/photos/${folderId}/preview`)
+                .finally(() => setIsLoading(false))
                 .then((photos) => setImages(photos))
-                .finally(() => setIsLoading(false));
+                .catch((error) => console.log(error));
         }
 
     }, [folderId]);
 
     const handleDeleteClick = (folderId: string, photoId: string) => {
         setIsLoading(true);
-        apiDeletePhotoByIdAndFolderId(folderId, photoId)
+        ApiClient.delete(`/photos/${folderId}/${photoId}`)
+            .finally(() => setIsLoading(false))
             .then(() => {
                 setImages(images.filter(image => image.id !== photoId));
             })
-            .catch((error) => console.log(error))
-            .finally(() => setIsLoading(false));
+            .catch((error) => console.log(error));
     };
 
     const handleCardMouseEnter = (index: number) => {
@@ -75,4 +76,4 @@ const FolderCreateUpdateImages: React.FC<Props> = ({ folderId }) => {
 };
 
 
-export default FolderCreateUpdateImages;;;
+export default FolderCreateUpdateImages;
