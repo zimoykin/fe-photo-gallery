@@ -19,9 +19,9 @@ const FolderV2: React.FC<Props> = ({ folder }) => {
             img.src = folder.url;
             img.onload = () => setLoadImg(img.src);
             img.onerror = () => console.error('Failed to load image');
-        } {
+        } else
             setLoadImg('/no-photo.jpeg');
-        }
+
     }, [folder.url]);
 
     return (

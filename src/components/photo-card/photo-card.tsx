@@ -10,10 +10,9 @@ interface Props {
     needRefresh?: (id: string) => void;
     saveAll?: true | null;
     removePhotoFromList?: () => void;
-    afterCreate?: (id: string) => void;
 }
 
-const PhotoCard: React.FC<Props> = ({ photo, showEditBtns, needRefresh, removePhotoFromList, saveAll, afterCreate }) => {
+const PhotoCard: React.FC<Props> = ({ photo, showEditBtns, needRefresh, removePhotoFromList, saveAll }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isEditMode, setIsEditMode] = useState(photo.id ? false : true);
     const [editInfo, setEditInfo] = useState<IPhotoWithImageFile>(photo);
@@ -39,7 +38,7 @@ const PhotoCard: React.FC<Props> = ({ photo, showEditBtns, needRefresh, removePh
         formData.append('favorite', photo.favorite?.toString() ?? 'false');
         formData.append('sortOrder', photo.sortOrder?.toString() ?? '0');
         return ApiClient.postUpload<IPhoto>(`/photos/${photo.folderId}`, formData);
-    }, [isEditMode, photo, editInfo]);
+    }, [photo]);
 
     useEffect(() => {
         if (saveAll) {
@@ -55,7 +54,6 @@ const PhotoCard: React.FC<Props> = ({ photo, showEditBtns, needRefresh, removePh
                     setIsLoading(false);
                 }).then(data => {
                     photo.id = data.id;
-                    if (afterCreate) afterCreate(data.id);
                 });
             }
         }

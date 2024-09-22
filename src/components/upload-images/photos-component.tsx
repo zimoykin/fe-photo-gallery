@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import './styles/upload-images-style.css';
 import { IPhoto, IPhotoWithImageFile } from "../../interfaces/photo.interface";
 import { RootState } from "../../store";
@@ -21,17 +21,14 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
     const { profile } = useSelector((state: RootState) => state.profile);
     const [photos, setPhotos] = useState<Map<string, IPhotoObject>>(new Map());
 
-    const fetchPhotos = useCallback(async (): Promise<IPhoto[]> => {
-        return await ApiClient.get<IPhoto[]>(`/photos/${folderId}/preview`);
-    }, [folderId]);
-
     useEffect(() => {
-        fetchPhotos().then(imgs => {
+        ApiClient.get<IPhoto[]>(`/photos/${folderId}/preview`).then(imgs => {
             const newPhotos = new Map(photos);
             imgs.forEach(img => newPhotos.set(img.id, { ...img, name: img.id, saveAll: true, editMode: false }));
             setPhotos(newPhotos);
         });
-    }, [folderId, fetchPhotos]);
+    }, [folderId]);
+
 
     const handleAddImageClick = () => {
         if (fileInputRef.current)
@@ -106,18 +103,6 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
                     onClick={handleAddImageClick}
                 />
             </div>
-
-            {photos.size > 0 && <div className="scale-m pointer palitra-4 hover-bg p-3">
-                <i className="fas fa-save"
-                    onClick={() => {
-                        const map = new Map(photos);
-                        map.forEach((value) => {
-                            value.saveAll = true;
-                        });
-                        setPhotos(map);
-                    }}
-                />
-            </div>}
         </div>
 
         <input
@@ -137,7 +122,6 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
                         key={index}
                         showEditBtns
                         removePhotoFromList={() => handleDeleteImage(name)}
-                        saveAll={image.saveAll}
                     />
 
                 ))

@@ -9,7 +9,6 @@ const FolderView: React.FC = () => {
     const { folderId } = useParams<{ folderId: string; }>();
     const [photos, SetPhotos] = useState<IPhoto[]>([]);
 
-
     useEffect(() => {
         ApiClient.get<IPhoto[]>(`/photos/${folderId}/preview`).then((photos) => SetPhotos(photos));
     }, [folderId]);

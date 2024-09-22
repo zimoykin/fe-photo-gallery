@@ -48,7 +48,7 @@ const UploadImages: React.FC = () => {
             fetchFolderData().finally(() => setIsLoading(false))
                 .then((fld) => {
                     setFolder(fld);
-                    updateFolderInStore();
+                    // updateFolderInStore();
                 });
         }
     }, [folderId, profile?.id, profile?.equipment, fetchFolderData, dispatch]);
