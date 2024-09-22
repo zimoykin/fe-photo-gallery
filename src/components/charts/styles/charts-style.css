@@ -4,14 +4,16 @@
     justify-items: center;
     align-items: center;
     flex-direction: column;
-    overflow: scroll; 
+    overflow: scroll;
     /* height: 45%; */
     width: 100%;
-    scrollbar-width: none; 
+    overflow: scroll;
+    scrollbar-width: none;
     -ms-overflow-style: none;
     /* background-color: tomato; */
 }
 
-.pointer {
-    cursor: pointer;
+.charts-box::-webkit-scrollbar {
+    display: none;
+    width: 1px;
 }

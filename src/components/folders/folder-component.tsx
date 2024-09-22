@@ -14,11 +14,14 @@ const FolderV2: React.FC<Props> = ({ folder }) => {
     const [loadImg, setLoadImg] = useState<string | null>(null);
 
     useEffect(() => {
-        const img = new Image();
-        img.src = folder.url ?? '';
-
-        img.onload = () => setLoadImg(img.src);
-        img.onerror = () => console.error('Failed to load image');
+        if (folder.url) {
+            const img = new Image();
+            img.src = folder.url;
+            img.onload = () => setLoadImg(img.src);
+            img.onerror = () => console.error('Failed to load image');
+        } {
+            setLoadImg('/no-photo.jpeg');
+        }
     }, [folder.url]);
 
     return (

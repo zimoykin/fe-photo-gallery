@@ -4,18 +4,18 @@ import { IProfile } from "../interfaces/profile.interface";
 import apiClient from "./api-gallery-client";
 
 
-export const apiFetchUserFolders = async (userId: string) => {
-    return apiClient.get<IUserFolder[]>(`/folders`, { params: { userId } })
-        .then((response) => {
-            if (response?.status !== 200) {
-                throw new Error('Failed to get folders');
-            }
-            return response.data;
-        }).catch(error => {
-            console.log(error);
-            throw error;
-        });
-};
+// export const apiFetchUserFolders = async (userId: string) => {
+//     return apiClient.get<IUserFolder[]>(`/folders`, { params: { userId } })
+//         .then((response) => {
+//             if (response?.status !== 200) {
+//                 throw new Error('Failed to get folders');
+//             }
+//             return response.data;
+//         }).catch(error => {
+//             console.log(error);
+//             throw error;
+//         });
+// };
 
 export const apiUpdateFolderById = async (id: string, folder: IFolder) => {
     return apiClient.put<IUserFolder>(`/folders/${id}`, folder).then((response) => {

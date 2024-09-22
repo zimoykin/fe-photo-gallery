@@ -78,9 +78,9 @@ export const LoginV2Page: React.FC = () => {
                 <div className='login-v2-sign-in-container-full  global-background-layer shadow'>
                 </div>
                 <div className='login-v2-sign-in-container-left'>
-                    <Palitra />
+                    <Palitra /> 
                 </div>
-                <div className='login-v2-sign-in-container-right global-secondary-background-layer shadow'>
+                <div className='login-v2-sign-in-container-right scroll global-secondary-background-layer shadow'>
                     <div className='login-v2-sign-in-container-welcome global-div-color'>
                         <h1 className='global-title'>Welcome!</h1>
                     </div>

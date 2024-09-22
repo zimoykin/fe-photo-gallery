@@ -11,8 +11,13 @@
     overflow: scroll;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    /* background-color: tomato; */
 }
 
+.news-container::-webkit-scrollbar {
+    display: none;
+    width: 0;
+}
 .news-box {
     position: relative;
     display: flex;
