@@ -99,6 +99,13 @@ option {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+.scroll::-webkit-scrollbar {
+  display: none;
+  width: 1px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
 
 .pointer {
   cursor: pointer;

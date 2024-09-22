@@ -28,11 +28,9 @@
 .photos-table {
     display: flex;
     flex-direction: row;
-    overflow: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
     width: 100%;
     height: 100%;
+    overflow-x: scroll;
 }
 
 @media (max-width: 768px) {

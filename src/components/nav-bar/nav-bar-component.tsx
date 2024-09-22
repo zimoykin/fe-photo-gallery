@@ -60,7 +60,7 @@ const NavBar: React.FC = () => {
     };
 
     return (
-        <div
+        <nav
             className='nav-bar-container'>
             <div className='nav-bar-command-panel'>
                 {iconSet === 'home' &&
@@ -117,7 +117,7 @@ const NavBar: React.FC = () => {
                     </div>
                 }
             </div>
-        </div>
+        </nav>
 
     );
 };

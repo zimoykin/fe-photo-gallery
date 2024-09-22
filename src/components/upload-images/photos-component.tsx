@@ -10,18 +10,27 @@ interface Props {
     readonly folderId: string;
 }
 
+interface IPhotoObject extends IPhotoWithImageFile {
+    name: string;
+    saveAll: true | null;
+    editMode: boolean;
+}
+
 const PhotosTable: React.FC<Props> = ({ folderId }) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const { profile } = useSelector((state: RootState) => state.profile);
-    const [photos, setPhotos] = useState<IPhotoWithImageFile[]>([]);
-    const [newPhotos, setNewPhotos] = useState<IPhotoWithImageFile[]>([]);
+    const [photos, setPhotos] = useState<Map<string, IPhotoObject>>(new Map());
 
     const fetchPhotos = useCallback(async (): Promise<IPhoto[]> => {
         return await ApiClient.get<IPhoto[]>(`/photos/${folderId}/preview`);
     }, [folderId]);
 
     useEffect(() => {
-        fetchPhotos().then(imgs => setPhotos(imgs));
+        fetchPhotos().then(imgs => {
+            const newPhotos = new Map(photos);
+            imgs.forEach(img => newPhotos.set(img.id, { ...img, name: img.id, saveAll: true, editMode: false }));
+            setPhotos(newPhotos);
+        });
     }, [folderId, fetchPhotos]);
 
     const handleAddImageClick = () => {
@@ -43,10 +52,10 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
     function getFromLastPhoto<K extends keyof IPhotoWithImageFile>(propertyName: K): IPhotoWithImageFile[K] | undefined {
         if (!photos)
             return undefined;
-        if (((photos.length ?? 0) - 1) < 0) {
+        if (((photos.size ?? 0) - 1) < 0) {
             return undefined;
         }
-        const lastPhoto = photos[(photos.length ?? 0) - 1];
+        const lastPhoto = Array.from(photos.values())[photos.size - 1];
         if (!lastPhoto) {
             return undefined;
         } return lastPhoto[propertyName];
@@ -56,10 +65,13 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files ?? [];
         if (files.length > 0) {
-            const imgs: IPhotoWithImageFile[] = [];
+
+            const additionalPhotos = new Map(photos);
             for await (const file of files) {
                 const storageUrl = await loadFile(file);
-                imgs.push({
+                // file.name
+                additionalPhotos.set(file.name, {
+                    name: file.name,
                     folderId: folderId,
                     film: getFromLastPhoto('film') ?? '',
                     iso: getFromLastPhoto('iso') ?? '',
@@ -69,19 +81,20 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
                     description: getFromLastPhoto('description') ?? '',
                     url: storageUrl,
                     file: file,
-                    sortOrder: (photos.length + newPhotos.length)
+                    sortOrder: (0 + photos.size),
+                    saveAll: null,
+                    editMode: false,
+                    profileId: profile?.id
                 });
             }
-            setNewPhotos([...newPhotos ?? [], ...imgs]);
+            setPhotos(additionalPhotos);
         }
     };
 
-    const handleDeleteImage = (index: number) => {
-        if (index > -1) {
-            setNewPhotos((prevPhotos) =>
-                prevPhotos.filter((_, i) => i !== index)
-            );
-        }
+    const handleDeleteImage = (name: string) => {
+        const map = new Map(photos);
+        map.delete(name);
+        setPhotos(map);
     };
 
 
@@ -93,6 +106,18 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
                     onClick={handleAddImageClick}
                 />
             </div>
+
+            {photos.size > 0 && <div className="scale-m pointer palitra-4 hover-bg p-3">
+                <i className="fas fa-save"
+                    onClick={() => {
+                        const map = new Map(photos);
+                        map.forEach((value) => {
+                            value.saveAll = true;
+                        });
+                        setPhotos(map);
+                    }}
+                />
+            </div>}
         </div>
 
         <input
@@ -106,23 +131,13 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
 
         <div className="photos-table w-100 pt-10 pl-10 pr-10 gap">
             {
-                [...photos]?.map((image, index) => (
+                Array.from(photos).map(([name, image], index) => (
                     <PhotoCard
                         photo={image}
                         key={index}
                         showEditBtns
-                        needRefresh={() => fetchPhotos().then(imgs => setPhotos(imgs))}
-                    />
-
-                ))
-            } {
-                newPhotos.map((image, index) => (
-                    <PhotoCard
-                        photo={image}
-                        key={index}
-                        showEditBtns
-                        removePhotoFromList={() => handleDeleteImage(index)}
-                        needRefresh={() => fetchPhotos().then(imgs => setPhotos(imgs))}
+                        removePhotoFromList={() => handleDeleteImage(name)}
+                        saveAll={image.saveAll}
                     />
 
                 ))

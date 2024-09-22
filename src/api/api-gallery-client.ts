@@ -33,6 +33,10 @@ apiClient.interceptors.response.use(
             config._retry = true;
             const state: RootState = store.getState();
             const refreshToken = state.auth.refreshToken;
+            if (!refreshToken) {
+                store.dispatch(logout());
+                return Promise.reject(error);
+            }
             try {
                 const refreshResponse = await apiClientAuth.post('auth/refresh', { refreshToken });
                 const { accessToken, refreshToken: newRefreshToken } = refreshResponse.data;
@@ -45,6 +49,8 @@ apiClient.interceptors.response.use(
                 console.error('Failed to refresh token', error);
                 store.dispatch(logout());
             }
+        } else {
+            throw error;
         }
 
     }

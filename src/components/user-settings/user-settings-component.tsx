@@ -2,10 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import './user-settings-style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import UserFolders from './user-folders-component';
 import UserEquipment from './user-equipment-component';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
-import FolderCreateUpdate from './folder-create-update/folder-create-update-component';
 import Avatar from '../avatar/avatar-component';
 import { useNavigate } from 'react-router-dom';
 import { storeProfile } from '../../features/profile/profile-slice';
@@ -15,6 +13,7 @@ import { storeFolders } from '../../features/folders/folders-slice';
 import { IFoldersAndTotal } from '../../interfaces/folder.interface';
 import { ApiClient } from '../../api/networking/api-client';
 import { toast } from 'react-toastify';
+import UserFolder from './user-folder-component';
 
 
 const UserSettings: React.FC = () => {
@@ -31,9 +30,6 @@ const UserSettings: React.FC = () => {
 
     const [editMode, setEditMode] = useState<boolean>(false);
     const [editModeEquipment, setEditModeEquipment] = useState<boolean>(false);
-
-    const [selectedFolder, setSelectedFolder] = useState<number>(-1);
-    const [showFolderCreateUpdate, setShowCreateUpdateFolder] = useState<boolean>(false);
 
     useEffect(() => {
         if (storedProfile) setProfile(storedProfile);
@@ -68,19 +64,21 @@ const UserSettings: React.FC = () => {
         }
     }, [isAuthenticated, dispatch, navigate, profile?.id]);
 
-
-    const handleClickEditFolder = (index: number) => {
-        setSelectedFolder(index);
-        setShowCreateUpdateFolder(true);
-    };
-
     const handleClickCreateFolder = () => {
-        setSelectedFolder(-1);
-        setShowCreateUpdateFolder(true);
-    };
-
-    const handleFolderCreateUpdateClose = () => {
-        setShowCreateUpdateFolder(false);
+        setFolders((fld) => {
+            return [...fld,
+            {
+                title: '',
+                profileId: profile?.id ?? '',
+                sortOrder: (fld.length + 1),
+                color: '#fff',
+                bgColor: '#000',
+                description: '',
+                id: '',
+                totalPhotos: 0,
+            }
+            ];
+        });
     };
 
     const handleCancelEditProfileClick = () => {
@@ -132,7 +130,7 @@ const UserSettings: React.FC = () => {
     return (
         <>
             <input ref={fileInputRef} onChange={handleFileChange} type="file" style={{ display: 'none' }} id="avatar-input" accept="image/*" />
-            <div className='user-settings-container'>
+            <div className='user-settings-container  shadow'>
                 <div className='user-settings-box'>
                     <div className='user-info-container global-background-layer'>
                         <Avatar
@@ -236,12 +234,21 @@ const UserSettings: React.FC = () => {
                         </div>
                     </div>
                     <div className='user-folders-equipment-container'>
-                        <div className='user-folders-equipment-container-box'>
-                            <UserFolders
-                                folders={folders}
-                                handleClickCreateFolder={handleClickCreateFolder}
-                                handleClickEditFolder={handleClickEditFolder}
-                            />
+                        <div className='user-folders-equipment-container-box '>
+                            <div className='table-command-panel' >
+                                <div className='hover-bg scale-l'>
+                                    <i className="fa-solid fa-plus"
+                                        onClick={handleClickCreateFolder} />
+                                </div>
+                            </div>
+                            <div className='table'>
+                                {[...folders]?.map((folder, index) => (
+                                    <UserFolder
+                                        key={index}
+                                        folder={folder}
+                                    />
+                                ))}
+                            </div>
                         </div>
                         <div className='user-folders-equipment-container-box'>
                             <div className='table-command-panel gap' >
@@ -334,14 +341,14 @@ const UserSettings: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            {showFolderCreateUpdate && <FolderCreateUpdate
+            </div >
+            {/* {showFolderCreateUpdate && <FolderCreateUpdate
                 onClose={handleFolderCreateUpdateClose}
                 folderId={folders[selectedFolder]?.id}
-            />}
+            />} */};
             {isLoading && <CameraSpinnerModal />}
         </>
     );
 };
 
-export default UserSettings;
+export default UserSettings;;

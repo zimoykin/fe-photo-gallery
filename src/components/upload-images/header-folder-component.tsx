@@ -27,7 +27,8 @@ const UploadImages: React.FC = () => {
     const fetchFolderData = useCallback(async (): Promise<IUserFolder> => {
         return await ApiClient.get<IUserFolder>(`/folders/${folderId}`);
     }, [folderId]);
-    const updateFolderInStore = useCallback(() => {
+
+    const updateFolderInStore = () => {
         if (folder) {
             toast.info('Folder updated successfully', { toastId: 'folder-updated' });
             const updatedFolder = { ...folder };
@@ -39,7 +40,7 @@ const UploadImages: React.FC = () => {
 
             setFolder(updatedFolder);
         }
-    }, [folder, dispatch]);
+    };
 
     useEffect(() => {
         if (folderId && profile?.id) {
@@ -50,7 +51,7 @@ const UploadImages: React.FC = () => {
                     updateFolderInStore();
                 });
         }
-    }, [folderId, profile?.id, profile?.equipment, fetchFolderData, dispatch, updateFolderInStore]);
+    }, [folderId, profile?.id, profile?.equipment, fetchFolderData, dispatch]);
 
     const handleSaveFolderData = () => {
         if (folder?.id) {
