@@ -23,9 +23,11 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
 
     useEffect(() => {
         ApiClient.get<IPhoto[]>(`/photos/${folderId}/preview`).then(imgs => {
-            const newPhotos = new Map(photos);
-            imgs.forEach(img => newPhotos.set(img.id, { ...img, name: img.id, saveAll: true, editMode: false }));
-            setPhotos(newPhotos);
+            setPhotos((phts) => {
+                const newPhotos = new Map(phts);
+                imgs.forEach(img => newPhotos.set(img.id, { ...img, name: img.id, saveAll: true, editMode: false }));
+                return newPhotos;
+            });
         });
     }, [folderId]);
 
