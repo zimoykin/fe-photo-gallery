@@ -194,9 +194,15 @@ const UserSettings: React.FC = () => {
                             }
 
                             {editMode
-                                ? <select className='global-input w-80' name="privateAccess" id="privateAccess">
-                                    <option value="true">private</option>
-                                    <option value="false">public</option>
+                                ? <select
+                                    onChange={(e) => {
+                                        if (profile) {
+                                            setProfile({ ...profile, privateAccess: Number(e.target.value) });
+                                        }
+                                    }}
+                                    className='global-input w-80' name="privateAccess" id="privateAccess">
+                                    <option value="1">private</option>
+                                    <option value="0">public</option>
                                 </select>
                                 :
                                 <div className='scale-s flex-row flex-center'>
@@ -342,10 +348,6 @@ const UserSettings: React.FC = () => {
                     </div>
                 </div>
             </div >
-            {/* {showFolderCreateUpdate && <FolderCreateUpdate
-                onClose={handleFolderCreateUpdateClose}
-                folderId={folders[selectedFolder]?.id}
-            />} */};
             {isLoading && <CameraSpinnerModal />}
         </>
     );

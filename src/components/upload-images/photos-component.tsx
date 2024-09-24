@@ -97,7 +97,7 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
     };
 
 
-    return <>
+    return <div className="flex-column scroll">
 
         <div className="table-command-panel pl-10">
             <div className="scale-m pointer palitra-4 hover-bg p-3">
@@ -129,6 +129,6 @@ const PhotosTable: React.FC<Props> = ({ folderId }) => {
                 ))
             }
         </div>
-    </>;
+    </div>;
 };
 export default PhotosTable;

@@ -11,12 +11,12 @@ body {
 }
 
 body.light-theme {
-  background-color: lightgray;
+  background-color: transparent;
   color: #000000;
 }
 
 body.dark-theme {
-  background-color: darkslategray;
+  background-color: transparent;
   color: #ffffff;
 }
 

@@ -10,11 +10,6 @@
     transition: width 0.3s ease, height 0.3s ease;
 }
 
-.nav-bar-icon:hover {
-    background-color: #fd5900cd;
-    scale: 1.2;
-}
-
 .dark-theme .nav-bar-icon:hover {
     background-color: #005f61ea;
 }
@@ -30,8 +25,9 @@
     justify-content: flex-end;
 }
 
-.nav-bar-command-panel>i {
+.nav-bar-icon {
     padding: .2rem;
+    min-width: 2rem;
     margin: .1rem;
     border-radius: 5px;
     cursor: pointer;
@@ -41,7 +37,10 @@
     justify-content: center;
     box-sizing: border-box;
 }
-
+.nav-bar-icon:hover {
+    background-color: #fd5900cd;
+    scale: 1.2;
+}
 
 @media (min-width: 768px) {
     .nav-bar-container {
