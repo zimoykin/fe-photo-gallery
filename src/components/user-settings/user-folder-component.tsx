@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { apiDeleteFolderById } from '../../api/api-gallery';
 import CameraSpinnerModal from '../camera-spinner/camera-spinner-modal.component';
 import { storeFolders } from '../../features/folders/folders-slice';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +17,7 @@ const UserFolder: React.FC<Props> = ({ folder }) => {
     const navigate = useNavigate();
     const { profile } = useSelector((state: RootState) => state.profile);
     const [isLoading, setIsLoading] = useState(false);
-    const [isDeleted, setIsDeleted] = useState<boolean>(false);
+    const [,setIsDeleted] = useState<boolean>(false);
     const [editMode, setEditMode] = useState<boolean>(folder.id === '');
     const [editedFolder, setEditedFolder] = useState<IUserFolder>(folder);
 

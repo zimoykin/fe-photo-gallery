@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApiClient } from "../../api/networking/api-client";
-import { IPhoto } from "../../interfaces/photo.interface";
 import PhotoCard from "../photo-card/photo-card";
 import { IPublicPhoto } from "../../interfaces/photo-profile.interface";
 
