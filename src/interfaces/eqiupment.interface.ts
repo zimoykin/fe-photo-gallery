@@ -1,5 +1,5 @@
-export interface IEquipment { 
-    name: string; 
-    favorite: boolean;
-    type: 'camera' | 'lens' | 'other';
+export interface IEquipment {
+  name: string;
+  favorite: boolean;
+  type: 'camera' | 'lens' | 'other';
 }

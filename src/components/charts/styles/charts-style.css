@@ -1,19 +1,19 @@
 .charts-box {
-    position: relative;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    flex-direction: column;
-    overflow: scroll;
-    /* height: 45%; */
-    width: 100%;
-    overflow: scroll;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    /* background-color: tomato; */
+  position: relative;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: scroll;
+  /* height: 45%; */
+  width: 100%;
+  overflow: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* background-color: tomato; */
 }
 
 .charts-box::-webkit-scrollbar {
-    display: none;
-    width: 1px;
+  display: none;
+  width: 1px;
 }

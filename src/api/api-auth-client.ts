@@ -4,22 +4,22 @@ import store, { RootState } from '../store';
 const { REACT_APP_AUTH_URL } = process.env;
 
 const apiClient = axios.create({
-    baseURL: REACT_APP_AUTH_URL,
+  baseURL: REACT_APP_AUTH_URL
 });
 
 // Add a request interceptor to include the token in headers
 apiClient.interceptors.request.use(
-    (config) => {
-        const state: RootState = store.getState();
-        const token = state.auth.accessToken;
+  (config) => {
+    const state: RootState = store.getState();
+    const token = state.auth.accessToken;
 
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
-        return config;
-    },
-    (error) => Promise.reject(error)
+    return config;
+  },
+  (error) => Promise.reject(error)
 );
 
 export default apiClient;

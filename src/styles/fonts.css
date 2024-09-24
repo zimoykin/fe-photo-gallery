@@ -1,61 +1,69 @@
 .glo {
-    transition: color 0.3s ease, font-size 0.3s ease;
-    font-size: 1rem;
+  transition:
+    color 0.3s ease,
+    font-size 0.3s ease;
+  font-size: 1rem;
 }
-input{
-    background-color: transparent;
+input {
+  background-color: transparent;
 }
 
 .dark-theme .glo {
-    color: var(--color-3);
+  color: var(--color-3);
 }
 
 .light-theme .glo {
-    color: var(--color-2-2)
+  color: var(--color-2-2);
 }
 
 .global-title {
-    line-height: 3rem;
-    text-align: center;
-    font-size: 5rem;
-    font-weight: 900;
-    text-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
-    transition: color 0.3s ease, font-size 0.3s ease;
+  line-height: 3rem;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 900;
+  text-shadow:
+    rgba(0, 0, 0, 0.25) 5px 20px 28px,
+    rgba(0, 0, 0, 0.22) 10px 10px 10px;
+  transition:
+    color 0.3s ease,
+    font-size 0.3s ease;
 }
-
 
 .light-theme .global-title,
 h1,
 h4 {
-    color: #FAAB35;
+  color: #faab35;
 }
 
 .darkt-theme .global-title,
 h1,
 h4 {
-    color: #F78105;
+  color: #f78105;
 }
 
 h4 {
-    line-height: 10px;
-    font-size: 30px;
+  line-height: 10px;
+  font-size: 30px;
 }
 
 a {
-    transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-    font-size: 18px;
+  transition:
+    color 0.3s ease,
+    color 0.3s ease,
+    font-size 0.3s ease;
+  font-size: 18px;
 }
 
 .dark-theme a {
-    color: #FAAB35;
+  color: #faab35;
 }
 
 .light-theme a {
-    color: #F78105;
+  color: #f78105;
 }
 
 @media (max-width: 1280px) {
-    .global-title {
-        font-size: 52px;
-    }
+  .global-title {
+    font-size: 52px;
+  }
 }

@@ -1,56 +1,66 @@
-// import React from 'react'; 
+// import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import authReducer from './features/auth/auth-slice';
 import profileReducer from './features/profile/profile-slice';
 import themaReducer from './features/thema/thema-slice';
 import folderReducer from './features/folders/folders-slice';
 
-
 // Persist configuration
 const persistConfig = {
   key: 'root',
   version: 1,
-  storage,
+  storage
 };
 const persistConfigProfile = {
   key: 'profile',
   version: 1,
-  storage,
+  storage
 };
 
 const persistConfigThema = {
   key: 'thema',
   version: 1,
-  storage,
+  storage
 };
 
 const persistConfigFolders = {
   key: 'folders',
   version: 1,
-  storage,
+  storage
 };
 // Create persisted reducers
 const persistedReducerAuth = persistReducer(persistConfig, authReducer);
-const persistedReducerUser = persistReducer(persistConfigProfile, profileReducer);
+const persistedReducerProfile = persistReducer(persistConfigProfile, profileReducer);
 const persistedReducerThema = persistReducer(persistConfigThema, themaReducer);
 const persistedReducerFolders = persistReducer(persistConfigFolders, folderReducer);
 
 const store = configureStore({
   reducer: {
     auth: persistedReducerAuth,
-    profile: persistedReducerUser,
+    profile: persistedReducerProfile,
     thema: persistedReducerThema,
     folders: persistedReducerFolders
   },
 
-  middleware: (getDefaultMiddleware: any) => // eslint-disable-line
+  middleware: (
+    getDefaultMiddleware: any // eslint-disable-line
+  ) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
+    })
 });
 
 // Create a persistor

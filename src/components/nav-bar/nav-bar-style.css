@@ -1,55 +1,57 @@
 .nav-bar-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    z-index: 5;
-    padding: .5rem;
-    transition: width 0.3s ease, height 0.3s ease;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  z-index: 5;
+  padding: 0.5rem;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
 }
 
 .dark-theme .nav-bar-icon:hover {
-    background-color: #005f61ea;
+  background-color: #005f61ea;
 }
 
 .light-theme .nav-bar-icon:hover {
-    background-color: #fd5900cd;
+  background-color: #fd5900cd;
 }
 
 .nav-bar-command-panel {
-    width: 100%;
-    max-width: 1280px;
-    display: flex;
-    justify-content: flex-end;
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .nav-bar-icon {
-    padding: .2rem;
-    min-width: 2rem;
-    margin: .1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 2px solid;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+  padding: 0.2rem;
+  min-width: 2rem;
+  margin: 0.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 .nav-bar-icon:hover {
-    background-color: #fd5900cd;
-    scale: 1.2;
+  background-color: #fd5900cd;
+  scale: 1.2;
 }
 
 @media (min-width: 768px) {
-    .nav-bar-container {
-        padding: .2rem;
-    }
+  .nav-bar-container {
+    padding: 0.2rem;
+  }
 }
 
 @media (max-width: 1280px) and (min-width: 768px) {
-    .nav-bar-container {
-        width: 90vw;
-    }
+  .nav-bar-container {
+    width: 90vw;
+  }
 }

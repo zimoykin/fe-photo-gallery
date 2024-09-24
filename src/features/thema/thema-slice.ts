@@ -2,24 +2,24 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Theme } from '../../contexts/theme/types';
 
 interface ThemaState {
-    thema: Theme;
+  thema: Theme;
 }
 
 const initialState: ThemaState = {
-    thema: 'light'
+  thema: 'light'
 };
 
 const themaSlice = createSlice({
-    name: 'thema',
-    initialState,
-    reducers: {
-        toDark: (state) => {
-            state.thema = 'dark';
-        },
-        toLight: (state) => {
-            state.thema = 'light';
-        },
+  name: 'thema',
+  initialState,
+  reducers: {
+    toDark: (state) => {
+      state.thema = 'dark';
     },
+    toLight: (state) => {
+      state.thema = 'light';
+    }
+  }
 });
 
 export const { toDark, toLight } = themaSlice.actions;

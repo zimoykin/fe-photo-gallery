@@ -1,16 +1,16 @@
 .camera-lens-chart-container {
-    position: relative;
-    display: flex;
-    /* height: 100%; */
-    width: 100%;
-    bottom: 0;
-    background-color: tomato;
+  position: relative;
+  display: flex;
+  /* height: 100%; */
+  width: 100%;
+  bottom: 0;
+  background-color: tomato;
 }
 
 .camera-lens-chart-box {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: tomato;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: tomato;
 }

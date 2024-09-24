@@ -9,66 +9,66 @@ import Avatar from '../avatar/avatar-component';
 import { ApiClient } from '../../api/networking/api-client';
 
 const GalleryV2: React.FC = () => {
+  const [userProfile, setUserProfile] = useState<IProfile | null>(null);
+  const { profileId } = useParams<{ profileId: string }>();
 
-    const [userProfile, setUserProfile] = useState<IProfile | null>(null);
-    const { profileId } = useParams<{ profileId: string; }>();
+  const [folders, setFolders] = useState<IUserFolder[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [folders, setFolders] = useState<IUserFolder[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (profileId) {
+        const _profile = await ApiClient.get<IProfile>(`/public/profiles/${profileId}`);
+        setUserProfile(_profile);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            if (profileId) {
-                const _profile = await ApiClient.get<IProfile>(`/public/profiles/${profileId}`);
-                setUserProfile(_profile);
+        const _folders = await ApiClient.get<IUserFolder[]>(`/public/folders/${profileId}`);
+        setFolders(_folders);
+      }
+    };
 
-                const _folders = await ApiClient.get<IUserFolder[]>(`/public/folders/${profileId}`);
-                setFolders(_folders);
-            }
-        };
+    setIsLoading(true);
+    fetchData().finally(() => {
+      setIsLoading(false);
+    });
+  }, [profileId]);
 
-        setIsLoading(true);
-        fetchData().finally(() => {
-            setIsLoading(false);
-        });
-
-    }, [profileId]);
-
-    return (
-        <div className='gallery-v2-container'>
-            <div className='gallery-v2-box shadow'>
-                <div className={`gallery-v2-box-owner`}>
-                    <div className='gallery-v2-box-person global-background-layer'>
-                        <Avatar url={userProfile?.url} />
-                        <div className='gallery-v2-box-person-data'>
-                            <h1 className='global-title p-1'>{userProfile?.name}</h1>
-                            <span className='scale-m'>{userProfile?.location ?? 'no location'}</span>
-                            {/* <br /> */}
-                            <span>{folders?.length} folders</span>
-                            <span>{folders?.length * 10} photos</span>
-                            {/* <br /> */}
-                            <span className='scale-m'>
-                                {userProfile?.equipment?.find(e => (e.type === 'camera' && e.favorite))?.name ?? 'no information'}
-                                ({userProfile?.equipment?.filter(e => e.type === 'camera')?.length ?? 0})
-                            </span>
-                            <span className='scale-m'>
-                                {userProfile?.equipment?.find(e => (e.type === 'lens' && e.favorite))?.name ?? 'no information'}
-                                ({userProfile?.equipment?.filter(e => e.type === 'lens')?.length ?? 0})
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='gallery-v2-box-gallery '>
-                    {folders?.map((folder) => (
-                        <div className='gallery-v2-box-folder' key={folder.id}>
-                            <FolderV2 folder={folder} />
-                        </div>
-                    ))}
-                </div>
+  return (
+    <div className="gallery-v2-container">
+      <div className="gallery-v2-box shadow">
+        <div className={`gallery-v2-box-owner`}>
+          <div className="gallery-v2-box-person global-background-layer">
+            <Avatar url={userProfile?.url} />
+            <div className="gallery-v2-box-person-data">
+              <h1 className="global-title p-1">{userProfile?.name}</h1>
+              <span className="scale-m">{userProfile?.location ?? 'no location'}</span>
+              {/* <br /> */}
+              <span>{folders?.length} folders</span>
+              <span>{folders?.length * 10} photos</span>
+              {/* <br /> */}
+              <span className="scale-m">
+                {userProfile?.equipment?.find((e) => e.type === 'camera' && e.favorite)?.name ??
+                  'no information'}
+                ({userProfile?.equipment?.filter((e) => e.type === 'camera')?.length ?? 0})
+              </span>
+              <span className="scale-m">
+                {userProfile?.equipment?.find((e) => e.type === 'lens' && e.favorite)?.name ??
+                  'no information'}
+                ({userProfile?.equipment?.filter((e) => e.type === 'lens')?.length ?? 0})
+              </span>
             </div>
-            {isLoading && <CameraSpinnerModal />}
+          </div>
         </div>
-    );
+
+        <div className="gallery-v2-box-gallery ">
+          {folders?.map((folder) => (
+            <div className="gallery-v2-box-folder" key={folder.id}>
+              <FolderV2 folder={folder} />
+            </div>
+          ))}
+        </div>
+      </div>
+      {isLoading && <CameraSpinnerModal />}
+    </div>
+  );
 };
 export default GalleryV2;

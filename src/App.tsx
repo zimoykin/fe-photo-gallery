@@ -10,7 +10,18 @@ import './styles/pages.css';
 import './styles/tables.css';
 import './styles/images.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Gallery, HomePage, LoginV2Page, NavBarPage, RegisterPage, Settings, UnavailablePage, UploadImagesPage, ConfirmationPage, RecoveryPage } from './pages';
+import {
+  Gallery,
+  HomePage,
+  LoginV2Page,
+  NavBarPage,
+  RegisterPage,
+  Settings,
+  UnavailablePage,
+  UploadImagesPage,
+  ConfirmationPage,
+  RecoveryPage
+} from './pages';
 import { RecoveryConfirmPage } from './pages/recovery-confirm/recovery-confirm-page';
 import FolderPage from './pages/folder/folder-page';
 
@@ -18,7 +29,7 @@ const App: React.FC = () => {
   return (
     <>
       <Router>
-        <div className='app-container'>
+        <div className="app-container">
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/login" element={<LoginV2Page />} />
@@ -26,24 +37,18 @@ const App: React.FC = () => {
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/recovery" element={<RecoveryPage />} />
             <Route path="/recovery/confirm" element={<RecoveryConfirmPage />} />
-            <Route path="/settings" element={
-              <NavBarPage secure={true} child={<Settings />}
-              />}
+            <Route path="/settings" element={<NavBarPage secure={true} child={<Settings />} />} />
+            <Route path="/gallery/:profileId" element={<NavBarPage child={<Gallery />} />} />
+            <Route
+              path="/folder/:profileId/:folderId"
+              element={<NavBarPage child={<FolderPage />} />}
             />
-            <Route path="/gallery/:profileId" element={
-              <NavBarPage child={<Gallery />}
-              />}
+            <Route path="/home" element={<NavBarPage child={<HomePage />} />} />
+            <Route
+              path="/settings/upload/:folderId"
+              element={<NavBarPage secure={true} child={<UploadImagesPage />} />}
             />
-            <Route path='/folder/:profileId/:folderId' element={<NavBarPage child={<FolderPage />} />} />
-            <Route path="/home" element={
-              <NavBarPage child={<HomePage />} />}
-            />
-            <Route path="/settings/upload/:folderId" element={
-              <NavBarPage secure={true} child={<UploadImagesPage />} />}
-            />
-            <Route path="*"
-              element={<UnavailablePage />}
-            />
+            <Route path="*" element={<UnavailablePage />} />
           </Routes>
         </div>
       </Router>

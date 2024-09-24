@@ -1,55 +1,55 @@
 .folder-container {
-    /* position: relative; */
-    /* display: flex;
+  /* position: relative; */
+  /* display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap; */
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    transition: width 0.3s ease;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  transition: width 0.3s ease;
 }
 
 .folder-box {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 99, 71, 0.43);
-    transition: width 0.3s ease;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 99, 71, 0.43);
+  transition: width 0.3s ease;
 }
 
 .folder-image-bg {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: width 0.3s ease;
-    width: 20rem;
-    max-height: 20rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.3s ease;
+  width: 20rem;
+  max-height: 20rem;
 }
 
 .folder-image-bg {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 20rem;
-    height: 20rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 20rem;
+  height: 20rem;
 }
 
 .folder-title {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 25%;
-    /* background-color: rgba(255, 99, 71, 0.43); */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: width 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25%;
+  /* background-color: rgba(255, 99, 71, 0.43); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.3s ease;
 }

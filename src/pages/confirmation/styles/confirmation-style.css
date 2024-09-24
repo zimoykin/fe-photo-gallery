@@ -1,66 +1,68 @@
 .confirmation-container {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
-    height: 70%;
-    border-radius: 20px;
-    transition: width 0.3s ease, color 0.3s ease, background-color 0.3s ease;
-    z-index: 6;
-
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 70%;
+  border-radius: 20px;
+  transition:
+    width 0.3s ease,
+    color 0.3s ease,
+    background-color 0.3s ease;
+  z-index: 6;
 }
 
 .confirmation-box {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .confirmation-box-title {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.confirmation-inputs-container{
-    width: 50%;
+.confirmation-inputs-container {
+  width: 50%;
 }
 
 .confirmation-box-input-code {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 1rem;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 10px;
 }
 
-.confirmation-box-input-code>input,
-.confirmation-box-input-code>button {
-    padding: 20px;
+.confirmation-box-input-code > input,
+.confirmation-box-input-code > button {
+  padding: 20px;
 }
 
 @media (max-width: 768px) {
-    .confirmation-container {
-        width: 100%;
-        height: 80%;
-    }
+  .confirmation-container {
+    width: 100%;
+    height: 80%;
+  }
 
-    .confirmation-box-title h1 {
-        font-size: 2rem;
-    }
+  .confirmation-box-title h1 {
+    font-size: 2rem;
+  }
 
-    .confirmation-inputs-container{
-        width: 100%;
-    }
+  .confirmation-inputs-container {
+    width: 100%;
+  }
 }

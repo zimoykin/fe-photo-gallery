@@ -1,76 +1,79 @@
 .bg-img-container {
-    position: absolute;
-    background-image: url('/public/bg/main-bg.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  position: absolute;
+  background-image: url('/public/bg/main-bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .bg-layer-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 
 .bg-layer-column {
-    transition: background-color 1s ease, color 1s ease;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, .2);
-    z-index: 2;
+  transition:
+    background-color 1s ease,
+    color 1s ease;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  z-index: 2;
 }
 
 .bg-vignette {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: background-color 0.3s ease, color 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .dark-theme .bg-vignette {
-    background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .light-theme .bg-vignette {
-    background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
-
 .bg-layer-column:hover {
-    background-color: rgba(250, 171, 53, 0.4);
+  background-color: rgba(250, 171, 53, 0.4);
 }
 
 .bg-footer {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    /* height: 1rem; */
-    z-index: 3;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /* height: 1rem; */
+  z-index: 3;
 }
-.light-theme .bg-footer > span { 
-    color: var(--color-2-2);
-    background-color: var(--color-4);
+.light-theme .bg-footer > span {
+  color: var(--color-2-2);
+  background-color: var(--color-4);
 }
 
 @media (max-width: 768px) {
-    .bg-img-container {
-        background-image: url('/public/bg/mobile-bg.jpeg');
-    }
+  .bg-img-container {
+    background-image: url('/public/bg/mobile-bg.jpeg');
+  }
 }
