@@ -5,12 +5,17 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
+  background-color: rgba(128, 128, 128, 0.772);
   z-index: 5;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   transition:
     width 0.3s ease,
     height 0.3s ease;
 }
+
+.dark-theme .nav-bar-container {
+  background-color: rgba(91, 91, 91, 0.772);
+ }
 
 .dark-theme .nav-bar-icon:hover {
   background-color: #005f61ea;
@@ -21,6 +26,7 @@
 }
 
 .nav-bar-command-panel {
+  background-color: rgba(128, 128, 128, 0.772);
   width: 100%;
   max-width: 1280px;
   display: flex;
@@ -39,14 +45,38 @@
   justify-content: center;
   box-sizing: border-box;
 }
+
 .nav-bar-icon:hover {
   background-color: #fd5900cd;
   scale: 1.2;
 }
 
-@media (min-width: 768px) {
+.nav-bar-search {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.nav-bar-search-input {
+  border: .1rem solid;
+}
+
+.nav-bar-search-input:focus {
+  position: absolute;
+  left: 0;
+  width: 40vw;
+}
+
+.nav-bar-search-input::placeholder {
+  color: lightgray;
+}
+
+@media (max-width: 768px) {
   .nav-bar-container {
-    padding: 0.2rem;
+    width: 95vw;
   }
 }
 

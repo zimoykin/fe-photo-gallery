@@ -31,44 +31,62 @@ const NavBar: React.FC = () => {
     dispatch(theme === 'light' ? toDark() : toLight());
   };
 
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    toast.info('This feature is not implemented yet! 😵‍💫', { toastId: 'search' });
+  };
+
   return (
     <nav className="nav-bar-container">
-      <div className="nav-bar-command-panel ">
-        {/* left constant */}
-        <div className="w-50 flex align-left-center">
-          <i className="nav-bar-icon fas fa-home" onClick={() => navigate('/home')} />
+      <div className="nav-bar-command-panel pt-3 pb-3 shadow">
+        {/* left */}
+        <div className="flex align-left-center gap">
+          <i className="shadow nav-bar-icon fas fa-home" onClick={() => navigate('/home')} />
+
+          <form 
+          className='nav-bar-search shadow'
+          onSubmit={handleSearch}>
+            <input
+            onFocus={(e) => e.target.select()}
+              onSubmit={(e) => {
+                toast.info('This feature is not implemented yet! 😵‍💫', { toastId: 'search' });
+              }}
+              className='nav-bar-search-input radius-5 p-3 w-100 palitra-6' type="text" placeholder="Search..."
+            />
+          </form>
+        </div>
+
+        {/* right */}
+
+        <div className="nav-bar-command-panel ">
           <i
-            className="nav-bar-icon fa-solid fa-bell"
+            className="shadow nav-bar-icon fa-solid fa-bell"
             onClick={() =>
               toast.info('This feature is not implemented yet! 😵‍💫', { toastId: 'notification' })
             }
           />
-
-          {theme === 'dark' ? (
-            <i className="nav-bar-icon fas fa-sun" onClick={handleThemeChange} />
-          ) : (
-            <i className="nav-bar-icon fas fa-moon" onClick={handleThemeChange} />
-          )}
-        </div>
-
-        {/* right dynamic */}
-
-        <div className="nav-bar-command-panel ">
           {isAuthenticated && (
             <i
               onClick={() => navigate(`/gallery/${profile?.id}`)}
-              className="nav-bar-icon fas fa-image"
+              className="shadow nav-bar-icon fas fa-image"
             />
           )}
           {isAuthenticated && (
-            <i className="nav-bar-icon fas fa-user" onClick={() => navigate(`/settings`)} />
+            <i className="shadow nav-bar-icon fas fa-user" onClick={() => navigate(`/settings`)} />
+          )}
+
+
+          {theme === 'dark' ? (
+            <i className="shadow nav-bar-icon fas fa-sun" onClick={handleThemeChange} />
+          ) : (
+            <i className="shadow nav-bar-icon fas fa-moon" onClick={handleThemeChange} />
           )}
 
           {isAuthenticated ? (
-            <i className="nav-bar-icon fa fa-sign-out" onClick={handleOnClickLogOut} />
+            <i className="shadow nav-bar-icon fa fa-sign-out" onClick={handleOnClickLogOut} />
           ) : (
             !isAuthenticated && (
-              <i className="nav-bar-icon fas fa-key" onClick={() => navigate('/login')} />
+              <i className="shadow nav-bar-icon fas fa-key" onClick={() => navigate('/login')} />
             )
           )}
         </div>
