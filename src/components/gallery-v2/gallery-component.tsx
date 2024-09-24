@@ -16,8 +16,6 @@ const GalleryV2: React.FC = () => {
     const [folders, setFolders] = useState<IUserFolder[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const [showUserData, setShowData] = useState(false);
-
     useEffect(() => {
         const fetchData = async () => {
             if (profileId) {
@@ -32,7 +30,6 @@ const GalleryV2: React.FC = () => {
         setIsLoading(true);
         fetchData().finally(() => {
             setIsLoading(false);
-            setShowData(true);
         });
 
     }, [profileId]);
@@ -40,11 +37,11 @@ const GalleryV2: React.FC = () => {
     return (
         <div className='gallery-v2-container'>
             <div className='gallery-v2-box shadow'>
-                <div className={`gallery-v2-box-owner ${showUserData && 'global-background-layer'}`}>
-                    <div className='gallery-v2-box-person'>
-                        <Avatar url={userProfile?.url} canShowImage={(res) => setShowData(res)} />
+                <div className={`gallery-v2-box-owner`}>
+                    <div className='gallery-v2-box-person global-background-layer'>
+                        <Avatar url={userProfile?.url} />
                         <div className='gallery-v2-box-person-data'>
-                            <h1 className='global-title'>{userProfile?.name}</h1>
+                            <h1 className='global-title p-1'>{userProfile?.name}</h1>
                             <span className='scale-m'>{userProfile?.location ?? 'no location'}</span>
                             {/* <br /> */}
                             <span>{folders?.length} folders</span>

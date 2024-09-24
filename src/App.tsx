@@ -34,7 +34,7 @@ const App: React.FC = () => {
               <NavBarPage child={<Gallery />}
               />}
             />
-            <Route path='/folder/:folderId' element={<NavBarPage child={<FolderPage />} />} />
+            <Route path='/folder/:profileId/:folderId' element={<NavBarPage child={<FolderPage />} />} />
             <Route path="/home" element={
               <NavBarPage child={<HomePage />} />}
             />

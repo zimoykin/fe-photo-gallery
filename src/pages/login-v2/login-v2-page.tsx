@@ -35,18 +35,23 @@ export const LoginV2Page: React.FC = () => {
                 if (tokens.accessToken && tokens.refreshToken) {
                     dispatch(login([tokens.accessToken, tokens.refreshToken]));
 
-                    ApiClient.get<IProfile>('/profiles/login')
-                        .then((user) => {
-                            dispatch(storeProfile(user));
-                            ApiClient.get<IUserFolder[]>(`/folders`).then((folders) => {
-                                dispatch(storeFolders(folders));
-                            }).catch((error) => {
-                                toast.error(error);
-                            });
-
-                        }).catch((error) => {
+                    await ApiClient.post<IProfile>('/profiles/login')
+                        .catch((error) => {
                             toast.error(error);
                         });
+
+                    await ApiClient.get<IProfile>('/profiles/me')
+                        .then((user) => {
+                            dispatch(storeProfile(user));
+                        });
+
+                    ApiClient.get<IUserFolder[]>(`/folders`).then((folders) => {
+                        dispatch(storeFolders(folders));
+                    }).catch((error) => {
+                        toast.error(error);
+                    });
+
+                    toast.success('Login successful');
 
                     navigate('/home');
                 }
@@ -78,7 +83,7 @@ export const LoginV2Page: React.FC = () => {
                 <div className='login-v2-sign-in-container-full  global-background-layer shadow'>
                 </div>
                 <div className='login-v2-sign-in-container-left'>
-                    <Palitra /> 
+                    <Palitra />
                 </div>
                 <div className='login-v2-sign-in-container-right scroll global-secondary-background-layer shadow'>
                     <div className='login-v2-sign-in-container-welcome global-div-color'>

@@ -7,7 +7,7 @@ export interface IProfile {
     location?: string;
     bio?: string;
     website?: string;
-    privateAccess: boolean;
+    privateAccess: number; // 0 - public, 1 - private
     equipment?: IEquipment[];
     url?: string;
 

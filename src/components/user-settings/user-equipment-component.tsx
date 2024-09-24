@@ -21,7 +21,7 @@ const UserEquipment: React.FC<Props> = ({ equipment, addStar, deleteEquipment, e
                 >
                     <div className='flex-center align-left p-10 w-70'>
                         {editMode ? <input
-                            className='global-input w-80 p-10' type="text" defaultValue={equipment.name}
+                            className='p-3 palitra-4 w-80 radius-5' type="text" defaultValue={equipment.name}
                             onChange={onChangeName}
                         />
                             : <span>{equipment.name}</span>}
@@ -29,7 +29,7 @@ const UserEquipment: React.FC<Props> = ({ equipment, addStar, deleteEquipment, e
 
                     <div className='flex-center align-left p-10 w-70'>
                         {editMode ?
-                            <select className='global-input w-100' name="type" id="type" defaultValue={equipment.type}
+                            <select className='p-3 palitra-4 w-80 radius-5 w-100' name="type" id="type" defaultValue={equipment.type}
 
                                 onChange={onChangeType}>
                                 <option value="camera">camera</option>

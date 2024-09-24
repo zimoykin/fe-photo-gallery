@@ -27,7 +27,7 @@ const FolderV2: React.FC<Props> = ({ folder }) => {
     return (
         <div className="folder-container">
             <div className='folder-box shadow scale-m'
-                onClick={() => navigate(`/folder/${folder.id}`)}
+                onClick={() => navigate(`/folder/${folder.profileId}/${folder.id}`)}
             >
                 {!loadImg && <div className=''><CameraSpinner /></div>}
                 {loadImg && <div className='folder-image-bg palitra-5 folder-image-bg'

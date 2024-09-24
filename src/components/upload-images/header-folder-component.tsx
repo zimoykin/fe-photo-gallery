@@ -48,7 +48,6 @@ const UploadImages: React.FC = () => {
             fetchFolderData().finally(() => setIsLoading(false))
                 .then((fld) => {
                     setFolder(fld);
-                    // updateFolderInStore();
                 });
         }
     }, [folderId, profile?.id, profile?.equipment, fetchFolderData, dispatch]);
@@ -80,7 +79,7 @@ const UploadImages: React.FC = () => {
     return <div className="w-100 h-100 flex-column">
         <div className="w-100 h-100">
 
-            <div className="w-100 upload-header-container">
+            <div className="w-100 upload-header-container scroll">
                 <div className="upload-header-blurred-image"
                     style={{
                         backgroundImage: `url(${favorite})`
@@ -113,7 +112,26 @@ const UploadImages: React.FC = () => {
                             }
                         </div>
                         <div>
-
+                            {editMode ?
+                                <div>
+                                    <select
+                                        onChange={(e) => {
+                                            if (folder) {
+                                                folder.privateAccess = Number(e.target.value);
+                                                setFolder({ ...folder });
+                                            }
+                                        }}
+                                        name="privateAccess" id="">
+                                        <option value={1}>PRIVATE</option>
+                                        <option value={0}>PUBLIC</option>
+                                    </select>
+                                </div>
+                                : <div>
+                                    {
+                                        folder?.privateAccess === 1
+                                            ? <span className="global-primary-color">PRIVATE</span>
+                                            : <span className="global-secondary-color">PUBLIC</span>}
+                                    <span></span></div>}
                         </div>
                         {editMode ? <div className="radius-5 shadow scale-m pt-3">
                             <input
@@ -130,6 +148,10 @@ const UploadImages: React.FC = () => {
                             >{folder?.description}</span>
                         }
 
+
+                        <div>
+
+                        </div>
                         <div className="flex-row gap">
                             {editMode ? <div className="">
                                 <div className="radius-5 shadow scale-m pt-3">

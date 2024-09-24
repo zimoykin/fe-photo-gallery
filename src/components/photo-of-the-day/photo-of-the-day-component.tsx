@@ -31,10 +31,11 @@ const PhotoOfTheDay: React.FC = () => {
             <div className="photo-of-the-day-box p-10 scale-s">
                 <div
                     className="photo-of-the-day-box-img shadow"
-                    style={{ backgroundImage: `url(${photo?.photo.url})` }}
+                    style={{ backgroundImage: `url(${photo?.photo.url ?? '/no-photo.jpeg'})` }}
                 >
                     <div className="photo-of-the-day-box-text p-10 scale-m">
-                        <span> Photo of the day </span>
+                        {photo && <span> Photo of the day </span>}
+                        {!photo && <span> There is no photo of the day </span>}
                     </div>
                 </div>
             </div>
