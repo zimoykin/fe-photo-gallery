@@ -14,115 +14,129 @@ import { ApiClient } from '../../api/networking/api-client';
 import { IProfile } from '../../interfaces/profile.interface';
 import { IUserFolder } from '../../interfaces/folder.interface';
 
-
 export const LoginV2Page: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const [isLoading, setIsLoading] = useState(false);
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const handleSignInWithGoogleClick = () => {
+    toast.info('Unfortunately, this feature is not implemented yet 😵‍💫');
+  };
 
-    const handleSignInWithGoogleClick = () => {
-        toast.info('Unfortunately, this feature is not implemented yet 😵‍💫');
-    };
+  const handleLogin = () => {
+    if (email?.length > 0 && password?.length > 0) {
+      setIsLoading(true);
+      apilogin(email, password)
+        .then(async (tokens) => {
+          if (tokens.accessToken && tokens.refreshToken) {
+            dispatch(login([tokens.accessToken, tokens.refreshToken]));
 
-    const handleLogin = () => {
-        if (email?.length > 0 && password?.length > 0) {
-            setIsLoading(true);
-            apilogin(email, password).then(async (tokens) => {
-                if (tokens.accessToken && tokens.refreshToken) {
-                    dispatch(login([tokens.accessToken, tokens.refreshToken]));
-
-                    await ApiClient.post<IProfile>('/profiles/login')
-                        .catch((error) => {
-                            toast.error(error);
-                        });
-
-                    await ApiClient.get<IProfile>('/profiles/me')
-                        .then((user) => {
-                            dispatch(storeProfile(user));
-                        });
-
-                    ApiClient.get<IUserFolder[]>(`/folders`).then((folders) => {
-                        dispatch(storeFolders(folders));
-                    }).catch((error) => {
-                        toast.error(error);
-                    });
-
-                    toast.success('Login successful');
-
-                    navigate('/home');
-                }
-                else {
-                    toast.error('Invalid credentials');
-                }
-            }).catch((error) => {
-                console.log(error);
-            }).finally(() => {
-                setIsLoading(false);
+            await ApiClient.post<IProfile>('/profiles/login').catch((error) => {
+              toast.error(error);
             });
-        } else {
-            toast.error('Please enter both email and password');
-        }
-    };
 
-    return (
-        <div className="page-container">
-            <BackgroundWithImage />
-            <div className='login-v2-sign-in-container-top'>
-                <div className='w-80 flex-center'>
-                    <Palitra />
-                </div>
+            await ApiClient.get<IProfile>('/profiles/me').then((user) => {
+              dispatch(storeProfile(user));
+            });
+
+            ApiClient.get<IUserFolder[]>(`/folders`)
+              .then((folders) => {
+                dispatch(storeFolders(folders));
+              })
+              .catch((error) => {
+                toast.error(error);
+              });
+
+            toast.success('Login successful');
+
+            navigate('/home');
+          } else {
+            toast.error('Invalid credentials');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      toast.error('Please enter both email and password');
+    }
+  };
+
+  return (
+    <div className="page-container">
+      <BackgroundWithImage />
+      <div className="login-v2-sign-in-container-top">
+        <div className="w-80 flex-center">
+          <Palitra />
+        </div>
+      </div>
+
+      <div className="login-v2-sign-in-container shadow">
+        <div className="login-v2-sign-in-container-full  global-background-layer shadow"></div>
+        <div className="login-v2-sign-in-container-left">
+          <Palitra />
+        </div>
+        <div className="login-v2-sign-in-container-right scroll global-secondary-background-layer shadow">
+          <div className="login-v2-sign-in-container-welcome global-div-color">
+            <h1 className="global-title">Welcome!</h1>
+          </div>
+          <div className="login-v2-sign-in-container-input">
+            <input
+              placeholder="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="global-input "
+            />
+            <input
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="global-input "
+            />
+          </div>
+          <div className="login-v2-sign-in-container-forgot-password">
+            <a href="/recovery">
+              <span>Forgot password?</span>
+            </a>
+          </div>
+
+          <div className="login-v2-sign-in-container-login-btn">
+            <button onClick={handleLogin} className="global-button w-80 shadow">
+              {' '}
+              Sign in{' '}
+            </button>
+          </div>
+
+          <div className="login-v2-sign-in-container-signin-w-google global-div-color">
+            <div className="login-v2-sign-in-container-sign-or">
+              <span>or</span>
             </div>
 
             <div
-                className='login-v2-sign-in-container shadow'
+              className="login-v2-sign-in-container-google scale-s"
+              onClick={handleSignInWithGoogleClick}
             >
-                <div className='login-v2-sign-in-container-full  global-background-layer shadow'>
-                </div>
-                <div className='login-v2-sign-in-container-left'>
-                    <Palitra />
-                </div>
-                <div className='login-v2-sign-in-container-right scroll global-secondary-background-layer shadow'>
-                    <div className='login-v2-sign-in-container-welcome global-div-color'>
-                        <h1 className='global-title'>Welcome!</h1>
-                    </div>
-                    <div className='login-v2-sign-in-container-input'>
-                        <input placeholder='email' type='email' value={email} onChange={(e) => setEmail(e.target.value)} className='global-input ' />
-                        <input placeholder='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} className='global-input ' />
-                    </div>
-                    <div className='login-v2-sign-in-container-forgot-password'>
-                        <a href="/recovery">
-                            <span>Forgot password?</span>
-                        </a>
-                    </div>
-
-                    <div className='login-v2-sign-in-container-login-btn'>
-                        <button
-                            onClick={handleLogin}
-                            className='global-button w-80 shadow'> Sign in </button>
-                    </div>
-
-                    <div className='login-v2-sign-in-container-signin-w-google global-div-color'>
-                        <div className='login-v2-sign-in-container-sign-or'>
-                            <span>or</span>
-                        </div>
-
-                        <div className='login-v2-sign-in-container-google scale-s'
-                            onClick={handleSignInWithGoogleClick}>
-                            <div className='google-icon' />
-                            <span>Sign in with Google</span>
-                        </div>
-                    </div>
-
-                    <div className='login-v2-sign-in-container-create-account scale-m'>
-                        <span>Do not have an account? <a href="/register">Create one</a></span>
-                    </div>
-                </div>
+              <div className="google-icon" />
+              <span>Sign in with Google</span>
             </div>
-            {isLoading && <CameraSpinnerModal />}
+          </div>
+
+          <div className="login-v2-sign-in-container-create-account scale-m">
+            <span>
+              Do not have an account? <a href="/register">Create one</a>
+            </span>
+          </div>
         </div>
-    );
+      </div>
+      {isLoading && <CameraSpinnerModal />}
+    </div>
+  );
 };

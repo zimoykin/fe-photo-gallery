@@ -9,7 +9,7 @@ interface AuthState {
 const initialState: AuthState = {
   isAuthenticated: false,
   accessToken: null,
-  refreshToken: null,
+  refreshToken: null
 };
 
 const authSlice = createSlice({
@@ -26,10 +26,9 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.accessToken = null;
       state.refreshToken = null;
-    },
-  },
+    }
+  }
 });
-
 
 export const { login, logout } = authSlice.actions;
 

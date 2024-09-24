@@ -7,7 +7,9 @@
 }
 
 body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 body.light-theme {
@@ -42,7 +44,6 @@ option {
   color: wheat;
 }
 
-
 /* Dark mode text defaultstyles */
 .light-mode р,
 h1,
@@ -62,23 +63,27 @@ option {
 }
 
 .global-background-layer {
-  transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: #249fa1cc
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  background-color: #249fa1cc;
 }
 
 .dark-theme .global-background-layer {
   background-color: #005f61de;
-  color: #FAAB35;
+  color: #faab35;
 }
 
 .light-theme .global-background-layer {
   background-color: #249fa1ed;
-  color: #FAAB35;
+  color: #faab35;
 }
 
 .global-secondary-background-layer {
-  transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: #249fa1df
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  background-color: #249fa1df;
 }
 
 .dark-theme .global-secondary-background-layer {
@@ -90,8 +95,12 @@ option {
 }
 
 .shadow {
-  box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
-  text-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 5px 20px 28px,
+    rgba(0, 0, 0, 0.22) 10px 10px 10px;
+  text-shadow:
+    rgba(0, 0, 0, 0.25) 5px 20px 28px,
+    rgba(0, 0, 0, 0.22) 10px 10px 10px;
 }
 
 .scroll {
@@ -126,7 +135,8 @@ option {
   transition: scale 0.3s ease;
 }
 
-.hover-bg {}
+.hover-bg {
+}
 
 .dark-theme .hover-bg:hover {
   background-color: var(--color-5);
@@ -138,20 +148,21 @@ option {
 }
 
 .global-div-color {
-  color: #F78105;
+  color: #f78105;
 }
 
 .light-theme .global-div-color {
-  color: #FAAB35;
+  color: #faab35;
 }
 
 .darkt-theme .global-div-color {
-  color: #F78105;
+  color: #f78105;
 }
 
-
 .global-input {
-  box-shadow: rgba(0, 0, 0, 0.25) 5px 20px 28px, rgba(0, 0, 0, 0.22) 10px 10px 10px;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 5px 20px 28px,
+    rgba(0, 0, 0, 0.22) 10px 10px 10px;
   border-radius: 10px;
   padding: 1rem;
   background-color: rgba(139, 242, 255, 0.9);
@@ -161,7 +172,10 @@ option {
   text-align: center;
   color: black;
   width: 100%;
-  transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+  transition:
+    color 0.3s ease,
+    color 0.3s ease,
+    font-size 0.3s ease;
 }
 
 .global-input:hover {
@@ -186,9 +200,11 @@ option {
   color: white;
 }
 
-
 .global-button {
-  transition: color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+  transition:
+    color 0.3s ease,
+    color 0.3s ease,
+    font-size 0.3s ease;
   border-radius: 1rem;
   min-width: 2rem;
   min-height: 2.4rem;
@@ -225,12 +241,10 @@ option {
   scale: 0.98;
 }
 
-
 .light-theme .global-button {
   color: var(--color-6);
   background-color: var(--color-3);
 }
-
 
 @keyframes fadeIn {
   0% {

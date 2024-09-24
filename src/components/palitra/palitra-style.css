@@ -1,9 +1,9 @@
 .app-container-palitra {
-    width: calc(100% - 80px);
-    height: 20vh;
+  width: calc(100% - 80px);
+  height: 20vh;
 }
 
 .app-container-palitra:hover {
-    scale: 1.1;
-    transition: scale 0.3s ease;
+  scale: 1.1;
+  transition: scale 0.3s ease;
 }

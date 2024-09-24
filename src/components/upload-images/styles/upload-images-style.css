@@ -1,40 +1,40 @@
 .upload-header-container {
-    position: relative;
-    top: 0;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .upload-header-blurred-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 2;
-    filter: blur(10px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 2;
+  filter: blur(10px);
 }
 
 .upload-header-content-overlay {
-    position: relative;
-    z-index: 3;
+  position: relative;
+  z-index: 3;
 }
 
 .upload-table {
-    position: relative;
-    z-index: 3;
+  position: relative;
+  z-index: 3;
 }
 
 .photos-table {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
-    .photos-table {
-        flex-direction: column;
-    }
+  .photos-table {
+    flex-direction: column;
+  }
 }

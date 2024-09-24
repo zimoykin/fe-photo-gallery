@@ -1,4 +1,5 @@
-export const fake_news = [{
+export const fake_news = [
+  {
     topic: 'How to choose your first camera wisely?',
     url: 'bg/topic-1.jpeg',
     content: `
@@ -38,7 +39,9 @@ Aperture (f-stop): A wider aperture (low f-stop like f/1.4) allows more light in
 Image stabilization: Important for telephoto lenses and low-light shooting, it helps reduce blur from camera shake.
 Purpose: Think about what you’ll be photographing most often — landscapes, portraits, sports, etc. This will help you decide whether you need a wide-angle, telephoto, or prime lens.
 Each lens type serves a different purpose, so it's useful to match the lens to your specific needs, whether it’s for versatility, creativity, or focusing on detail.'
-`}, {
+`
+  },
+  {
     topic: 'What is your best lens?',
     url: 'bg/topic-2.jpeg',
     content: `
@@ -102,4 +105,5 @@ Panasonic: Strong in the video market, great for videographers looking to shoot 
 Conclusion
 When choosing your first camera, think about how you plan to use it (e.g., for travel, portraits, landscapes), your budget, and whether you want room to grow into more advanced photography. If possible, try out different cameras in a store to see which feels most comfortable in your hands. Starting with a versatile, easy-to-use camera is key, and you can always upgrade your gear as your skills improve!
 `
-}]; 
+  }
+];

@@ -1,8 +1,8 @@
 .google-icon {
-    max-width: 1.2rem;
-    height: 1.2rem;
-    background-repeat: no-repeat;
-    background-size: contain;
-    aspect-ratio: 1 / 1;
-    background-image: url('/public/logos/google_logo.png');
+  max-width: 1.2rem;
+  height: 1.2rem;
+  background-repeat: no-repeat;
+  background-size: contain;
+  aspect-ratio: 1 / 1;
+  background-image: url('/public/logos/google_logo.png');
 }

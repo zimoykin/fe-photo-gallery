@@ -1,54 +1,60 @@
 .camera-lens-chart-line-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    z-index: 6;
-    border-radius: 10px;
-    padding: 3px;
-    /* background-color: tomato; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  z-index: 6;
+  border-radius: 10px;
+  padding: 3px;
+  /* background-color: tomato; */
 }
 
 .camera-lens-chart-line-box {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    width: 100%;
-    padding: 10px;
-    z-index: 6;
-    transition: width 0.3s ease, height 0.3s ease;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  padding: 10px;
+  z-index: 6;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
 }
 
 .camera-lens-chart-line-box-left {
-    /* position: relative; */
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    flex-direction: column;
-    width: 50%;
-    z-index: 6;
-    transition: width 0.3s ease, height 0.3s ease;
-    width: 80%;
+  /* position: relative; */
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  width: 50%;
+  z-index: 6;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
+  width: 80%;
 }
 
 .camera-lens-chart-line-box-right {
-    /* position: relative; */
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    flex-direction: column;
-    width: 50%;
-    z-index: 6;
-    transition: width 0.3s ease, height 0.3s ease;
-    width: 20%;
-    flex-wrap: nowrap;
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: column;
+  width: 50%;
+  z-index: 6;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease;
+  width: 20%;
+  flex-wrap: nowrap;
 }
 
-.light-theme .camera-lens-chart-line-box-left>span, 
-.light-theme .camera-lens-chart-line-box-right>span {
-    color: black;
+.light-theme .camera-lens-chart-line-box-left > span,
+.light-theme .camera-lens-chart-line-box-right > span {
+  color: black;
 }
