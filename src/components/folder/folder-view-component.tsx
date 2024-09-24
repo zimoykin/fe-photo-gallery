@@ -10,8 +10,9 @@ const FolderView: React.FC = () => {
     const [photos, SetPhotos] = useState<IPublicPhoto[]>([]);
 
     useEffect(() => {
-        ApiClient.get<IPublicPhoto[]>(`/public/photos/${profileId}/${folderId}`).then((photos) => SetPhotos(photos));
-    }, [folderId]);
+        if (folderId && profileId)
+            ApiClient.get<IPublicPhoto[]>(`/public/photos/${profileId}/${folderId}`).then((photos) => SetPhotos(photos));
+    }, [folderId, profileId]);
 
     return <div className="global-background-layer w-100 h-100 scroll p-10">
         <div className="flex-center wrap gap">
